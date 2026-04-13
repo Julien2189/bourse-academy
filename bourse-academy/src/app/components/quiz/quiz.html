@@ -1,0 +1,21 @@
+<section id="quiz">
+  <div class="section-label">Quiz Interactif</div>
+  <h2 class="section-title fade-in">TESTEZ VOS <span style="color:var(--gold)">CONNAISSANCES</span></h2>
+  <p class="section-desc">15 questions pour valider votre compréhension des marchés financiers.</p>
+
+  <div class="quiz-box fade-in" id="quizBox">
+    <div class="quiz-score" id="quizScore">Question 1 / 15</div>
+    <div class="quiz-question" id="quizQuestion"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <div class="quiz-nav">
+      <button class="btn-ghost" id="quizPrev" (click)="quizPrev()" style="display:none">← Précédent</button>
+      <button class="btn" id="quizNext" (click)="quizNext()">Suivant →</button>
+    </div>
+    <div id="quizResult" style="display:none;text-align:center;padding:24px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:60px;color:var(--gold)" id="finalScore"></div>
+      <div style="font-size:18px;margin-bottom:16px" id="finalMsg"></div>
+      <button class="btn" (click)="restartQuiz()">Recommencer</button>
+    </div>
+  </div>
+</section>

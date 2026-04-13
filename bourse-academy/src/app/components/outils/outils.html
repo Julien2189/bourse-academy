@@ -1,0 +1,121 @@
+<section id="outils" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 13</div>
+  <h2 class="section-title fade-in">OUTILS DU <span style="color:var(--gold)">TRADER</span></h2>
+  <p class="section-desc fade-in">TradingView, calendrier économique, screeners, backtesting — maîtrisez les outils qui font la différence.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">OT.01</span><span class="concept-title">TradingView — La référence mondiale des graphiques</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p><span class="highlight">TradingView</span> (tradingview.com) est la plateforme de chartisme la plus utilisée au monde. Gratuite avec limitations, elle est indispensable.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--blue)">Fonctionnalités clés</h3>
+          <p style="font-size:13px">Graphiques multi-timeframe | 100+ indicateurs | Pine Script (langage de script) | Alertes de prix | Backtesting intégré | Social (idées de traders) | Paper trading</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--gold)">Raccourcis essentiels</h3>
+          <p style="font-size:13px">Alt+T → dessin tendance | Alt+H → horizontale | Alt+F → Fibonacci | Alt+C → copie | 1/5/D/W → changer timeframe | Ctrl+Z → annuler | / → recherche symbole</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--green)">Plans gratuit vs payant</h3>
+          <p style="font-size:13px">Gratuit : 3 indicateurs/graphique, 1 alerte, données 15min délayées. Basic+ : 5 indicateurs. Pro+ : données temps réel, alertes illimitées. Premium : multi-charts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">OT.02</span><span class="concept-title">Calendrier Économique — Lire et utiliser l'agenda des marchés</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">calendrier économique</span> liste tous les événements macro susceptibles de créer de la volatilité. Indispensable avant chaque session de trading.</p>
+      <div class="formula">
+        <div class="formula-label">Comment lire un event économique</div>
+        DEVISE IMPACTÉE → quelle monnaie/marché va être touché<br>
+        IMPORTANCE (🔴🟡🟢) → niveau de volatilité attendu<br>
+        PRÉCÉDENT → résultat du mois dernier (base de comparaison)<br>
+        PRÉVISION → consensus des économistes (prix déjà dans le marché)<br>
+        RÉEL → la vraie donnée publiée → c'est l'ÉCART vs prévision qui fait bouger<br><br>
+        Règle : Réel &gt; Prévision = positif pour la devise/marché concerné
+      </div>
+      <table class="asset-table">
+        <thead><tr><th>Plateforme</th><th>URL</th><th>Forces</th></tr></thead>
+        <tbody>
+          <tr><td>Forex Factory</td><td>forexfactory.com/calendar</td><td>Référence Forex, filtres avancés, couleur-coded, historique</td></tr>
+          <tr><td>Investing.com</td><td>investing.com/economic-calendar</td><td>Complet, multi-actifs, notifications mobiles</td></tr>
+          <tr><td>TradingEconomics</td><td>tradingeconomics.com</td><td>Données macro mondiales, graphiques historiques</td></tr>
+          <tr><td>EarningsWhispers</td><td>earningswhispers.com</td><td>Calendrier résultats d'entreprises US</td></tr>
+          <tr><td>AMF / BCE</td><td>amf-france.org | ecb.europa.eu</td><td>Régulateurs officiels, discours, décisions</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">OT.03</span><span class="concept-title">Backtesting & Paper Trading — Tester sans risque</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">backtesting</span> consiste à tester une stratégie sur données historiques. Le <span class="highlight">paper trading</span> teste en temps réel sans argent réel. Les deux sont <span class="green">indispensables avant de risquer du capital.</span></p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--blue)"></div>
+          <h4 style="color:var(--blue)">Backtesting</h4>
+          <div class="prop"><span>Avantage</span><span>Résultats sur 5-10 ans en minutes</span></div>
+          <div class="prop"><span>Limite</span><span>Overfitting, lookahead bias</span></div>
+          <div class="prop"><span>Outil gratuit</span><span>TradingView (Pine Script)</span></div>
+          <div class="prop"><span>Outil pro</span><span>MetaTrader Strategy Tester</span></div>
+          <div class="prop"><span>Métriques clés</span><span>Win rate, max drawdown, Sharpe ratio</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--green)"></div>
+          <h4 style="color:var(--green)">Paper Trading</h4>
+          <div class="prop"><span>Avantage</span><span>Données temps réel, émotions simulées</span></div>
+          <div class="prop"><span>Durée minimum</span><span>3 mois avant argent réel</span></div>
+          <div class="prop"><span>Outil gratuit</span><span>TradingView Paper | TD Ameritrade</span></div>
+          <div class="prop"><span>Piège</span><span>Sans argent réel = sans vraies émotions</span></div>
+          <div class="prop"><span>Règle</span><span>Même discipline qu'avec argent réel</span></div>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="ex-title">📊 Métriques d'évaluation d'une stratégie</div>
+        <p>
+        <span class="highlight">Win Rate</span> : % de trades gagnants (55%+ est excellent pour day trading)<br>
+        <span class="highlight">Profit Factor</span> : Gains bruts / Pertes brutes &gt;1.5 = stratégie rentable<br>
+        <span class="highlight">Sharpe Ratio</span> : Rendement ajusté au risque &gt;1 = bon, &gt;2 = excellent<br>
+        <span class="highlight">Max Drawdown</span> : Perte maximale depuis un pic — doit rester sous 20% idéalement<br>
+        <span class="highlight">Expectancy</span> : (Win% × Gain moyen) − (Loss% × Perte moyenne) = gain espéré par trade
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">OT.04</span><span class="concept-title">Screeners & Sources d'information — Trouver les opportunités</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--blue)">📊 Screeners actions</h3>
+          <p style="font-size:13px"><span class="highlight">Finviz.com</span> — screener US ultra-complet. <span class="highlight">Zonebourse.com</span> — Europe + France. <span class="highlight">TradingView screener</span> — intégré. <span class="highlight">Wisesheets</span> — données dans Excel/Google Sheets.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--gold)">📰 Sources fiables</h3>
+          <p style="font-size:13px"><span class="highlight">Bloomberg / Reuters</span> — actualité institutionnelle. <span class="highlight">Les Échos</span> — France. <span class="highlight">Seeking Alpha</span> — analyses US. <span class="highlight">Zero Hedge</span> — macro (attention: orienté). <span class="highlight">SEC EDGAR</span> — documents officiels US.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--red)">⚠️ Sources à éviter</h3>
+          <p style="font-size:13px">Influenceurs crypto sans track record. Forums Reddit/Twitter pour des signaux. "Groupes privés de trading" payants. Newsletters de "traders millionnaires". Tout ce qui promet des rendements garantis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,153 @@
+<section id="analyse">
+  <div class="section-label">Module 04</div>
+  <h2 class="section-title fade-in">ANALYSE <span style="color:var(--gold)">TECHNIQUE & FONDAMENTALE</span></h2>
+  <p class="section-desc">Deux grandes écoles s'affrontent pour prédire les mouvements de prix. Le trader professionnel les combine.</p>
+
+  <div class="tabs" id="analyseTabs">
+    <button class="tab active" (click)="switchTabAnalyse('technique', $event)">📉 Technique</button>
+    <button class="tab" (click)="switchTabAnalyse('fondamentale', $event)">🏢 Fondamentale</button>
+    <button class="tab" (click)="switchTabAnalyse('sentiment', $event)">🧠 Sentiment</button>
+  </div>
+
+  <!-- ANALYSE TECHNIQUE -->
+  <div class="tab-panel active" id="technique">
+    <div class="concept-block fade-in">
+      <div class="concept-header" (click)="toggleConcept($event)">
+        <div class="concept-header-left"><span class="concept-num">AT.01</span><span class="concept-title">Supports, Résistances & Tendances</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>Les <span class="highlight">supports</span> sont des niveaux de prix où la demande est suffisamment forte pour stopper la baisse. Les <span class="highlight">résistances</span> sont des niveaux où l'offre stoppe la hausse. Une résistance cassée devient support (et vice versa).</p>
+        <div class="formula">
+          <div class="formula-label">Tendances (Dow Theory)</div>
+          HAUSSIÈRE (Uptrend) = Sommets + Hauts + Creux + Hauts successifs<br>
+          BAISSIÈRE (Downtrend) = Sommets + Bas + Creux + Bas successifs<br>
+          RANGE = Prix coincé entre un support et une résistance horizontaux
+        </div>
+        <div class="example-box">
+          <div class="ex-title">🎯 Setup de trading classique</div>
+          <p>Le prix teste 3 fois la résistance à 150$ sur une action, puis casse au-dessus avec un fort volume. → Entrée LONG à 150.50$, Stop Loss à 148$, Target: 158$ (résistance suivante). Risk/Reward = 1.5$ risqué / 7.5$ visé = ratio 1:5 → excellent.</p>
+        </div>
+      </div>
+    </div>
+    <div class="concept-block fade-in">
+      <div class="concept-header" (click)="toggleConcept($event)">
+        <div class="concept-header-left"><span class="concept-num">AT.02</span><span class="concept-title">Indicateurs Techniques Essentiels</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <div class="grid-3" style="margin-bottom:0">
+          <div class="card">
+            <h3 style="font-size:16px">RSI (Relative Strength Index)</h3>
+            <p style="font-size:13px">Oscille 0-100. <span class="green">&lt;30 = survente (potentiellement haussier)</span>. <span class="red">&gt;70 = surachat (potentiellement baissier)</span>. Divergences RSI/prix = signal puissant.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">MACD</h3>
+            <p style="font-size:13px">Moving Average Convergence Divergence. Croisement MACD/Signal = signal. Histogramme positif = momentum haussier. Divergences = retournement potentiel.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">Moyennes Mobiles</h3>
+            <p style="font-size:13px">MA 20 (court terme), MA 50 (moyen), MA 200 (long). <span class="green">Golden Cross</span> (MA50 croise MA200 à la hausse) = signal achat. <span class="red">Death Cross</span> = signal vente.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">Bandes de Bollinger</h3>
+            <p style="font-size:13px">MA + 2 écarts-types. Prix proche bande haute = surachat. Prix proche bande basse = survente. Squeeze (bandes resserrées) = explosion de volatilité imminente.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">Volume & OBV</h3>
+            <p style="font-size:13px">Le volume confirme les mouvements. Cassure avec fort volume = fiable. Cassure avec faible volume = signal faible. OBV = volume cumulatif = indicateur de pression achat/vente.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">Fibonacci Retracement</h3>
+            <p style="font-size:13px">Niveaux 23.6%, 38.2%, 50%, <span class="highlight">61.8%</span> (golden ratio), 78.6%. Zones de retracement probables lors d'une correction après une forte tendance.</p>
+          </div>
+        </div>
+        <h4 style="margin-top:24px;margin-bottom:16px;font-size:16px;font-weight:700">Figures Chartistes Importantes</h4>
+        <table class="asset-table">
+          <thead><tr><th>Figure</th><th>Signal</th><th>Fiabilité</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Double Top / Double Bottom</td><td><span class="badge badge-red">Retournement</span></td><td><span class="badge badge-green">Forte</span></td><td>W (haussier) ou M (baissier) — inversion de tendance</td></tr>
+            <tr><td>Tête & Épaules (H&S)</td><td><span class="badge badge-red">Retournement Baissier</span></td><td><span class="badge badge-green">Forte</span></td><td>3 sommets, le central plus haut. Neckline = déclencheur</td></tr>
+            <tr><td>Triangle Ascendant</td><td><span class="badge badge-green">Continuation Haussière</span></td><td><span class="badge badge-gold">Bonne</span></td><td>Résistance horizontale + support montant → breakout haussier probable</td></tr>
+            <tr><td>Drapeau / Fanion</td><td><span class="badge badge-blue">Continuation</span></td><td><span class="badge badge-gold">Bonne</span></td><td>Consolidation courte après forte impulsion → continuation probable</td></tr>
+            <tr><td>Wedge (Coin)</td><td><span class="badge badge-red">Retournement</span></td><td><span class="badge badge-gold">Modérée</span></td><td>Compression de prix, souvent précède une rupture violente</td></tr>
+            <tr><td>Chandelier Engulfant</td><td><span class="badge badge-purple">Retournement court terme</span></td><td><span class="badge badge-gold">Modérée</span></td><td>Une bougie avale entièrement la précédente → signal de retournement</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSE FONDAMENTALE -->
+  <div class="tab-panel" id="fondamentale">
+    <div class="concept-block fade-in">
+      <div class="concept-header" (click)="toggleConcept($event)">
+        <div class="concept-header-left"><span class="concept-num">AF.01</span><span class="concept-title">Lire un bilan comptable & compte de résultat</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>L'analyse fondamentale consiste à évaluer la <span class="highlight">valeur intrinsèque</span> d'une entreprise via ses données financières.</p>
+        <div class="formula">
+          <div class="formula-label">Documents financiers clés</div>
+          BILAN = Actif (ce qu'elle possède) = Passif + Capitaux propres<br>
+          COMPTE DE RÉSULTAT = Chiffre d'affaires - Charges = Bénéfice net<br>
+          CASH FLOW = Flux de trésorerie (plus difficile à manipuler que le bénéfice)<br>
+          EBITDA = Bénéfice avant intérêts, impôts, dépréciations et amortissements
+        </div>
+        <table class="asset-table" style="margin-top:16px">
+          <thead><tr><th>Ratio</th><th>Formule</th><th>Interprétation</th></tr></thead>
+          <tbody>
+            <tr><td>P/E (PER)</td><td>Cours / EPS</td><td>&lt;15 = value, 15-25 = normal, &gt;30 = croissance ou cher</td></tr>
+            <tr><td>P/B (Price to Book)</td><td>Cours / Actif net par action</td><td>&lt;1 = sous book value, souvent value</td></tr>
+            <tr><td>EV/EBITDA</td><td>Valeur d'entreprise / EBITDA</td><td>Permet comparaison inter-sectorielle</td></tr>
+            <tr><td>Debt/Equity</td><td>Dettes totales / Capitaux propres</td><td>&lt;1 = faible endettement, &gt;2 = vigilance</td></tr>
+            <tr><td>Free Cash Flow Yield</td><td>FCF / Market Cap</td><td>&gt;5% = attractif pour value investors</td></tr>
+            <tr><td>ROIC</td><td>NOPAT / Capital investi</td><td>&gt;WACC = création de valeur</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="concept-block fade-in">
+      <div class="concept-header" (click)="toggleConcept($event)">
+        <div class="concept-header-left"><span class="concept-num">AF.02</span><span class="concept-title">Macro-économie & Indicateurs</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>Les <span class="highlight">indicateurs macroéconomiques</span> influencent massivement les marchés. Les traders les surveillent de près pour anticiper les mouvements.</p>
+        <table class="asset-table">
+          <thead><tr><th>Indicateur</th><th>Fréquence</th><th>Impact marché</th><th>Ce qu'il mesure</th></tr></thead>
+          <tbody>
+            <tr><td>NFP (Non-Farm Payrolls)</td><td>1er vendredi du mois</td><td><span class="badge badge-red">Majeur</span></td><td>Emplois créés aux US → impact USD et Fed</td></tr>
+            <tr><td>CPI (Inflation)</td><td>Mensuel</td><td><span class="badge badge-red">Majeur</span></td><td>Évolution des prix → oriente la politique monétaire</td></tr>
+            <tr><td>Décisions Fed / BCE</td><td>8 fois/an</td><td><span class="badge badge-red">Majeur</span></td><td>Hausse/baisse des taux directeurs</td></tr>
+            <tr><td>PIB (GDP)</td><td>Trimestriel</td><td><span class="badge badge-orange">Fort</span></td><td>Croissance économique. 2 trimestres négatifs = récession</td></tr>
+            <tr><td>ISM Manufacturing / PMI</td><td>Mensuel</td><td><span class="badge badge-gold">Modéré</span></td><td>&gt;50 = expansion, &lt;50 = contraction industrielle</td></tr>
+            <tr><td>Chômage (Unemployment Rate)</td><td>Mensuel</td><td><span class="badge badge-gold">Modéré</span></td><td>Santé du marché de l'emploi</td></tr>
+            <tr><td>Retail Sales</td><td>Mensuel</td><td><span class="badge badge-gold">Modéré</span></td><td>Consommation des ménages → 70% du PIB US</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENTIMENT -->
+  <div class="tab-panel" id="sentiment">
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <span class="card-icon">😱</span>
+        <h3>Fear & Greed Index</h3>
+        <p>Indicateur CNN 0-100. <span class="red">0-25 = Fear extrême</span> (souvent bon point d'entrée historiquement). <span class="green">75-100 = Greed extrême</span> (souvent risque de correction). "Soyez avide quand les autres ont peur" — Buffett.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎰</span>
+        <h3>Put/Call Ratio</h3>
+        <p>Volume de puts / volume de calls. Ratio élevé = sentiment baissier dominant. Ratio faible = euphorie. Utilisé comme indicateur contrarian : un ratio très élevé peut signaler un retournement haussier.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <h3>Short Interest / COT Report</h3>
+        <p>Le <span class="highlight">Short Interest</span> mesure le % d'actions vendues à découvert. Le <span class="highlight">rapport COT</span> (Commitment of Traders) montre les positions des gros acteurs sur les futures. <span class="green">Données hebdomadaires publiées par la CFTC.</span></p>
+      </div>
+    </div>
+  </div>
+</section>

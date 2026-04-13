@@ -1,0 +1,90 @@
+<section id="contrats">
+  <div class="section-label">Module 03</div>
+  <h2 class="section-title fade-in">TYPES DE <span style="color:var(--gold)">CONTRATS</span></h2>
+  <p class="section-desc">Au-delà des actifs sous-jacents, il existe de nombreux types d'instruments financiers avec des caractéristiques très différentes.</p>
+
+  <div class="grid-2 fade-in">
+    <div class="card">
+      <span class="card-icon">📊</span>
+      <h3>Actions au comptant (Spot)</h3>
+      <p>Achat direct d'une action sur le marché. Vous êtes <span class="green">propriétaire</span> des titres. Pas de date d'expiration. Éligible PEA pour les actions européennes. Dividendes perçus. La forme la plus simple et recommandée pour investissement long terme.</p>
+      <div style="margin-top:16px"><span class="badge badge-green">Levier: 1x</span> <span class="badge badge-blue">Propriétaire</span> <span class="badge badge-gold">Dividendes</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">📋</span>
+      <h3>CFD — Contracts for Difference</h3>
+      <p>Contrat entre vous et le broker sur la <span class="highlight">différence de prix</span>. Vous ne possédez PAS l'actif sous-jacent. Permet de shorter (vendre à découvert) et d'utiliser l'effet de levier. <span class="red">Interdit aux non-professionnels dans certains pays.</span></p>
+      <div style="margin-top:16px"><span class="badge badge-red">Levier: jusqu'à 30x</span> <span class="badge badge-red">Pas propriétaire</span> <span class="badge badge-orange">Short possible</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <h3>Futures (Contrats à Terme)</h3>
+      <p>Accord d'acheter/vendre un actif à un <span class="highlight">prix et une date fixés à l'avance</span>. Standardisés et cotés en bourse. Utilisés par les producteurs pour se couvrir (ex: agriculteurs sur blé) et par les traders pour spéculer. <span class="orange">Obligation d'exécution.</span></p>
+      <div style="margin-top:16px"><span class="badge badge-orange">Levier élevé</span> <span class="badge badge-purple">Date d'expiration</span> <span class="badge badge-blue">Marché organisé</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎯</span>
+      <h3>Options (Calls & Puts)</h3>
+      <p>Droit (mais pas obligation) d'acheter (CALL) ou vendre (PUT) un actif à un prix déterminé (strike) avant/à une date donnée. L'acheteur paie une <span class="highlight">prime</span>. Outil puissant pour couverture et spéculation.</p>
+      <div style="margin-top:16px"><span class="badge badge-green">CALL = Droit d'achat</span> <span class="badge badge-red">PUT = Droit de vente</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏦</span>
+      <h3>ETF — Exchange Traded Funds</h3>
+      <p>Fonds d'investissement coté en bourse qui réplique un indice (CAC 40, S&P 500, secteur…). Diversification instantanée à faible coût. <span class="green">Idéal pour l'investissement passif.</span> Frais de gestion ~0.07-0.50%/an. Les ETF indiciels battent 80-90% des gérants actifs sur 15 ans.</p>
+      <div style="margin-top:16px"><span class="badge badge-green">Diversifié</span> <span class="badge badge-blue">Faibles frais</span> <span class="badge badge-gold">Passif</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔄</span>
+      <h3>Warrants & Turbos</h3>
+      <p>Produits à effet de levier émis par des banques (BNP, SocGen). Les <span class="highlight">Turbos</span> ont une barrière désactivante : si le prix atteint la barrière, le produit expire sans valeur immédiatement. <span class="red">Très risqués, réservés aux experts.</span></p>
+      <div style="margin-top:16px"><span class="badge badge-red">Très risqué</span> <span class="badge badge-orange">Barrière désactivante</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">📱</span>
+      <h3>Perpetual Futures (Crypto)</h3>
+      <p>Futures sans date d'expiration, propres aux cryptos. Un mécanisme de <span class="highlight">funding rate</span> (taux de financement payé toutes les 8h) rééquilibre le prix entre le marché futures et le spot. Levier jusqu'à 100x sur certains exchanges. <span class="red">Extrêmement dangereux.</span></p>
+      <div style="margin-top:16px"><span class="badge badge-red">Levier 100x</span> <span class="badge badge-purple">Funding rate</span> <span class="badge badge-red">Crypto only</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏢</span>
+      <h3>OPCVM / Fonds Mutuels</h3>
+      <p>Fonds gérés activement par un gérant. Vous achetez des "parts". Les <span class="highlight">SICAV</span> et <span class="highlight">FCP</span> en France. Diversifiés mais frais souvent élevés (1-2%/an) et performances souvent inférieures aux ETF sur le long terme.</p>
+      <div style="margin-top:16px"><span class="badge badge-blue">Géré activement</span> <span class="badge badge-gold">Diversifié</span></div>
+    </div>
+  </div>
+
+  <!-- OPTIONS DÉTAIL -->
+  <div style="margin-top:48px">
+    <h3 class="section-title" style="font-size:36px">LES OPTIONS EN DÉTAIL</h3>
+    <div class="concept-block fade-in">
+      <div class="concept-header" (click)="toggleConcept($event)">
+        <div class="concept-header-left"><span class="concept-num">OPT</span><span class="concept-title">Greeks des Options — Delta, Gamma, Theta, Vega</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>Les <span class="highlight">"Greeks"</span> mesurent la sensibilité du prix d'une option à différents facteurs :</p>
+        <div class="formula">
+          <div class="formula-label">Les Greeks</div>
+          DELTA (Δ) = sensibilité au prix du sous-jacent (0 à 1 pour un call)<br>
+          GAMMA (Γ) = vitesse de variation du delta<br>
+          THETA (Θ) = perte de valeur par jour (time decay) → négatif pour l'acheteur<br>
+          VEGA (V) = sensibilité à la volatilité implicite<br>
+          RHO (ρ) = sensibilité aux taux d'intérêt
+        </div>
+        <div class="example-box">
+          <div class="ex-title">💡 Exemple pratique</div>
+          <p>Vous achetez un CALL Apple 200$ expiration dans 1 mois. Prime: 5$. Delta: 0.5.<br>
+          → Si Apple monte de 10$, votre call gagne ~5$ (delta 0.5 × 10$) → soit +100% sur votre prime<br>
+          → Si Apple reste stable pendant 2 semaines, le theta vous coûte environ 0.15$/jour → perte de 2.1$ juste par le temps qui passe<br>
+          → Si la volatilité implicite chute de 20%, vega vous coûte de la valeur supplémentaire</p>
+        </div>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card"><h3 style="color:var(--green);font-size:16px">Stratégies Haussières</h3><p style="font-size:13px">Long Call, Bull Call Spread, Cash-Secured Put, Covered Call</p></div>
+          <div class="card"><h3 style="color:var(--red);font-size:16px">Stratégies Baissières</h3><p style="font-size:13px">Long Put, Bear Put Spread, Protective Put</p></div>
+          <div class="card"><h3 style="color:var(--purple);font-size:16px">Neutres / Vol</h3><p style="font-size:13px">Straddle, Strangle, Iron Condor, Butterfly</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

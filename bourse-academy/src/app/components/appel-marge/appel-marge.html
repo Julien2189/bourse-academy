@@ -1,0 +1,405 @@
+<section id="appel-marge" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 06-B</div>
+  <h2 class="section-title fade-in">APPELS DE <span style="color:var(--gold)">MARGE</span></h2>
+  <p class="section-desc fade-in">L'appel de marge est l'un des mécanismes les plus redoutés des traders. Mal compris, il peut provoquer la perte totale d'un compte en quelques minutes.</p>
+
+  <!-- INTRO VISUELLE -->
+  <div class="card fade-in" style="border-color:rgba(255,77,109,.3);background:linear-gradient(135deg,rgba(255,77,109,.05) 0%,var(--surface) 60%);margin-bottom:32px">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+      <span style="font-size:48px">📞</span>
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--red)">MARGIN CALL</div>
+        <div style="color:var(--muted);font-size:14px">Le coup de téléphone que tout trader redoute</div>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:15px;line-height:1.8">Un <span style="color:var(--red);font-weight:700">appel de marge</span> (Margin Call) survient quand les pertes sur vos positions ouvertes ont consommé une part trop importante de votre marge disponible. Le broker vous demande alors d'alimenter votre compte — ou il ferme vos positions de force, souvent au pire moment.</p>
+  </div>
+
+  <!-- CONCEPTS DE BASE -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">MC.01</span><span class="concept-title">Marge initiale, marge de maintenance — les définitions</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Pour trader avec effet de levier (CFD, Forex, Futures), vous devez déposer une <span class="highlight">marge</span> — une garantie. Il en existe deux types fondamentaux :</p>
+      <div class="compare-grid" style="margin-top:16px">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--blue)"></div>
+          <h4 style="color:var(--blue)">MARGE INITIALE</h4>
+          <div class="prop"><span>Définition</span><span>Capital requis pour ouvrir la position</span></div>
+          <div class="prop"><span>Calcul</span><span>Valeur position / Levier</span></div>
+          <div class="prop"><span>Exemple levier 10:1</span><span>Position 10 000€ → marge 1 000€</span></div>
+          <div class="prop"><span>Exemple levier 30:1</span><span>Position 30 000€ → marge 1 000€</span></div>
+          <div class="prop"><span>Rôle</span><span>Débloque la position leveragée</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">MARGE DE MAINTENANCE</h4>
+          <div class="prop"><span>Définition</span><span>Seuil minimum pour garder la position ouverte</span></div>
+          <div class="prop"><span>Niveau typique</span><span>50% à 75% de la marge initiale</span></div>
+          <div class="prop"><span>Si atteint</span><span>→ Margin Call déclenché</span></div>
+          <div class="prop"><span>Si ignoré</span><span>→ Stop Out : liquidation forcée</span></div>
+          <div class="prop"><span>Rôle</span><span>Protège le broker contre les pertes</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--orange)"></div>
+          <h4 style="color:var(--orange)">NIVEAU STOP OUT</h4>
+          <div class="prop"><span>Définition</span><span>Niveau de fermeture automatique forcée</span></div>
+          <div class="prop"><span>Niveau typique</span><span>20% à 50% de la marge initiale</span></div>
+          <div class="prop"><span>Déclenchement</span><span>Automatique, sans prévenir</span></div>
+          <div class="prop"><span>Ordre de fermeture</span><span>La position la plus perdante en premier</span></div>
+          <div class="prop"><span>Risque</span><span>Slippage possible en volatilité extrême</span></div>
+        </div>
+      </div>
+      <div class="formula" style="margin-top:20px">
+        <div class="formula-label">Formules clés — Margin & Levier</div>
+        Marge requise (%) = 1 / Levier × 100<br>
+        Ex: levier 30:1 → marge = 1/30 = 3.33% de la valeur notionnelle<br><br>
+        Niveau de marge (%) = (Équité du compte / Marge utilisée) × 100<br>
+        Margin Call déclenché quand niveau de marge &lt; seuil broker (ex: 100%)<br>
+        Stop Out déclenché quand niveau de marge &lt; seuil stop (ex: 50%)
+      </div>
+    </div>
+  </div>
+
+  <!-- MÉCANISME STEP BY STEP -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">MC.02</span><span class="concept-title">Mécanisme complet — Étape par étape avec exemple chiffré</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Suivons un trade EUR/USD de A à Z jusqu'à l'appel de marge :</p>
+
+      <!-- TIMELINE MARGE -->
+      <div style="margin:24px 0">
+        <div style="display:flex;flex-direction:column;gap:0">
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(77,166,255,.06);border:1px solid rgba(77,166,255,.2);border-radius:12px 12px 0 0;border-bottom:none">
+            <div style="background:var(--blue);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">1</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--blue)">Ouverture de position</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">Capital compte: <span class="highlight">5 000€</span> | Levier: <span class="highlight">30:1</span> | Achat 1 lot EUR/USD à 1.0850<br>
+              Valeur notionnelle: 100 000€ | Marge initiale requise: 100 000 / 30 = <span class="highlight">3 333€</span><br>
+              Marge libre restante: 5 000 - 3 333 = <span class="green">1 667€</span> disponibles | Niveau marge: <span class="green">150%</span> ✅</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(245,197,24,.06);border:1px solid rgba(245,197,24,.2);border-left:1px solid rgba(245,197,24,.2);border-right:1px solid rgba(245,197,24,.2);border-bottom:none">
+            <div style="background:var(--gold);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">2</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--gold)">Le marché se retourne — perte latente croissante</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">EUR/USD chute à 1.0820 → perte = 30 pips × 10$/pip = <span style="color:var(--red);font-weight:700">-300€</span><br>
+              Équité compte: 5 000 - 300 = 4 700€ | Niveau marge: 4 700 / 3 333 × 100 = <span style="color:var(--gold);font-weight:700">141%</span><br>
+              Marge libre: 1 367€ — Situation tendue mais pas encore en danger</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(255,140,66,.06);border:1px solid rgba(255,140,66,.3);border-left:1px solid rgba(255,140,66,.3);border-right:1px solid rgba(255,140,66,.3);border-bottom:none">
+            <div style="background:var(--orange);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">3</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--orange)">⚠️ Zone de danger — Approaching Margin Call</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">EUR/USD descend à 1.0750 → perte = 100 pips = <span style="color:var(--red);font-weight:700">-1 000€</span><br>
+              Équité: 4 000€ | Niveau marge: 4 000 / 3 333 × 100 = <span style="color:var(--orange);font-weight:700">120%</span><br>
+              Le broker envoie un AVERTISSEMENT — alimentez votre compte ou réduisez la position</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.4);border-radius:0">
+            <div style="background:var(--red);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">4</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--red)">🚨 MARGIN CALL — Seuil 100% atteint</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">EUR/USD à 1.0717 → perte = 133 pips = <span style="color:var(--red);font-weight:700">-1 330€</span><br>
+              Équité: 3 670€ | Niveau marge: 3 670 / 3 333 × 100 = <span style="color:var(--red);font-weight:700">110%</span> → <span class="red">MARGIN CALL !</span><br>
+              Le broker exige un dépôt immédiat. Vous avez généralement quelques heures pour réagir.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(255,77,109,.15);border:1px solid rgba(255,77,109,.5);border-radius:0 0 12px 12px;border-top:none">
+            <div style="background:#8b0000;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">5</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--red)">💀 STOP OUT — Liquidation automatique forcée</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">Si vous n'avez pas agi, le broker ferme la position automatiquement quand le niveau passe sous 50%.<br>
+              Perte définitive: <span style="color:var(--red);font-weight:700">-3 333€</span> (quasi-totalité de la marge) | Solde restant: ~1 667€<br>
+              <span class="red">En moins de 30 minutes pendant une forte volatilité (NFP, discours Fed), tout peut s'effondrer.</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="ex-title">📐 Calcul du prix de liquidation</div>
+        <p>Pour connaître à quel prix EXACT vous recevrez un margin call, utilisez cette formule :<br><br>
+        <span class="highlight">Prix liquidation (Long) = Prix d'entrée − ((Équité − Marge maintenance) / (Lots × Valeur pip))</span><br><br>
+        Notre exemple: 1.0850 − ((5000 − 3333 × 0.5) / (1 × 100 000)) = 1.0850 − 0.0183 = <span class="red">1.0667</span><br>
+        → Si EUR/USD tombe à 1.0667 sans stop loss, liquidation totale.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPES D'APPELS DE MARGE -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">MC.03</span><span class="concept-title">Les 4 situations qui déclenchent un appel de marge</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3" style="margin-bottom:0">
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <span class="card-icon">📉</span>
+          <h3 style="color:var(--red);font-size:16px">1. Position perdante</h3>
+          <p style="font-size:13px">La cause la plus courante. Le marché va contre vous et les pertes latentes érodent votre équité jusqu'à passer sous le seuil de maintenance. Brutal en période de forte volatilité.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,140,66,.3)">
+          <span class="card-icon">🌙</span>
+          <h3 style="color:var(--orange);font-size:16px">2. Gap overnight</h3>
+          <p style="font-size:13px">Le marché ouvre bien plus bas/haut que la clôture (gap). Votre stop loss n'a pas pu s'exécuter. La perte instantanée peut dépasser votre marge disponible en quelques secondes.</p>
+        </div>
+        <div class="card" style="border-color:rgba(168,85,247,.3)">
+          <span class="card-icon">📊</span>
+          <h3 style="color:var(--purple);font-size:16px">3. Broker augmente les exigences</h3>
+          <p style="font-size:13px">En période de forte volatilité (crise, événement macro), les brokers peuvent augmenter leurs exigences de marge subitement, déclenchant des margin calls même sur des positions gagnantes.</p>
+        </div>
+        <div class="card" style="border-color:rgba(77,166,255,.3)">
+          <span class="card-icon">💱</span>
+          <h3 style="color:var(--blue);font-size:16px">4. Effet de change sur marge</h3>
+          <p style="font-size:13px">Si votre compte est en EUR et que vous tradez des actifs en USD, une appréciation du dollar augmente mécaniquement la valeur en € de votre marge requise. Risque souvent ignoré.</p>
+        </div>
+        <div class="card" style="border-color:rgba(245,197,24,.3)">
+          <span class="card-icon">🔄</span>
+          <h3 style="color:var(--gold);font-size:16px">5. Surexposition (overleverage)</h3>
+          <p style="font-size:13px">Ouvrir trop de positions simultanément. La marge totale utilisée représente 90-100% du capital → le moindre mouvement défavorable déclenche le margin call immédiatement.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <span class="card-icon">🌊</span>
+          <h3 style="color:var(--red);font-size:16px">6. Flash crash / Événement extrême</h3>
+          <p style="font-size:13px">Événements comme le <span class="highlight">CHF Flash Crash</span> de 2015 (CHF +30% en 15 minutes) ou le <span class="highlight">pétrole négatif</span> de 2020. Certains comptes ont été liquidés ET sont passés en négatif.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFFÉRENCE CFD / FUTURES / CRYPTO -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">MC.04</span><span class="concept-title">Marge selon les instruments — CFD, Futures, Crypto, Actions</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="asset-table">
+        <thead>
+          <tr><th>Instrument</th><th>Levier max (EU)</th><th>Marge initiale type</th><th>Appel de marge</th><th>Solde négatif possible ?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CFD Forex (majeurs)</td><td>30:1</td><td>3.33%</td><td>Oui — automatique</td><td><span class="badge badge-green">Non (protection ESMA)</span></td></tr>
+          <tr><td>CFD Indices</td><td>20:1</td><td>5%</td><td>Oui — automatique</td><td><span class="badge badge-green">Non (protection ESMA)</span></td></tr>
+          <tr><td>CFD Actions</td><td>5:1</td><td>20%</td><td>Oui</td><td><span class="badge badge-green">Non (protection ESMA)</span></td></tr>
+          <tr><td>Futures (CME, Eurex)</td><td>Variable</td><td>3-15% selon contrat</td><td>Oui — variation margin quotidienne</td><td><span class="badge badge-red">OUI — pertes illimitées</span></td></tr>
+          <tr><td>Crypto Perpetual (Binance)</td><td>125:1 (!)</td><td>0.8%</td><td>Oui — liquidation automatique</td><td><span class="badge badge-orange">Dépend exchange</span></td></tr>
+          <tr><td>Actions au comptant</td><td>1:1 (PEA/CTO)</td><td>100%</td><td>Non</td><td><span class="badge badge-green">Impossible</span></td></tr>
+          <tr><td>SRD (France)</td><td>~5:1</td><td>20%</td><td>Oui — fin de mois</td><td><span class="badge badge-orange">Limité</span></td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box" style="margin-top:20px">
+        <div class="w-title">⚠️ Solde négatif — Le cauchemar des traders sur Futures</div>
+        <p>Sur les <span class="red">Futures</span> et certains exchanges crypto non-régulés, votre perte peut DÉPASSER votre dépôt initial. En 2020, des traders de Futures pétrole (WTI) ont eu des soldes <span class="red">négatifs de plusieurs milliers de dollars</span> quand le WTI est passé à -37$/baril. Les brokers CFD régulés en Europe ont l'obligation de protection contre le solde négatif depuis 2018 (ESMA).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARK-TO-MARKET / VARIATION MARGIN SUR FUTURES -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">MC.05</span><span class="concept-title">Mark-to-Market & Variation Margin sur les Futures</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Sur les Futures, le mécanisme de marge est différent des CFD. Chaque soir à la clôture, la chambre de compensation (clearing house) recalcule tous les P&L — c'est le <span class="highlight">Mark-to-Market</span>.</p>
+      <div class="formula">
+        <div class="formula-label">Variation Margin — Règlement quotidien sur Futures</div>
+        Chaque soir: votre compte est DÉBITÉ des pertes ou CRÉDITÉ des gains de la journée<br><br>
+        Exemple: Vous êtes Long 1 contrat CAC 40 Future (valeur 1 point = 10€)<br>
+        Jour 1: CAC ouvre 7800, ferme 7750 → -50 points → débit de 50 × 10€ = -500€ sur votre compte<br>
+        Jour 2: CAC ouvre 7750, ferme 7720 → -30 points → débit de 300€<br>
+        Si solde &lt; marge de maintenance → appel de marge le soir même, à régler avant l'ouverture
+      </div>
+      <div class="example-box">
+        <div class="ex-title">💡 Différence clé CFD vs Futures sur la marge</div>
+        <p><span class="highlight">CFD</span> : les pertes latentes s'accumulent en temps réel sur votre équité. Stop Out déclenché dès que le niveau de marge est atteint, à n'importe quel moment de la journée.<br><br>
+        <span class="highlight">Futures</span> : règlement quotidien. Vous pouvez avoir une position perdante en cours de journée sans appel de marge immédiat — mais à la clôture le broker prélève directement. Si vous n'avez pas les fonds, l'appel de marge est émis le soir et doit être réglé avant l'ouverture du lendemain.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMENT ÉVITER / GÉRER -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">MC.06</span><span class="concept-title">7 règles pour ne JAMAIS recevoir d'appel de marge</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3" style="margin-bottom:24px">
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">01</div>
+          <h3 style="color:var(--green);font-size:15px">Respectez la règle des 1-2%</h3>
+          <p style="font-size:13px">Ne risquez jamais plus de 1-2% de votre capital par trade. Avec cette règle, même 10 pertes consécutives ne peuvent pas vous provoquer un margin call.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">02</div>
+          <h3 style="color:var(--green);font-size:15px">Toujours utiliser un Stop Loss</h3>
+          <p style="font-size:13px">Un stop loss placé avant l'entrée en position garantit que votre perte est définie et limitée. C'est la première ligne de défense contre l'appel de marge.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">03</div>
+          <h3 style="color:var(--green);font-size:15px">Gardez une marge libre de 50%+</h3>
+          <p style="font-size:13px">N'utilisez jamais plus de 50% de votre capital en marge. Les 50% restants servent de coussin pour absorber les mouvements adverses sans atteindre le seuil de margin call.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">04</div>
+          <h3 style="color:var(--green);font-size:15px">Évitez les événements à risque</h3>
+          <p style="font-size:13px">NFP, décisions de banques centrales, résultats d'entreprises... Fermez ou réduisez vos positions AVANT ces événements, ou élargissez vos stops pour absorber la volatilité.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">05</div>
+          <h3 style="color:var(--green);font-size:15px">Fermez les positions overnight</h3>
+          <p style="font-size:13px">En day trading, fermez toujours vos positions avant la clôture du marché. Les gaps d'ouverture sont imprévisibles et peuvent déclencher un margin call instantané.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">06</div>
+          <h3 style="color:var(--green);font-size:15px">Calculez AVANT d'entrer</h3>
+          <p style="font-size:13px">Avant chaque trade, calculez votre niveau de margin call exact. Connaître le prix auquel vous serez liquidé vous aide à choisir la bonne taille de position et le bon stop.</p>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <div class="w-title">⛔ L'ERREUR FATALE — Moyenner à la baisse sur une position perdante</div>
+        <p>Un réflexe dangereux de débutant : quand une position perd, rajouter des lots pour "faire baisser le prix moyen". <span class="red">C'est exactement ce qui précipite le margin call.</span> Vous augmentez votre exposition sur une position déjà perdante, consommant encore plus de marge. Si le marché continue dans la même direction, la liquidation survient d'autant plus vite. La discipline consiste à <span class="highlight">couper la perte, jamais à la moyenner.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMULATEUR -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">MC.07</span><span class="concept-title">🧮 Simulateur d'appel de marge — Calculez votre niveau de risque</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;padding-top:20px">
+
+  <div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">
+      Capital du compte (€)
+    </div>
+    <input
+      type="number"
+      id="sim-capital"
+      value="10000"
+      min="100"
+      style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:IBM Plex Mono,monospace;font-size:14px;outline:none"
+      (input)="calcMargin()"
+    >
+  </div>
+
+  <div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">
+      Levier utilisé
+    </div>
+    <select
+      id="sim-levier"
+      (change)="calcMargin()"
+      style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:IBM Plex Mono,monospace;font-size:14px;outline:none;cursor:pointer"
+    >
+      <option value="2">2:1 (Crypto ESMA)</option>
+      <option value="5">5:1 (Actions CFD)</option>
+      <option value="10">10:1 (Indices)</option>
+      <option value="20">20:1 (Indices majeurs)</option>
+      <option value="30" selected>30:1 (Forex majeurs)</option>
+      <option value="50">50:1 (Hors Europe)</option>
+      <option value="100">100:1 (Hors Europe)</option>
+      <option value="125">125:1 (Crypto perp.)</option>
+    </select>
+  </div>
+
+  <div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">
+      % du capital en marge utilisée
+    </div>
+    <input
+      type="number"
+      id="sim-usage"
+      value="50"
+      min="1"
+      max="100"
+      style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:IBM Plex Mono,monospace;font-size:14px;outline:none"
+      (input)="calcMargin()"
+    >
+  </div>
+
+  <div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">
+      Seuil Margin Call du broker (%)
+    </div>
+    <input
+      type="number"
+      id="sim-mc-level"
+      value="100"
+      min="50"
+      max="200"
+      style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:IBM Plex Mono,monospace;font-size:14px;outline:none"
+      (input)="calcMargin()"
+    >
+  </div>
+
+</div>
+
+      <div id="sim-result" style="margin-top:24px;padding:24px;background:var(--surface2);border-radius:12px;border:1px solid var(--border)">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">RÉSULTATS DU SIMULATEUR</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px" id="sim-metrics"></div>
+        <div id="sim-verdict" style="margin-top:16px;padding:14px;border-radius:8px;font-size:14px;line-height:1.6"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAS RÉELS HISTORIQUES -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">MC.08</span><span class="concept-title">Cas réels historiques — Quand les margin calls ont ruiné des géants</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">LTCM — 1998</h4>
+          <div class="prop"><span>Levier utilisé</span><span>25:1 à 250:1</span></div>
+          <div class="prop"><span>Pertes en 4 mois</span><span>-4,6 Milliards $</span></div>
+          <div class="prop"><span>Cause</span><span>Défaut Russie + fuite vers la qualité</span></div>
+          <div class="prop"><span>Résultat</span><span>Renflouement par la Fed + 14 banques</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px">Long-Term Capital Management était géré par 2 prix Nobel d'économie. Leur modèle mathématique n'avait pas prévu les corrélations en période de crise : tous leurs actifs ont chuté simultanément.</p>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--orange)"></div>
+          <h4 style="color:var(--orange)">CHF FLASH CRASH — Jan 2015</h4>
+          <div class="prop"><span>Événement</span><span>BNS abandonne le plancher EUR/CHF</span></div>
+          <div class="prop"><span>Mouvement</span><span>CHF +30% en 15 minutes</span></div>
+          <div class="prop"><span>Victimes</span><span>Milliers de traders retail + brokers</span></div>
+          <div class="prop"><span>Broker FXCM</span><span>Pertes clients : -225M$ → renfloué</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px">Tous les stops loss ont été "gaps" — le prix a sauté par-dessus sans exécution. Des traders ont perdu non seulement leur dépôt mais se sont retrouvés débiteurs auprès de leur broker.</p>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--purple)"></div>
+          <h4 style="color:var(--purple)">PÉTROLE WTI NÉGATIF — Avr 2020</h4>
+          <div class="prop"><span>Événement</span><span>Prix WTI Mai 2020 : -37,63$/baril</span></div>
+          <div class="prop"><span>Cause</span><span>Stockages pleins + COVID-19</span></div>
+          <div class="prop"><span>Victimes</span><span>Traders de futures sur pétrole</span></div>
+          <div class="prop"><span>Broker Bank of China</span><span>-1 Milliard $ de pertes clients</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px">Des particuliers chinois avaient acheté un produit lié au WTI. Personne n'avait prévu que le prix puisse passer négatif. Soldes débiteurs massifs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,54 @@
+<section id="brokers" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 12</div>
+  <h2 class="section-title fade-in">BROKERS & <span style="color:var(--gold)">PLATEFORMES</span></h2>
+  <p class="section-desc fade-in">Le choix du broker impacte directement votre rentabilité. Frais, régulation, exécution, outils — voici comment comparer objectivement.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">BR.01</span><span class="concept-title">Comparatif complet des brokers — France & Europe</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="asset-table">
+        <thead><tr><th>Broker</th><th>Type</th><th>Régulation</th><th>Frais actions FR</th><th>ETF</th><th>Crypto</th><th>CFD/Levier</th><th>Idéal pour</th></tr></thead>
+        <tbody>
+          <tr><td>Degiro</td><td>Discount</td><td>AFM (NL) + AMF</td><td>~1€+0.05%</td><td>✅ Gratuit(s)</td><td>❌</td><td>❌</td><td><span class="badge badge-green">Investisseurs</span></td></tr>
+          <tr><td>Boursorama Bourse</td><td>Banque</td><td>AMF</td><td>0.99€ à 1.99%</td><td>✅</td><td>❌</td><td>❌</td><td><span class="badge badge-blue">PEA + banque</span></td></tr>
+          <tr><td>Fortuneo</td><td>Banque</td><td>AMF</td><td>0€ (conditions)</td><td>✅</td><td>❌</td><td>❌</td><td><span class="badge badge-blue">PEA gratuit</span></td></tr>
+          <tr><td>Interactive Brokers</td><td>Pro</td><td>SEC + AMF</td><td>0.05% min 1$</td><td>✅</td><td>✅ (limité)</td><td>✅ Pro</td><td><span class="badge badge-purple">Traders actifs</span></td></tr>
+          <tr><td>Saxo Bank</td><td>Pro</td><td>DFSA + AMF</td><td>0.1% min 10€</td><td>✅</td><td>❌</td><td>✅</td><td><span class="badge badge-purple">Traders pro</span></td></tr>
+          <tr><td>eToro</td><td>Social</td><td>CySEC + AMF</td><td>0% (spread)</td><td>✅</td><td>✅</td><td>✅ CFD</td><td><span class="badge badge-gold">Copy trading</span></td></tr>
+          <tr><td>XTB</td><td>CFD</td><td>KNF + AMF</td><td>0% &lt;100K€/mois</td><td>✅</td><td>✅ Crypto</td><td>✅</td><td><span class="badge badge-orange">Traders actifs</span></td></tr>
+          <tr><td>IG Markets</td><td>CFD</td><td>FCA + AMF</td><td>Spread</td><td>✅</td><td>✅</td><td>✅</td><td><span class="badge badge-orange">CFD/Forex</span></td></tr>
+          <tr><td>Binance / Kraken</td><td>Crypto</td><td>Variable</td><td>❌</td><td>❌</td><td>✅ Complet</td><td>✅ Futures</td><td><span class="badge badge-red">Crypto only</span></td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box" style="margin-top:20px">
+        <div class="w-title">⚠️ Vérifiez TOUJOURS la régulation avant de déposer</div>
+        <p>En France, vérifiez que le broker est enregistré auprès de l'<span class="highlight">AMF</span> (amf-france.org → rubrique "Rechercher une société"). Un broker non régulé peut disparaître avec vos fonds du jour au lendemain. Méfiez-vous des brokers qui ne sont pas sur la liste blanche de l'AMF. La protection des dépôts en France est assurée par le <span class="highlight">Fonds de Garantie des Dépôts</span> à hauteur de 70 000€ pour les actifs non-crypto.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">BR.02</span><span class="concept-title">Frais cachés — Ce que les brokers ne mettent pas en avant</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="asset-table">
+        <thead><tr><th>Type de frais</th><th>Description</th><th>Impact annuel estimé</th></tr></thead>
+        <tbody>
+          <tr><td>Spread bid/ask</td><td>Différence entre prix achat et vente → coût implicite à chaque trade</td><td>Très variable selon instrument</td></tr>
+          <tr><td>Overnight swap (CFD)</td><td>Coût de financement pour garder une position leveragée overnight (~2-8%/an)</td><td><span class="badge badge-red">Élevé sur positions longues</span></td></tr>
+          <tr><td>Inactivité</td><td>Certains brokers facturent si aucun trade pendant X mois</td><td>5-15€/mois</td></tr>
+          <tr><td>Change de devise</td><td>Conversion EUR↔USD sur achat d'actions US (0.1-1.5% par transaction)</td><td><span class="badge badge-gold">Modéré</span></td></tr>
+          <tr><td>Retrait</td><td>Frais de virement bancaire pour retirer vos fonds</td><td>0-25€ par retrait</td></tr>
+          <tr><td>Garde / Custodial</td><td>Frais annuels pour détenir des titres (surtout banques traditionnelles)</td><td>0.1-0.5%/an</td></tr>
+          <tr><td>Données temps réel</td><td>Flux de cotation en direct (certains brokers facturent)</td><td>5-30€/mois</td></tr>
+          <tr><td>Frais de conversion ETF</td><td>TER (Total Expense Ratio) de l'ETF prélevé automatiquement</td><td>0.07% à 1.5%/an</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

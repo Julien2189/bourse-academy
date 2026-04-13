@@ -1,0 +1,90 @@
+<!-- TICKER TAPE -->
+<div class="ticker-wrap">
+  <div class="ticker" id="liveTicker">
+    ⏳ Chargement des prix... &nbsp;|&nbsp; Cliquez sur ⚙️ en bas à droite pour configurer votre clé API Twelve Data &nbsp;|&nbsp; 📊 BOURSE ACADEMY — DE ZÉRO À HERO &nbsp;|&nbsp;
+  </div>
+</div>
+
+<!-- API CONFIG PANEL -->
+<div class="api-panel">
+  <div class="api-drawer" id="apiDrawer">
+    <div class="api-drawer-title">⚙️ CONFIG API LIVE</div>
+    <div class="api-drawer-sub">Entrez votre clé API pour les prix réels. Les cryptos (BTC, ETH…) sont chargées automatiquement via CoinGecko — sans clé nécessaire.</div>
+    <div class="api-status" id="apiStatus">
+      <div class="dot dot-idle" id="statusDot"></div>
+      <span id="statusText">Aucune clé — données simulées actives</span>
+    </div>
+    <div class="api-field">
+      <label>🔑 Twelve Data API Key — Actions, Forex, Indices, Or</label>
+      <input type="password" id="twelveApiKey" placeholder="ex: a1b2c3d4e5f6789..." />
+    </div>
+    <div class="api-links">
+      🆓 Clé gratuite 800 req/jour → <a href="https://twelvedata.com/register" target="_blank">twelvedata.com/register</a><br>
+      🆓 Crypto sans clé → CoinGecko API intégrée automatiquement<br>
+      💡 Plan gratuit suffit pour ce cours
+    </div>
+    <div class="api-btns" style="margin-top:16px">
+      <button class="btn" (click)="apiSave.emit()">✅ Charger les prix réels</button>
+      <button class="btn-ghost" (click)="apiClear.emit()">🗑️ Effacer</button>
+    </div>
+    <div style="margin-top:12px;font-size:11px;color:var(--muted)">🔒 Votre clé est stockée uniquement dans votre navigateur (localStorage). Elle ne transite pas par nos serveurs.</div>
+  </div>
+
+  <button class="api-fab" (click)="apiToggle.emit()" title="Configuration API temps réel">⚙️</button>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#home">BOURSE ACADEMY</a>
+  <ul class="nav-links" id="desktopLinks">
+    <li><a href="#fondamentaux">Bases</a></li>
+    <li><a href="#actifs">Actifs</a></li>
+    <li><a href="#contrats">Contrats</a></li>
+    <li><a href="#analyse">Analyse</a></li>
+    <li><a href="#strategies">Stratégies</a></li>
+    <li><a href="#risque">Risque</a></li>
+    <li><a href="#appel-marge">Marge</a></li>
+    <li><a href="#bougies">Bougies</a></li>
+    <li><a href="#psychologie">Psycho</a></li>
+    <li><a href="#brokers">Brokers</a></li>
+    <li><a href="#outils">Outils</a></li>
+    <li><a href="#reglementation">AMF</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#glossaire">Glossaire</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" (click)="themeToggle.emit()" title="Basculer mode clair/sombre" aria-label="Toggle theme">🌙</button>
+
+    <button class="burger-btn" id="burgerBtn" (click)="menuToggle.emit()" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#fondamentaux" (click)="menuClose.emit()">📚 Bases</a></li>
+    <li><a href="#actifs" (click)="menuClose.emit()">📈 Actifs</a></li>
+    <li><a href="#contrats" (click)="menuClose.emit()">📋 Contrats</a></li>
+    <li><a href="#analyse" (click)="menuClose.emit()">🔍 Analyse</a></li>
+    <li><a href="#strategies" (click)="menuClose.emit()">🎯 Stratégies</a></li>
+    <li><a href="#risque" (click)="menuClose.emit()">⚠️ Risque</a></li>
+    <li><a href="#appel-marge" (click)="menuClose.emit()">📞 Marge</a></li>
+    <li><a href="#bougies" (click)="menuClose.emit()">🕯️ Bougies</a></li>
+    <li><a href="#instruments-avances" (click)="menuClose.emit()">⚡ Avancés</a></li>
+    <li><a href="#psychologie" (click)="menuClose.emit()">🧠 Psycho</a></li>
+    <li><a href="#brokers" (click)="menuClose.emit()">🏦 Brokers</a></li>
+    <li><a href="#outils" (click)="menuClose.emit()">🛠️ Outils</a></li>
+    <li><a href="#reglementation" (click)="menuClose.emit()">🏛️ AMF</a></li>
+    <li><a href="#quiz" (click)="menuClose.emit()">🎯 Quiz</a></li>
+    <li><a href="#glossaire" (click)="menuClose.emit()">📖 Glossaire</a></li>
+    <li><a href="#fiscalite" (click)="menuClose.emit()">💰 Fiscalité</a></li>
+  </ul>
+  <div class="menu-divider"></div>
+  <div class="menu-footer">BOURSE ACADEMY · Cours complet 2025 · 14 Modules</div>
+</div>

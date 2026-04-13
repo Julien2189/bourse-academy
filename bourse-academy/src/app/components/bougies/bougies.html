@@ -1,0 +1,120 @@
+<section id="bougies" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 09</div>
+  <h2 class="section-title fade-in">BOUGIES <span style="color:var(--gold)">JAPONAISES</span></h2>
+  <p class="section-desc fade-in">Les candlesticks sont le langage universel des traders. Inventées au Japon au XVIIIe siècle par Munehisa Homma pour spéculer sur le riz, elles révèlent en un coup d'œil la psychologie du marché.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">BJ.01</span><span class="concept-title">Anatomie d'une bougie — OHLC</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Chaque bougie représente une période (1min, 1h, 1 jour…) et contient 4 informations :</p>
+      <div class="formula">
+        <div class="formula-label">Structure OHLC</div>
+        O = Open (Prix d'ouverture) → bas du corps si bougie haussière<br>
+        H = High (Plus haut atteint) → sommet de la mèche supérieure<br>
+        L = Low  (Plus bas atteint)  → bas de la mèche inférieure<br>
+        C = Close (Prix de clôture)  → haut du corps si bougie haussière<br><br>
+        Corps large = forte conviction | Mèches longues = hésitation / rejet
+      </div>
+      <!-- Candlestick visual SVG -->
+      <div style="display:flex;gap:32px;align-items:flex-end;margin:28px 0;flex-wrap:wrap">
+        <!-- Bullish candle -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="40" stroke="#00d4aa" stroke-width="2"/>
+            <rect x="15" y="40" width="30" height="80" fill="#00d4aa" rx="2"/>
+            <line x1="30" y1="120" x2="30" y2="150" stroke="#00d4aa" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--green);font-size:12px;font-weight:700;margin-top:8px">HAUSSIÈRE</div>
+          <div style="color:var(--muted);font-size:11px">Close > Open</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Corps vert/blanc</div>
+        </div>
+        <!-- Bearish candle -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="40" stroke="#ff4d6d" stroke-width="2"/>
+            <rect x="15" y="40" width="30" height="80" fill="#ff4d6d" rx="2"/>
+            <line x1="30" y1="120" x2="30" y2="150" stroke="#ff4d6d" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--red);font-size:12px;font-weight:700;margin-top:8px">BAISSIÈRE</div>
+          <div style="color:var(--muted);font-size:11px">Close &lt; Open</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Corps rouge/noir</div>
+        </div>
+        <!-- Doji -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="78" stroke="#f5c518" stroke-width="2"/>
+            <rect x="10" y="78" width="40" height="4" fill="#f5c518" rx="1"/>
+            <line x1="30" y1="82" x2="30" y2="150" stroke="#f5c518" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--gold);font-size:12px;font-weight:700;margin-top:8px">DOJI</div>
+          <div style="color:var(--muted);font-size:11px">Open ≈ Close</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Indécision</div>
+        </div>
+        <!-- Hammer -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="20" stroke="#00d4aa" stroke-width="2"/>
+            <rect x="15" y="20" width="30" height="30" fill="#00d4aa" rx="2"/>
+            <line x1="30" y1="50" x2="30" y2="150" stroke="#00d4aa" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--green);font-size:12px;font-weight:700;margin-top:8px">MARTEAU</div>
+          <div style="color:var(--muted);font-size:11px">Longue mèche bas</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Retournement haussier</div>
+        </div>
+        <!-- Shooting star -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="110" stroke="#ff4d6d" stroke-width="2"/>
+            <rect x="15" y="110" width="30" height="30" fill="#ff4d6d" rx="2"/>
+            <line x1="30" y1="140" x2="30" y2="150" stroke="#ff4d6d" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--red);font-size:12px;font-weight:700;margin-top:8px">ÉTOILE FILANTE</div>
+          <div style="color:var(--muted);font-size:11px">Longue mèche haut</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Retournement baissier</div>
+        </div>
+        <!-- Marubozu -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <rect x="15" y="10" width="30" height="140" fill="#00d4aa" rx="2"/>
+          </svg>
+          <div style="color:var(--green);font-size:12px;font-weight:700;margin-top:8px">MARUBOZU</div>
+          <div style="color:var(--muted);font-size:11px">Aucune mèche</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Force absolue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">BJ.02</span><span class="concept-title">Les 12 figures de retournement essentielles</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="asset-table">
+        <thead><tr><th>Figure</th><th>Signal</th><th>Description</th><th>Fiabilité</th><th>Confirmation requise</th></tr></thead>
+        <tbody>
+          <tr><td>🔨 Marteau (Hammer)</td><td><span class="badge badge-green">Haussier</span></td><td>Petite corps en haut + longue mèche basse. Apparaît après une baisse → les acheteurs ont rejeté les bas prix</td><td><span class="badge badge-gold">Bonne</span></td><td>Bougie suivante haussière</td></tr>
+          <tr><td>⭐ Étoile filante (Shooting Star)</td><td><span class="badge badge-red">Baissier</span></td><td>Petite corps en bas + longue mèche haute. Après une hausse → les vendeurs ont rejeté les hauts prix</td><td><span class="badge badge-gold">Bonne</span></td><td>Bougie suivante baissière</td></tr>
+          <tr><td>🔃 Engulfant haussier</td><td><span class="badge badge-green">Haussier</span></td><td>Grande bougie verte avale entièrement la précédente rouge. Fort signal de retournement</td><td><span class="badge badge-green">Forte</span></td><td>Volume élevé</td></tr>
+          <tr><td>🔃 Engulfant baissier</td><td><span class="badge badge-red">Baissier</span></td><td>Grande bougie rouge avale entièrement la précédente verte. Fort signal de retournement</td><td><span class="badge badge-green">Forte</span></td><td>Volume élevé</td></tr>
+          <tr><td>✙ Doji</td><td><span class="badge badge-blue">Neutre</span></td><td>Open = Close. Indécision totale entre acheteurs et vendeurs. Contexte crucial pour l'interprétation</td><td><span class="badge badge-gold">Modérée</span></td><td>Bougie suivante + contexte</td></tr>
+          <tr><td>⚡ Doji libellule</td><td><span class="badge badge-green">Haussier</span></td><td>Open/Close en haut + longue mèche basse. Rejet fort des prix bas</td><td><span class="badge badge-green">Forte</span></td><td>Support + volume</td></tr>
+          <tr><td>☄️ Doji pierre tombale</td><td><span class="badge badge-red">Baissier</span></td><td>Open/Close en bas + longue mèche haute. Rejet fort des prix hauts</td><td><span class="badge badge-green">Forte</span></td><td>Résistance + volume</td></tr>
+          <tr><td>🌟 Morning Star</td><td><span class="badge badge-green">Haussier</span></td><td>3 bougies: grande rouge → petit doji → grande verte. Retournement haussier puissant</td><td><span class="badge badge-green">Très forte</span></td><td>Volume sur 3e bougie</td></tr>
+          <tr><td>🌙 Evening Star</td><td><span class="badge badge-red">Baissier</span></td><td>3 bougies: grande verte → petit doji → grande rouge. Retournement baissier puissant</td><td><span class="badge badge-green">Très forte</span></td><td>Volume sur 3e bougie</td></tr>
+          <tr><td>👶 Harami haussier</td><td><span class="badge badge-green">Haussier</span></td><td>Petite bougie verte contenue dans le corps d'une grande bougie rouge précédente</td><td><span class="badge badge-gold">Modérée</span></td><td>Confirmation obligatoire</td></tr>
+          <tr><td>3 soldats blancs</td><td><span class="badge badge-green">Haussier</span></td><td>3 grandes bougies vertes consécutives, chacune ouvrant dans le corps de la précédente</td><td><span class="badge badge-green">Forte</span></td><td>Volume croissant</td></tr>
+          <tr><td>3 corbeaux noirs</td><td><span class="badge badge-red">Baissier</span></td><td>3 grandes bougies rouges consécutives. Signal de distribution intense</td><td><span class="badge badge-green">Forte</span></td><td>Volume croissant</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box" style="margin-top:20px">
+        <div class="w-title">⚠️ Règle d'or des bougies</div>
+        <p>Une bougie seule ne suffit <span class="red">jamais</span> à prendre un trade. Elle doit être confirmée par : le contexte (support/résistance), le volume, et au minimum la bougie suivante. Les figures en bas de range ou sur support fort ont une bien meilleure fiabilité qu'en plein milieu d'une tendance.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,2242 @@
+<body>
+
+<!-- TICKER TAPE -->
+<div class="ticker-wrap">
+  <div class="ticker" id="liveTicker">
+    ⏳ Chargement des prix... &nbsp;|&nbsp; Cliquez sur ⚙️ en bas à droite pour configurer votre clé API Twelve Data &nbsp;|&nbsp; 📊 BOURSE ACADEMY — DE ZÉRO À HERO &nbsp;|&nbsp;
+  </div>
+</div>
+
+<!-- API CONFIG PANEL -->
+<div class="api-panel">
+  <div class="api-drawer" id="apiDrawer">
+    <div class="api-drawer-title">⚙️ CONFIG API LIVE</div>
+    <div class="api-drawer-sub">Entrez votre clé API pour les prix réels. Les cryptos (BTC, ETH…) sont chargées automatiquement via CoinGecko — sans clé nécessaire.</div>
+    <div class="api-status" id="apiStatus">
+      <div class="dot dot-idle" id="statusDot"></div>
+      <span id="statusText">Aucune clé — données simulées actives</span>
+    </div>
+    <div class="api-field">
+      <label>🔑 Twelve Data API Key — Actions, Forex, Indices, Or</label>
+      <input type="password" id="twelveApiKey" placeholder="ex: a1b2c3d4e5f6789..." />
+    </div>
+    <div class="api-links">
+      🆓 Clé gratuite 800 req/jour → <a href="https://twelvedata.com/register" target="_blank">twelvedata.com/register</a><br>
+      🆓 Crypto sans clé → CoinGecko API intégrée automatiquement<br>
+      💡 Plan gratuit suffit pour ce cours
+    </div>
+    <div class="api-btns" style="margin-top:16px">
+      <button class="btn" onclick="saveAndFetch()">✅ Charger les prix réels</button>
+      <button class="btn-ghost" onclick="clearApiKey()">🗑️ Effacer</button>
+    </div>
+    <div style="margin-top:12px;font-size:11px;color:var(--muted)">🔒 Votre clé est stockée uniquement dans votre navigateur (localStorage). Elle ne transite pas par nos serveurs.</div>
+  </div>
+  <button class="api-fab" onclick="toggleApiDrawer()" title="Configuration API temps réel">⚙️</button>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#home">BOURSE ACADEMY</a>
+  <ul class="nav-links" id="desktopLinks">
+    <li><a href="#fondamentaux">Bases</a></li>
+    <li><a href="#actifs">Actifs</a></li>
+    <li><a href="#contrats">Contrats</a></li>
+    <li><a href="#analyse">Analyse</a></li>
+    <li><a href="#strategies">Stratégies</a></li>
+    <li><a href="#risque">Risque</a></li>
+    <li><a href="#appel-marge">Marge</a></li>
+    <li><a href="#bougies">Bougies</a></li>
+    <li><a href="#psychologie">Psycho</a></li>
+    <li><a href="#brokers">Brokers</a></li>
+    <li><a href="#outils">Outils</a></li>
+    <li><a href="#reglementation">AMF</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#glossaire">Glossaire</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Basculer mode clair/sombre" aria-label="Toggle theme">🌙</button>
+    <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#fondamentaux" onclick="closeMenu()">📚 Bases</a></li>
+    <li><a href="#actifs" onclick="closeMenu()">📈 Actifs</a></li>
+    <li><a href="#contrats" onclick="closeMenu()">📋 Contrats</a></li>
+    <li><a href="#analyse" onclick="closeMenu()">🔍 Analyse</a></li>
+    <li><a href="#strategies" onclick="closeMenu()">🎯 Stratégies</a></li>
+    <li><a href="#risque" onclick="closeMenu()">⚠️ Risque</a></li>
+    <li><a href="#appel-marge" onclick="closeMenu()">📞 Marge</a></li>
+    <li><a href="#bougies" onclick="closeMenu()">🕯️ Bougies</a></li>
+    <li><a href="#instruments-avances" onclick="closeMenu()">⚡ Avancés</a></li>
+    <li><a href="#psychologie" onclick="closeMenu()">🧠 Psycho</a></li>
+    <li><a href="#brokers" onclick="closeMenu()">🏦 Brokers</a></li>
+    <li><a href="#outils" onclick="closeMenu()">🛠️ Outils</a></li>
+    <li><a href="#reglementation" onclick="closeMenu()">🏛️ AMF</a></li>
+    <li><a href="#quiz" onclick="closeMenu()">🎯 Quiz</a></li>
+    <li><a href="#glossaire" onclick="closeMenu()">📖 Glossaire</a></li>
+    <li><a href="#fiscalite" onclick="closeMenu()">💰 Fiscalité</a></li>
+  </ul>
+  <div class="menu-divider"></div>
+  <div class="menu-footer">BOURSE ACADEMY · Cours complet 2025 · 14 Modules</div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge">Cours Complet 2025</div>
+  <h1 class="fade-in">
+    DE <span class="outline">ZÉRO</span><br>
+    À <span class="gold">HERO</span><br>
+    EN BOURSE
+  </h1>
+  <p class="hero-sub fade-in">Maîtrisez le trading & l'investissement, de A à Z. Actions, Forex, Crypto, Matières Premières, Dérivés — tout ce que vous devez savoir.</p>
+  <div class="hero-stats fade-in">
+    <div class="hero-stat"><div class="num">12</div><div class="lbl">Modules</div></div>
+    <div class="hero-stat"><div class="num">50+</div><div class="lbl">Concepts</div></div>
+    <div class="hero-stat"><div class="num">100+</div><div class="lbl">Exemples</div></div>
+    <div class="hero-stat"><div class="num">5</div><div class="lbl">Classes d'actifs</div></div>
+  </div>
+  <div class="scroll-cta">↓ &nbsp; Commencer &nbsp; ↓</div>
+</div>
+
+<!-- MODULE 1: FONDAMENTAUX -->
+<section id="fondamentaux">
+  <div class="section-label">Module 01</div>
+  <h2 class="section-title fade-in">LES <span style="color:var(--gold)">FONDAMENTAUX</span></h2>
+  <p class="section-desc">Avant d'investir le moindre euro, il faut comprendre les bases du marché financier, comment il fonctionne et qui en sont les acteurs.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">01.01</span><span class="concept-title">Qu'est-ce que la Bourse ?</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>La <span class="highlight">Bourse</span> est un marché organisé où s'échangent des actifs financiers (actions, obligations, dérivés…). Elle remplit deux fonctions essentielles : permettre aux entreprises de se financer en émettant des titres, et permettre aux investisseurs d'acheter/vendre ces titres librement.</p>
+      <p>Les principales Bourses mondiales :</p>
+      <ul>
+        <li>🇫🇷 <span class="highlight">Euronext Paris</span> (CAC 40) — 1ère place européenne</li>
+        <li>🇺🇸 <span class="highlight">NYSE</span> (New York Stock Exchange) — plus grande au monde</li>
+        <li>🇺🇸 <span class="highlight">NASDAQ</span> — spécialisée tech (Apple, Google, Nvidia…)</li>
+        <li>🇬🇧 <span class="highlight">London Stock Exchange</span> (FTSE 100)</li>
+        <li>🇯🇵 <span class="highlight">Tokyo Stock Exchange</span> (Nikkei 225)</li>
+        <li>🇩🇪 <span class="highlight">Xetra Frankfurt</span> (DAX 40)</li>
+      </ul>
+      <div class="example-box">
+        <div class="ex-title">💡 Analogie simple</div>
+        <p>La Bourse, c'est comme un marché aux puces géant : les vendeurs proposent leurs actifs à un certain prix, les acheteurs font des offres, et la transaction se fait quand les deux parties sont d'accord. Le <span class="highlight">cours</span> d'une action, c'est simplement le dernier prix auquel elle a été échangée.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">01.02</span><span class="concept-title">Les acteurs du marché</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Les marchés financiers impliquent de nombreux acteurs aux objectifs différents :</p>
+      <ul>
+        <li><span class="highlight">Investisseurs particuliers (retail)</span> — vous et moi, représentent ~15% des volumes</li>
+        <li><span class="highlight">Fonds institutionnels</span> — BlackRock, Vanguard, fonds de pension → >60% des volumes</li>
+        <li><span class="highlight">Market Makers</span> — assurent la liquidité en cotant en permanence un prix acheteur et vendeur</li>
+        <li><span class="highlight">Hedge Funds</span> — stratégies agressives, short selling, arbitrage</li>
+        <li><span class="highlight">Banques centrales</span> (BCE, Fed) — influencent les taux, la monnaie</li>
+        <li><span class="highlight">Algorithmes / HFT</span> — High Frequency Trading, représentent 50-70% des volumes sur les grands marchés</li>
+        <li><span class="highlight">Entreprises</span> — émettent des actions et obligations pour se financer</li>
+        <li><span class="highlight">Courtiers (brokers)</span> — intermédiaires qui exécutent vos ordres (Degiro, eToro, Boursorama…)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">01.03</span><span class="concept-title">Le carnet d'ordres (Order Book)</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">carnet d'ordres</span> est le cœur du marché. Il liste tous les ordres d'achat et de vente en attente, classés par prix.</p>
+      <div class="formula">
+        <div class="formula-label">Structure</div>
+        OFFRE (ASK) = plus bas prix auquel on peut acheter<br>
+        DEMANDE (BID) = plus haut prix auquel on peut vendre<br>
+        SPREAD = ASK - BID (coût implicite de la transaction)
+      </div>
+      <p>Plus le <span class="highlight">spread</span> est faible, plus l'actif est <span class="green">liquide</span>. Un spread large = actif peu liquide = coûts de transaction élevés.</p>
+      <div class="example-box">
+        <div class="ex-title">📊 Exemple concret — LVMH</div>
+        <p>BID: 750.20€ | ASK: 750.40€ | Spread = 0,20€ = 0,027% → très liquide<br>
+        Pour une action peu connue : BID: 12,00€ | ASK: 12,40€ | Spread = 0,40€ = 3,3% → peu liquide, dangereux pour le trader court terme.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">01.04</span><span class="concept-title">Types d'ordres de Bourse</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Il existe plusieurs façons de passer un ordre en Bourse :</p>
+      <ul>
+        <li><span class="highlight">Ordre au marché (Market Order)</span> — s'exécute immédiatement au meilleur prix disponible. Rapide mais le prix n'est pas garanti.</li>
+        <li><span class="highlight">Ordre à cours limité (Limit Order)</span> — s'exécute uniquement si le prix atteint votre limite. Meilleur contrôle mais pas de garantie d'exécution.</li>
+        <li><span class="highlight">Ordre stop (Stop Loss)</span> — déclenche une vente automatique si le prix descend sous un seuil. Protège contre les grosses pertes.</li>
+        <li><span class="highlight">Ordre Stop-Limit</span> — combinaison : déclenché par le stop, mais s'exécute en limit. Risque de non-exécution en gap.</li>
+        <li><span class="highlight">Ordre OCO (One Cancels the Other)</span> — deux ordres liés : si l'un s'exécute, l'autre est annulé automatiquement.</li>
+        <li><span class="highlight">Ordre à la clôture / ouverture</span> — s'exécute uniquement au prix d'ouverture ou de clôture de séance.</li>
+      </ul>
+      <div class="warning-box">
+        <div class="w-title">⚠️ Attention au Slippage</div>
+        <p>Le <span class="red">slippage</span> est l'écart entre le prix espéré et le prix d'exécution réel. Il survient surtout lors de forte volatilité ou de faible liquidité. Un ordre au marché en période de crash peut s'exécuter bien plus bas que prévu.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">01.05</span><span class="concept-title">Trading vs Investissement — Quelle différence ?</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Ces deux approches sont fondamentalement différentes :</p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--green)"></div>
+          <h4 style="color:var(--green)">INVESTISSEMENT</h4>
+          <div class="prop"><span>Horizon</span><span>Long terme (1-20 ans)</span></div>
+          <div class="prop"><span>Objectif</span><span>Croissance du capital</span></div>
+          <div class="prop"><span>Analyse</span><span>Fondamentale</span></div>
+          <div class="prop"><span>Fréquence</span><span>Rare (buy & hold)</span></div>
+          <div class="prop"><span>Stress</span><span>Faible</span></div>
+          <div class="prop"><span>Exemple</span><span>Acheter Apple et garder 10 ans</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">TRADING</h4>
+          <div class="prop"><span>Horizon</span><span>Court terme (sec à semaines)</span></div>
+          <div class="prop"><span>Objectif</span><span>Profit sur mouvements de prix</span></div>
+          <div class="prop"><span>Analyse</span><span>Technique + flux</span></div>
+          <div class="prop"><span>Fréquence</span><span>Élevée (parfois 100x/jour)</span></div>
+          <div class="prop"><span>Stress</span><span>Très élevé</span></div>
+          <div class="prop"><span>Exemple</span><span>Shorter l'EUR/USD pendant NFP</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 2: CLASSES D'ACTIFS -->
+<section id="actifs">
+  <div class="section-label">Module 02</div>
+  <h2 class="section-title fade-in">CLASSES D'<span style="color:var(--gold)">ACTIFS</span></h2>
+  <p class="section-desc">Un actif financier est tout instrument susceptible de prendre de la valeur ou de générer des revenus. Voici les 5 grandes classes.</p>
+
+  <div class="tabs" id="assetTabs">
+    <button class="tab active" onclick="switchTab('actions', this)">📈 Actions</button>
+    <button class="tab" onclick="switchTab('forex', this)">💱 Forex</button>
+    <button class="tab" onclick="switchTab('crypto', this)">₿ Crypto</button>
+    <button class="tab" onclick="switchTab('matieres', this)">🛢️ Matières 1ères</button>
+    <button class="tab" onclick="switchTab('obligations', this)">📄 Obligations</button>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="tab-panel active" id="actions">
+    <div class="card fade-in" style="margin-bottom:20px">
+      <span class="card-icon">📈</span>
+      <h3>Les Actions</h3>
+      <p>Une <span class="highlight">action</span> représente une fraction du capital d'une entreprise. En achetant une action, vous devenez actionnaire = copropriétaire de l'entreprise. Vous profitez de la hausse du cours (plus-value) et des dividendes.</p>
+    </div>
+    <h3 style="font-size:18px;font-weight:700;margin-bottom:20px;margin-top:32px">🇫🇷 Actions Françaises — CAC 40 & Euronext</h3>
+    <div class="chart-demo">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">CAC 40 <span id="cacLiveBadge"></span></div>
+          <div class="chart-price" id="chartPrice" style="font-size:28px">— <span style="font-size:14px;color:var(--muted);font-family:Outfit,sans-serif">chargement...</span></div>
+        </div>
+        <div id="chartChange" style="font-size:13px;font-weight:600;color:var(--muted)">Clé API requise</div>
+      </div>
+      <canvas id="priceChart"></canvas>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;font-family:IBM Plex Mono,monospace" id="chartMeta">⚙️ Configurez une clé Twelve Data (bouton en bas à droite) pour les données réelles</div>
+    </div>
+    <table class="asset-table fade-in">
+      <thead>
+        <tr><th>Entreprise</th><th>Ticker</th><th>Prix LIVE</th><th>Variation</th><th>Dividende</th><th>Risque</th><th>Profil</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>LVMH (MC)</td><td>MC.PA</td><td class="price-cell" id="price-MC.PA"><span class="loading-price">⏳</span></td><td id="change-MC.PA">—</td><td>~1.5%</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-green">Croissance</span></td></tr>
+        <tr><td>TotalEnergies (TTE)</td><td>TTE.PA</td><td class="price-cell" id="price-TTE.PA"><span class="loading-price">⏳</span></td><td id="change-TTE.PA">—</td><td>~5.5%</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot active-low"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-gold">Dividende</span></td></tr>
+        <tr><td>BNP Paribas (BNP)</td><td>BNP.PA</td><td class="price-cell" id="price-BNP.PA"><span class="loading-price">⏳</span></td><td id="change-BNP.PA">—</td><td>~6%</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div></div></td><td><span class="badge badge-gold">Dividende</span></td></tr>
+        <tr><td>Sanofi (SAN)</td><td>SAN.PA</td><td class="price-cell" id="price-SAN.PA"><span class="loading-price">⏳</span></td><td id="change-SAN.PA">—</td><td>~3.5%</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot active-low"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-blue">Défensif</span></td></tr>
+        <tr><td>Airbus (AIR)</td><td>AIR.PA</td><td class="price-cell" id="price-AIR.PA"><span class="loading-price">⏳</span></td><td id="change-AIR.PA">—</td><td>~1%</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-green">Croissance</span></td></tr>
+        <tr><td>Hermès (RMS)</td><td>RMS.PA</td><td class="price-cell" id="price-RMS.PA"><span class="loading-price">⏳</span></td><td id="change-RMS.PA">—</td><td>~0.8%</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-purple">Premium</span></td></tr>
+      </tbody>
+    </table>
+    <h3 style="font-size:18px;font-weight:700;margin-bottom:20px;margin-top:40px">🇺🇸 Actions Américaines — S&P 500 / NASDAQ</h3>
+    <table class="asset-table fade-in">
+      <thead>
+        <tr><th>Entreprise</th><th>Ticker</th><th>Prix LIVE</th><th>Variation</th><th>Risque</th><th>Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Apple</td><td>AAPL</td><td class="price-cell" id="price-AAPL"><span class="loading-price">⏳</span></td><td id="change-AAPL">—</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-blue">Méga Cap</span></td></tr>
+        <tr><td>Nvidia</td><td>NVDA</td><td class="price-cell" id="price-NVDA"><span class="loading-price">⏳</span></td><td id="change-NVDA">—</td><td><div class="risk-meter"><div class="risk-dot active-high"></div><div class="risk-dot active-high"></div><div class="risk-dot active-high"></div></div></td><td><span class="badge badge-green">Hypercroissance</span></td></tr>
+        <tr><td>Microsoft</td><td>MSFT</td><td class="price-cell" id="price-MSFT"><span class="loading-price">⏳</span></td><td id="change-MSFT">—</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-blue">Méga Cap</span></td></tr>
+        <tr><td>Tesla</td><td>TSLA</td><td class="price-cell" id="price-TSLA"><span class="loading-price">⏳</span></td><td id="change-TSLA">—</td><td><div class="risk-meter"><div class="risk-dot active-high"></div><div class="risk-dot active-high"></div><div class="risk-dot active-high"></div></div></td><td><span class="badge badge-orange">Spéculatif</span></td></tr>
+        <tr><td>Berkshire Hathaway</td><td>BRK.B</td><td class="price-cell" id="price-BRK.B"><span class="loading-price">⏳</span></td><td id="change-BRK.B">—</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot active-low"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-gold">Value</span></td></tr>
+        <tr><td>Amazon</td><td>AMZN</td><td class="price-cell" id="price-AMZN"><span class="loading-price">⏳</span></td><td id="change-AMZN">—</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-green">Croissance</span></td></tr>
+      </tbody>
+    </table>
+    <div class="concept-block fade-in" style="margin-top:32px">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-header-left"><span class="concept-num">INFO</span><span class="concept-title">Comment lire une action — P/E, PEG, dividende, EPS</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>Pour évaluer une action, les investisseurs utilisent plusieurs ratios fondamentaux :</p>
+        <div class="formula">
+          <div class="formula-label">Ratios clés</div>
+          P/E (Price/Earnings) = Cours / Bénéfice par action → valorisation<br>
+          PEG = P/E / Taux de croissance → ajuste le P/E à la croissance<br>
+          EPS (Earnings Per Share) = Bénéfice net / Nb d'actions<br>
+          Rendement dividende = Dividende annuel / Cours × 100<br>
+          ROE (Return on Equity) = Bénéfice net / Capitaux propres
+        </div>
+        <div class="example-box">
+          <div class="ex-title">📊 Exemple — Apple</div>
+          <p>Cours: 200$ | EPS: 6.5$ | P/E = 30.7 | Dividende: 0.96$/action = 0.48% de rendement | ROE: 171% (exceptionnel car rachats massifs d'actions). Un P/E de 30 pour une entreprise qui croît de 10%/an = PEG de 3, ce qui est élevé. Apple vaut cher en termes de valorisation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOREX -->
+  <div class="tab-panel" id="forex">
+    <div class="card fade-in" style="margin-bottom:28px">
+      <span class="card-icon">💱</span>
+      <h3>Le Marché des Changes (FOREX)</h3>
+      <p>Le <span class="highlight">Forex</span> (Foreign Exchange) est le plus grand marché financier au monde avec <span class="green">7 500 milliards $</span> d'échanges quotidiens. Il est ouvert 24h/24, 5j/7 et ne dispose d'aucune bourse centralisée. On y échange des paires de devises.</p>
+    </div>
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;margin-top:0">Taux de change en temps réel</h3>
+    <table class="asset-table" style="margin-bottom:32px">
+      <thead><tr><th>Paire</th><th>Taux LIVE</th><th>Variation</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>EUR/USD</td><td class="price-cell" id="price-EUR/USD"><span class="loading-price">⏳</span></td><td id="change-EUR/USD">—</td><td><span class="badge badge-green">Majeure</span></td></tr>
+        <tr><td>GBP/USD</td><td class="price-cell" id="price-GBP/USD"><span class="loading-price">⏳</span></td><td id="change-GBP/USD">—</td><td><span class="badge badge-green">Majeure</span></td></tr>
+        <tr><td>USD/JPY</td><td class="price-cell" id="price-USD/JPY"><span class="loading-price">⏳</span></td><td id="change-USD/JPY">—</td><td><span class="badge badge-green">Majeure</span></td></tr>
+        <tr><td>USD/CHF</td><td class="price-cell" id="price-USD/CHF"><span class="loading-price">⏳</span></td><td id="change-USD/CHF">—</td><td><span class="badge badge-green">Majeure</span></td></tr>
+        <tr><td>EUR/GBP</td><td class="price-cell" id="price-EUR/GBP"><span class="loading-price">⏳</span></td><td id="change-EUR/GBP">—</td><td><span class="badge badge-gold">Mineure</span></td></tr>
+        <tr><td>AUD/USD</td><td class="price-cell" id="price-AUD/USD"><span class="loading-price">⏳</span></td><td id="change-AUD/USD">—</td><td><span class="badge badge-gold">Mineure</span></td></tr>
+      </tbody>
+    </table>
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <h3 style="color:var(--blue)">Paires Majeures</h3>
+        <p>EUR/USD, GBP/USD, USD/JPY, USD/CHF, AUD/USD, USD/CAD, NZD/USD. Très liquides, spreads serrés. <span class="green">Recommandées pour débutants.</span></p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--gold)">Paires Mineures</h3>
+        <p>EUR/GBP, EUR/JPY, GBP/JPY, AUD/JPY... Moins liquides mais encore accessibles. Spreads légèrement plus larges.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--red)">Paires Exotiques</h3>
+        <p>USD/TRY, EUR/ZAR, USD/BRL... Très volatiles, spreads énormes, peu recommandées. <span class="red">Risque très élevé.</span></p>
+      </div>
+    </div>
+    <div class="concept-block fade-in" style="margin-top:28px">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-header-left"><span class="concept-num">FOREX</span><span class="concept-title">Comprendre les Pips, Lots et Leviers</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <div class="formula">
+          <div class="formula-label">Unités Forex</div>
+          1 PIP = 0.0001 sur EUR/USD (4ème décimale)<br>
+          1 LOT standard = 100 000 unités de devise de base<br>
+          1 Mini-lot = 10 000 unités<br>
+          1 Micro-lot = 1 000 unités<br>
+          Valeur d'un pip (lot standard EUR/USD) ≈ 10$
+        </div>
+        <div class="example-box">
+          <div class="ex-title">💡 Exemple de trade EUR/USD</div>
+          <p>Vous achetez 1 lot standard EUR/USD à 1.0850. Le prix monte à 1.0870. Gain = 20 pips × 10$ = <span class="green">200$</span>. Avec un levier de 30:1 (max en Europe), vous immobilisez 3 333$ de marge pour contrôler 100 000$. Attention : le levier amplifie AUSSI les pertes.</p>
+        </div>
+        <div class="warning-box">
+          <div class="w-title">⚠️ Réglementation ESMA (Europe)</div>
+          <p>En Europe, le levier max sur Forex est limité à <span class="red">30:1</span> pour les particuliers (majeurs). À l'inverse, certains brokers offshore offrent 500:1 — extrêmement dangereux. 74-89% des comptes retail perdent de l'argent sur le Forex selon les statistiques des brokers régulés.</p>
+        </div>
+      </div>
+    </div>
+    <h3 style="font-size:18px;font-weight:700;margin:32px 0 20px">Sessions de trading Forex</h3>
+    <table class="asset-table fade-in">
+      <thead><tr><th>Session</th><th>Heure FR (hiver)</th><th>Heure FR (été)</th><th>Paires actives</th><th>Volatilité</th></tr></thead>
+      <tbody>
+        <tr><td>Sydney</td><td>23h - 08h</td><td>00h - 09h</td><td>AUD/USD, NZD/USD</td><td><span class="badge badge-blue">Faible</span></td></tr>
+        <tr><td>Tokyo</td><td>01h - 10h</td><td>02h - 11h</td><td>USD/JPY, AUD/JPY</td><td><span class="badge badge-gold">Modérée</span></td></tr>
+        <tr><td>Londres</td><td>09h - 18h</td><td>10h - 19h</td><td>EUR/USD, GBP/USD</td><td><span class="badge badge-green">Forte</span></td></tr>
+        <tr><td>New York</td><td>14h - 23h</td><td>15h - 00h</td><td>Toutes majeures</td><td><span class="badge badge-red">Très forte</span></td></tr>
+        <tr><td>Londres + NY (overlap)</td><td>14h - 18h</td><td>15h - 19h</td><td>EUR/USD, GBP/USD</td><td><span class="badge badge-red">Maximum</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CRYPTO -->
+  <div class="tab-panel" id="crypto">
+    <div class="card fade-in" style="margin-bottom:28px">
+      <span class="card-icon">₿</span>
+      <h3>Les Cryptomonnaies</h3>
+      <p>Les <span class="highlight">cryptomonnaies</span> sont des actifs numériques décentralisés basés sur la blockchain. Le marché est ouvert <span class="green">24h/24, 7j/7</span>. Très volatil, potentiel de gain énorme, risque de perte totale. Capitalisation totale : ~2 500 Mds$ (2025).</p>
+    </div>
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <h3>Bitcoin (BTC)</h3>
+        <div style="margin-bottom:8px"><span class="price-cell" id="price-BTC" style="font-size:20px">⏳</span> <span id="change-BTC" style="font-size:13px">—</span></div>
+        <p>Première crypto, "or numérique". Supply limitée à 21M BTC. <span class="highlight">Store of value</span>. Halving tous les 4 ans divise la récompense des mineurs par 2 → impact haussier historique.</p>
+      </div>
+      <div class="card">
+        <h3>Ethereum (ETH)</h3>
+        <div style="margin-bottom:8px"><span class="price-cell" id="price-ETH" style="font-size:20px">⏳</span> <span id="change-ETH" style="font-size:13px">—</span></div>
+        <p>Plateforme de <span class="highlight">smart contracts</span>. Permet les DeFi, NFT, dApps. Proof of Stake depuis 2022. Écosystème le plus développé en dehors de BTC.</p>
+      </div>
+      <div class="card">
+        <h3>Altcoins</h3>
+        <div style="margin-bottom:8px;font-size:12px;color:var(--muted)"><span id="price-SOL" class="price-cell">⏳</span> SOL &nbsp; <span id="price-BNB" class="price-cell">⏳</span> BNB</div>
+        <p>Solana, Cardano, Avalanche, Chainlink, Polkadot… Plus risqués mais aussi potentiellement plus rentables. <span class="red">Risque de disparition totale.</span></p>
+      </div>
+    </div>
+    <div class="concept-block fade-in" style="margin-top:28px">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-header-left"><span class="concept-num">CRYPTO</span><span class="concept-title">DeFi, NFT, Staking, Stablecoins — Le Lexique Crypto</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <ul>
+          <li><span class="highlight">DeFi (Finance Décentralisée)</span> — protocoles financiers sans intermédiaire : prêts, échanges, yield farming sur la blockchain</li>
+          <li><span class="highlight">Stablecoin</span> — crypto indexée sur une devise (USDT, USDC, DAI). Utilisée pour se "refugier" en crypto sans volatilité</li>
+          <li><span class="highlight">Staking</span> — bloquer ses cryptos pour valider des transactions et recevoir des récompenses (~5-15%/an sur ETH)</li>
+          <li><span class="highlight">NFT (Non-Fungible Token)</span> — token unique sur blockchain représentant un actif numérique (art, jeux…)</li>
+          <li><span class="highlight">Wallet</span> — portefeuille numérique. Custodial (exchange garde les clés) ou Non-custodial (vous gardez vos clés = vrai propriétaire)</li>
+          <li><span class="highlight">Halving BTC</span> — événement tous les ~4 ans diviséant par 2 la récompense des mineurs. Historiquement bullish à 12-18 mois</li>
+          <li><span class="highlight">Fear & Greed Index</span> — indicateur de sentiment crypto 0-100. En dessous de 20 = peur extrême = souvent bon moment d'achat</li>
+        </ul>
+        <div class="warning-box">
+          <div class="w-title">⚠️ ATTENTION aux arnaques crypto</div>
+          <p>95% des altcoins perdent plus de 90% de leur valeur sur le long terme. Méfiez-vous des <span class="red">rug pulls</span>, <span class="red">pump & dump</span>, influenceurs payés pour promouvoir des tokens. Ne jamais investir plus que vous n'êtes prêt à perdre totalement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATIÈRES PREMIÈRES -->
+  <div class="tab-panel" id="matieres">
+    <div class="card fade-in" style="margin-bottom:28px">
+      <span class="card-icon">🛢️</span>
+      <h3>Matières Premières (Commodities)</h3>
+      <p>Les <span class="highlight">matières premières</span> sont des ressources naturelles ou agricoles. Elles jouent un rôle de <span class="green">couverture contre l'inflation</span> et de diversification de portefeuille. On y accède via des contrats futures, ETF, ou CFD.</p>
+    </div>
+    <table class="asset-table fade-in">
+      <thead><tr><th>Matière Première</th><th>Symbole</th><th>Prix LIVE</th><th>Variation</th><th>Catégorie</th><th>Corrélation</th></tr></thead>
+      <tbody>
+        <tr><td>Or (Gold)</td><td>XAU/USD</td><td class="price-cell" id="price-XAU/USD"><span class="loading-price">⏳</span></td><td id="change-XAU/USD">—</td><td>Métal précieux</td><td><span class="badge badge-red">-USD, -Taux</span></td></tr>
+        <tr><td>Argent (Silver)</td><td>XAG/USD</td><td class="price-cell" id="price-XAG/USD"><span class="loading-price">⏳</span></td><td id="change-XAG/USD">—</td><td>Métal précieux/Industriel</td><td><span class="badge badge-gold">+Or, +Industrie</span></td></tr>
+        <tr><td>Pétrole Brent</td><td>BRENT/USD</td><td class="price-cell" id="price-BRENT/USD"><span class="loading-price">⏳</span></td><td id="change-BRENT/USD">—</td><td>Énergie</td><td><span class="badge badge-orange">+Croissance mondiale</span></td></tr>
+        <tr><td>Pétrole WTI</td><td>WTI/USD</td><td>Énergie</td><td>Pétrole américain, stockages Cushing</td><td><span class="badge badge-orange">+Brent</span></td></tr>
+        <tr><td>Gaz Naturel</td><td>NATGAS</td><td>Énergie</td><td>Météo, stocks, demande hivernale</td><td><span class="badge badge-red">Très volatile</span></td></tr>
+        <tr><td>Blé</td><td>WHEAT</td><td>Agricole</td><td>Météo, conflits (Ukraine), récoltes</td><td><span class="badge badge-blue">Saisonnier</span></td></tr>
+        <tr><td>Cuivre</td><td>COPPER</td><td>Métal industriel</td><td>Chine, construction, véhicules électriques</td><td><span class="badge badge-green">+Chine, +Croissance</span></td></tr>
+        <tr><td>Café, Cacao, Soja</td><td>—</td><td>Agricole/Soft</td><td>El Niño, récoltes, demande émergente</td><td><span class="badge badge-purple">Saisonniers</span></td></tr>
+      </tbody>
+    </table>
+    <div class="example-box fade-in" style="margin-top:24px">
+      <div class="ex-title">💡 L'or comme valeur refuge</div>
+      <p>L'or ne génère pas de revenus mais protège contre l'inflation et les crises. Règle empirique : <span class="highlight">quand les taux réels baissent, l'or monte</span>. En 2020 (COVID, taux proches de 0), l'or a atteint un record historique à 2 070$/oz. En 2025, avec tensions géopolitiques et achats massifs des banques centrales, il dépasse 2 300$/oz.</p>
+    </div>
+  </div>
+
+  <!-- OBLIGATIONS -->
+  <div class="tab-panel" id="obligations">
+    <div class="card fade-in" style="margin-bottom:28px">
+      <span class="card-icon">📄</span>
+      <h3>Les Obligations (Bonds)</h3>
+      <p>Une <span class="highlight">obligation</span> est un titre de dette. En achetant une obligation, vous prêtez de l'argent à un émetteur (État, entreprise) qui s'engage à vous rembourser à échéance avec des intérêts périodiques (coupons). Moins risqué que les actions, mais moins rentable.</p>
+    </div>
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <h3 style="color:var(--blue)">Obligations d'État</h3>
+        <p><span class="highlight">OAT</span> françaises, <span class="highlight">Treasuries</span> US, <span class="highlight">Bunds</span> allemands. Très sûres (risque souverain). Les T-Bills US à 3 mois servent de taux "sans risque". <span class="green">Rendement ~3-5% en 2025.</span></p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--gold)">Obligations Entreprises</h3>
+        <p><span class="highlight">Investment Grade</span> (notation AAA à BBB) — solides. <span class="highlight">High Yield</span> (junk bonds, BB et moins) — plus risqués mais meilleur rendement (~6-10%).</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--red)">La Courbe des Taux</h3>
+        <p>Normalement croissante (long terme > court terme). Une <span class="red">inversion</span> (court terme > long terme) prédit historiquement une récession dans 12-18 mois.</p>
+      </div>
+    </div>
+    <div class="formula fade-in" style="margin-top:24px">
+      <div class="formula-label">Relation Taux / Prix des obligations</div>
+      Quand les taux montent → prix des obligations BAISSENT (relation inverse)<br>
+      Duration = sensibilité du prix aux variations de taux<br>
+      Une obligation 10 ans avec duration 8 : si taux +1% → prix -8%<br>
+      Yield to Maturity (YTM) = rendement si on garde jusqu'à échéance
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 3: TYPES DE CONTRATS -->
+<section id="contrats">
+  <div class="section-label">Module 03</div>
+  <h2 class="section-title fade-in">TYPES DE <span style="color:var(--gold)">CONTRATS</span></h2>
+  <p class="section-desc">Au-delà des actifs sous-jacents, il existe de nombreux types d'instruments financiers avec des caractéristiques très différentes.</p>
+
+  <div class="grid-2 fade-in">
+    <div class="card">
+      <span class="card-icon">📊</span>
+      <h3>Actions au comptant (Spot)</h3>
+      <p>Achat direct d'une action sur le marché. Vous êtes <span class="green">propriétaire</span> des titres. Pas de date d'expiration. Éligible PEA pour les actions européennes. Dividendes perçus. La forme la plus simple et recommandée pour investissement long terme.</p>
+      <div style="margin-top:16px"><span class="badge badge-green">Levier: 1x</span> <span class="badge badge-blue">Propriétaire</span> <span class="badge badge-gold">Dividendes</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">📋</span>
+      <h3>CFD — Contracts for Difference</h3>
+      <p>Contrat entre vous et le broker sur la <span class="highlight">différence de prix</span>. Vous ne possédez PAS l'actif sous-jacent. Permet de shorter (vendre à découvert) et d'utiliser l'effet de levier. <span class="red">Interdit aux non-professionnels dans certains pays.</span></p>
+      <div style="margin-top:16px"><span class="badge badge-red">Levier: jusqu'à 30x</span> <span class="badge badge-red">Pas propriétaire</span> <span class="badge badge-orange">Short possible</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <h3>Futures (Contrats à Terme)</h3>
+      <p>Accord d'acheter/vendre un actif à un <span class="highlight">prix et une date fixés à l'avance</span>. Standardisés et cotés en bourse. Utilisés par les producteurs pour se couvrir (ex: agriculteurs sur blé) et par les traders pour spéculer. <span class="orange">Obligation d'exécution.</span></p>
+      <div style="margin-top:16px"><span class="badge badge-orange">Levier élevé</span> <span class="badge badge-purple">Date d'expiration</span> <span class="badge badge-blue">Marché organisé</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎯</span>
+      <h3>Options (Calls & Puts)</h3>
+      <p>Droit (mais pas obligation) d'acheter (CALL) ou vendre (PUT) un actif à un prix déterminé (strike) avant/à une date donnée. L'acheteur paie une <span class="highlight">prime</span>. Outil puissant pour couverture et spéculation.</p>
+      <div style="margin-top:16px"><span class="badge badge-green">CALL = Droit d'achat</span> <span class="badge badge-red">PUT = Droit de vente</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏦</span>
+      <h3>ETF — Exchange Traded Funds</h3>
+      <p>Fonds d'investissement coté en bourse qui réplique un indice (CAC 40, S&P 500, secteur…). Diversification instantanée à faible coût. <span class="green">Idéal pour l'investissement passif.</span> Frais de gestion ~0.07-0.50%/an. Les ETF indiciels battent 80-90% des gérants actifs sur 15 ans.</p>
+      <div style="margin-top:16px"><span class="badge badge-green">Diversifié</span> <span class="badge badge-blue">Faibles frais</span> <span class="badge badge-gold">Passif</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔄</span>
+      <h3>Warrants & Turbos</h3>
+      <p>Produits à effet de levier émis par des banques (BNP, SocGen). Les <span class="highlight">Turbos</span> ont une barrière désactivante : si le prix atteint la barrière, le produit expire sans valeur immédiatement. <span class="red">Très risqués, réservés aux experts.</span></p>
+      <div style="margin-top:16px"><span class="badge badge-red">Très risqué</span> <span class="badge badge-orange">Barrière désactivante</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">📱</span>
+      <h3>Perpetual Futures (Crypto)</h3>
+      <p>Futures sans date d'expiration, propres aux cryptos. Un mécanisme de <span class="highlight">funding rate</span> (taux de financement payé toutes les 8h) rééquilibre le prix entre le marché futures et le spot. Levier jusqu'à 100x sur certains exchanges. <span class="red">Extrêmement dangereux.</span></p>
+      <div style="margin-top:16px"><span class="badge badge-red">Levier 100x</span> <span class="badge badge-purple">Funding rate</span> <span class="badge badge-red">Crypto only</span></div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏢</span>
+      <h3>OPCVM / Fonds Mutuels</h3>
+      <p>Fonds gérés activement par un gérant. Vous achetez des "parts". Les <span class="highlight">SICAV</span> et <span class="highlight">FCP</span> en France. Diversifiés mais frais souvent élevés (1-2%/an) et performances souvent inférieures aux ETF sur le long terme.</p>
+      <div style="margin-top:16px"><span class="badge badge-blue">Géré activement</span> <span class="badge badge-gold">Diversifié</span></div>
+    </div>
+  </div>
+
+  <!-- OPTIONS DÉTAIL -->
+  <div style="margin-top:48px">
+    <h3 class="section-title" style="font-size:36px">LES OPTIONS EN DÉTAIL</h3>
+    <div class="concept-block fade-in">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-header-left"><span class="concept-num">OPT</span><span class="concept-title">Greeks des Options — Delta, Gamma, Theta, Vega</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>Les <span class="highlight">"Greeks"</span> mesurent la sensibilité du prix d'une option à différents facteurs :</p>
+        <div class="formula">
+          <div class="formula-label">Les Greeks</div>
+          DELTA (Δ) = sensibilité au prix du sous-jacent (0 à 1 pour un call)<br>
+          GAMMA (Γ) = vitesse de variation du delta<br>
+          THETA (Θ) = perte de valeur par jour (time decay) → négatif pour l'acheteur<br>
+          VEGA (V) = sensibilité à la volatilité implicite<br>
+          RHO (ρ) = sensibilité aux taux d'intérêt
+        </div>
+        <div class="example-box">
+          <div class="ex-title">💡 Exemple pratique</div>
+          <p>Vous achetez un CALL Apple 200$ expiration dans 1 mois. Prime: 5$. Delta: 0.5.<br>
+          → Si Apple monte de 10$, votre call gagne ~5$ (delta 0.5 × 10$) → soit +100% sur votre prime<br>
+          → Si Apple reste stable pendant 2 semaines, le theta vous coûte environ 0.15$/jour → perte de 2.1$ juste par le temps qui passe<br>
+          → Si la volatilité implicite chute de 20%, vega vous coûte de la valeur supplémentaire</p>
+        </div>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card"><h3 style="color:var(--green);font-size:16px">Stratégies Haussières</h3><p style="font-size:13px">Long Call, Bull Call Spread, Cash-Secured Put, Covered Call</p></div>
+          <div class="card"><h3 style="color:var(--red);font-size:16px">Stratégies Baissières</h3><p style="font-size:13px">Long Put, Bear Put Spread, Protective Put</p></div>
+          <div class="card"><h3 style="color:var(--purple);font-size:16px">Neutres / Vol</h3><p style="font-size:13px">Straddle, Strangle, Iron Condor, Butterfly</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 4: ANALYSE -->
+<section id="analyse">
+  <div class="section-label">Module 04</div>
+  <h2 class="section-title fade-in">ANALYSE <span style="color:var(--gold)">TECHNIQUE & FONDAMENTALE</span></h2>
+  <p class="section-desc">Deux grandes écoles s'affrontent pour prédire les mouvements de prix. Le trader professionnel les combine.</p>
+
+  <div class="tabs" id="analyseTabs">
+    <button class="tab active" onclick="switchTabAnalyse('technique', this)">📉 Technique</button>
+    <button class="tab" onclick="switchTabAnalyse('fondamentale', this)">🏢 Fondamentale</button>
+    <button class="tab" onclick="switchTabAnalyse('sentiment', this)">🧠 Sentiment</button>
+  </div>
+
+  <!-- ANALYSE TECHNIQUE -->
+  <div class="tab-panel active" id="technique">
+    <div class="concept-block fade-in">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-header-left"><span class="concept-num">AT.01</span><span class="concept-title">Supports, Résistances & Tendances</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>Les <span class="highlight">supports</span> sont des niveaux de prix où la demande est suffisamment forte pour stopper la baisse. Les <span class="highlight">résistances</span> sont des niveaux où l'offre stoppe la hausse. Une résistance cassée devient support (et vice versa).</p>
+        <div class="formula">
+          <div class="formula-label">Tendances (Dow Theory)</div>
+          HAUSSIÈRE (Uptrend) = Sommets + Hauts + Creux + Hauts successifs<br>
+          BAISSIÈRE (Downtrend) = Sommets + Bas + Creux + Bas successifs<br>
+          RANGE = Prix coincé entre un support et une résistance horizontaux
+        </div>
+        <div class="example-box">
+          <div class="ex-title">🎯 Setup de trading classique</div>
+          <p>Le prix teste 3 fois la résistance à 150$ sur une action, puis casse au-dessus avec un fort volume. → Entrée LONG à 150.50$, Stop Loss à 148$, Target: 158$ (résistance suivante). Risk/Reward = 1.5$ risqué / 7.5$ visé = ratio 1:5 → excellent.</p>
+        </div>
+      </div>
+    </div>
+    <div class="concept-block fade-in">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-header-left"><span class="concept-num">AT.02</span><span class="concept-title">Indicateurs Techniques Essentiels</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <div class="grid-3" style="margin-bottom:0">
+          <div class="card">
+            <h3 style="font-size:16px">RSI (Relative Strength Index)</h3>
+            <p style="font-size:13px">Oscille 0-100. <span class="green">&lt;30 = survente (potentiellement haussier)</span>. <span class="red">&gt;70 = surachat (potentiellement baissier)</span>. Divergences RSI/prix = signal puissant.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">MACD</h3>
+            <p style="font-size:13px">Moving Average Convergence Divergence. Croisement MACD/Signal = signal. Histogramme positif = momentum haussier. Divergences = retournement potentiel.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">Moyennes Mobiles</h3>
+            <p style="font-size:13px">MA 20 (court terme), MA 50 (moyen), MA 200 (long). <span class="green">Golden Cross</span> (MA50 croise MA200 à la hausse) = signal achat. <span class="red">Death Cross</span> = signal vente.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">Bandes de Bollinger</h3>
+            <p style="font-size:13px">MA + 2 écarts-types. Prix proche bande haute = surachat. Prix proche bande basse = survente. Squeeze (bandes resserrées) = explosion de volatilité imminente.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">Volume & OBV</h3>
+            <p style="font-size:13px">Le volume confirme les mouvements. Cassure avec fort volume = fiable. Cassure avec faible volume = signal faible. OBV = volume cumulatif = indicateur de pression achat/vente.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16px">Fibonacci Retracement</h3>
+            <p style="font-size:13px">Niveaux 23.6%, 38.2%, 50%, <span class="highlight">61.8%</span> (golden ratio), 78.6%. Zones de retracement probables lors d'une correction après une forte tendance.</p>
+          </div>
+        </div>
+        <h4 style="margin-top:24px;margin-bottom:16px;font-size:16px;font-weight:700">Figures Chartistes Importantes</h4>
+        <table class="asset-table">
+          <thead><tr><th>Figure</th><th>Signal</th><th>Fiabilité</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Double Top / Double Bottom</td><td><span class="badge badge-red">Retournement</span></td><td><span class="badge badge-green">Forte</span></td><td>W (haussier) ou M (baissier) — inversion de tendance</td></tr>
+            <tr><td>Tête & Épaules (H&S)</td><td><span class="badge badge-red">Retournement Baissier</span></td><td><span class="badge badge-green">Forte</span></td><td>3 sommets, le central plus haut. Neckline = déclencheur</td></tr>
+            <tr><td>Triangle Ascendant</td><td><span class="badge badge-green">Continuation Haussière</span></td><td><span class="badge badge-gold">Bonne</span></td><td>Résistance horizontale + support montant → breakout haussier probable</td></tr>
+            <tr><td>Drapeau / Fanion</td><td><span class="badge badge-blue">Continuation</span></td><td><span class="badge badge-gold">Bonne</span></td><td>Consolidation courte après forte impulsion → continuation probable</td></tr>
+            <tr><td>Wedge (Coin)</td><td><span class="badge badge-red">Retournement</span></td><td><span class="badge badge-gold">Modérée</span></td><td>Compression de prix, souvent précède une rupture violente</td></tr>
+            <tr><td>Chandelier Engulfant</td><td><span class="badge badge-purple">Retournement court terme</span></td><td><span class="badge badge-gold">Modérée</span></td><td>Une bougie avale entièrement la précédente → signal de retournement</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSE FONDAMENTALE -->
+  <div class="tab-panel" id="fondamentale">
+    <div class="concept-block fade-in">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-header-left"><span class="concept-num">AF.01</span><span class="concept-title">Lire un bilan comptable & compte de résultat</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>L'analyse fondamentale consiste à évaluer la <span class="highlight">valeur intrinsèque</span> d'une entreprise via ses données financières.</p>
+        <div class="formula">
+          <div class="formula-label">Documents financiers clés</div>
+          BILAN = Actif (ce qu'elle possède) = Passif + Capitaux propres<br>
+          COMPTE DE RÉSULTAT = Chiffre d'affaires - Charges = Bénéfice net<br>
+          CASH FLOW = Flux de trésorerie (plus difficile à manipuler que le bénéfice)<br>
+          EBITDA = Bénéfice avant intérêts, impôts, dépréciations et amortissements
+        </div>
+        <table class="asset-table" style="margin-top:16px">
+          <thead><tr><th>Ratio</th><th>Formule</th><th>Interprétation</th></tr></thead>
+          <tbody>
+            <tr><td>P/E (PER)</td><td>Cours / EPS</td><td>&lt;15 = value, 15-25 = normal, &gt;30 = croissance ou cher</td></tr>
+            <tr><td>P/B (Price to Book)</td><td>Cours / Actif net par action</td><td>&lt;1 = sous book value, souvent value</td></tr>
+            <tr><td>EV/EBITDA</td><td>Valeur d'entreprise / EBITDA</td><td>Permet comparaison inter-sectorielle</td></tr>
+            <tr><td>Debt/Equity</td><td>Dettes totales / Capitaux propres</td><td>&lt;1 = faible endettement, &gt;2 = vigilance</td></tr>
+            <tr><td>Free Cash Flow Yield</td><td>FCF / Market Cap</td><td>&gt;5% = attractif pour value investors</td></tr>
+            <tr><td>ROIC</td><td>NOPAT / Capital investi</td><td>&gt;WACC = création de valeur</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="concept-block fade-in">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-header-left"><span class="concept-num">AF.02</span><span class="concept-title">Macro-économie & Indicateurs</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>Les <span class="highlight">indicateurs macroéconomiques</span> influencent massivement les marchés. Les traders les surveillent de près pour anticiper les mouvements.</p>
+        <table class="asset-table">
+          <thead><tr><th>Indicateur</th><th>Fréquence</th><th>Impact marché</th><th>Ce qu'il mesure</th></tr></thead>
+          <tbody>
+            <tr><td>NFP (Non-Farm Payrolls)</td><td>1er vendredi du mois</td><td><span class="badge badge-red">Majeur</span></td><td>Emplois créés aux US → impact USD et Fed</td></tr>
+            <tr><td>CPI (Inflation)</td><td>Mensuel</td><td><span class="badge badge-red">Majeur</span></td><td>Évolution des prix → oriente la politique monétaire</td></tr>
+            <tr><td>Décisions Fed / BCE</td><td>8 fois/an</td><td><span class="badge badge-red">Majeur</span></td><td>Hausse/baisse des taux directeurs</td></tr>
+            <tr><td>PIB (GDP)</td><td>Trimestriel</td><td><span class="badge badge-orange">Fort</span></td><td>Croissance économique. 2 trimestres négatifs = récession</td></tr>
+            <tr><td>ISM Manufacturing / PMI</td><td>Mensuel</td><td><span class="badge badge-gold">Modéré</span></td><td>&gt;50 = expansion, &lt;50 = contraction industrielle</td></tr>
+            <tr><td>Chômage (Unemployment Rate)</td><td>Mensuel</td><td><span class="badge badge-gold">Modéré</span></td><td>Santé du marché de l'emploi</td></tr>
+            <tr><td>Retail Sales</td><td>Mensuel</td><td><span class="badge badge-gold">Modéré</span></td><td>Consommation des ménages → 70% du PIB US</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENTIMENT -->
+  <div class="tab-panel" id="sentiment">
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <span class="card-icon">😱</span>
+        <h3>Fear & Greed Index</h3>
+        <p>Indicateur CNN 0-100. <span class="red">0-25 = Fear extrême</span> (souvent bon point d'entrée historiquement). <span class="green">75-100 = Greed extrême</span> (souvent risque de correction). "Soyez avide quand les autres ont peur" — Buffett.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎰</span>
+        <h3>Put/Call Ratio</h3>
+        <p>Volume de puts / volume de calls. Ratio élevé = sentiment baissier dominant. Ratio faible = euphorie. Utilisé comme indicateur contrarian : un ratio très élevé peut signaler un retournement haussier.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <h3>Short Interest / COT Report</h3>
+        <p>Le <span class="highlight">Short Interest</span> mesure le % d'actions vendues à découvert. Le <span class="highlight">rapport COT</span> (Commitment of Traders) montre les positions des gros acteurs sur les futures. <span class="green">Données hebdomadaires publiées par la CFTC.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 5: STRATÉGIES -->
+<section id="strategies">
+  <div class="section-label">Module 05</div>
+  <h2 class="section-title fade-in">STRATÉGIES DE <span style="color:var(--gold)">TRADING</span></h2>
+  <p class="section-desc">Il existe autant de stratégies que de traders. L'important n'est pas d'en trouver une parfaite, mais d'en maîtriser une qui correspond à votre profil.</p>
+
+  <div class="compare-grid fade-in">
+    <div class="compare-card">
+      <div class="top-accent" style="background:var(--red)"></div>
+      <h4>SCALPING</h4>
+      <div class="prop"><span>Durée trade</span><span>Secondes à minutes</span></div>
+      <div class="prop"><span>Timeframe</span><span>1min, 5min</span></div>
+      <div class="prop"><span>Trades/jour</span><span>10 - 100+</span></div>
+      <div class="prop"><span>Target pip</span><span>3-10 pips</span></div>
+      <div class="prop"><span>Niveau requis</span><span>Expert</span></div>
+      <div class="prop"><span>Stress</span><span>Extrême</span></div>
+    </div>
+    <div class="compare-card">
+      <div class="top-accent" style="background:var(--orange)"></div>
+      <h4>DAY TRADING</h4>
+      <div class="prop"><span>Durée trade</span><span>Minutes à heures</span></div>
+      <div class="prop"><span>Timeframe</span><span>5min, 15min, 1h</span></div>
+      <div class="prop"><span>Trades/jour</span><span>2 - 10</span></div>
+      <div class="prop"><span>Target</span><span>0.5% - 2%</span></div>
+      <div class="prop"><span>Niveau requis</span><span>Avancé</span></div>
+      <div class="prop"><span>Clôture en soirée</span><span>✅ Oui</span></div>
+    </div>
+    <div class="compare-card">
+      <div class="top-accent" style="background:var(--gold)"></div>
+      <h4>SWING TRADING</h4>
+      <div class="prop"><span>Durée trade</span><span>Jours à semaines</span></div>
+      <div class="prop"><span>Timeframe</span><span>4h, Daily</span></div>
+      <div class="prop"><span>Trades/semaine</span><span>2 - 10</span></div>
+      <div class="prop"><span>Target</span><span>3% - 15%</span></div>
+      <div class="prop"><span>Niveau requis</span><span>Intermédiaire</span></div>
+      <div class="prop"><span>Compatible emploi</span><span>✅ Oui</span></div>
+    </div>
+    <div class="compare-card">
+      <div class="top-accent" style="background:var(--green)"></div>
+      <h4>POSITION TRADING</h4>
+      <div class="prop"><span>Durée trade</span><span>Semaines à mois</span></div>
+      <div class="prop"><span>Timeframe</span><span>Weekly, Monthly</span></div>
+      <div class="prop"><span>Trades/mois</span><span>1 - 5</span></div>
+      <div class="prop"><span>Target</span><span>20% - 100%+</span></div>
+      <div class="prop"><span>Niveau requis</span><span>Intermédiaire+</span></div>
+      <div class="prop"><span>Compatible emploi</span><span>✅ Idéal</span></div>
+    </div>
+    <div class="compare-card">
+      <div class="top-accent" style="background:var(--blue)"></div>
+      <h4>INVESTISSEMENT PASSIF</h4>
+      <div class="prop"><span>Durée</span><span>Années à décennies</span></div>
+      <div class="prop"><span>Instrument</span><span>ETF, Actions</span></div>
+      <div class="prop"><span>Actions/an</span><span>0 - 12</span></div>
+      <div class="prop"><span>Rendement cible</span><span>8-12%/an (marché)</span></div>
+      <div class="prop"><span>Niveau requis</span><span>Débutant</span></div>
+      <div class="prop"><span>Recommandé pour</span><span>90% des gens</span></div>
+    </div>
+    <div class="compare-card">
+      <div class="top-accent" style="background:var(--purple)"></div>
+      <h4>SHORT SELLING</h4>
+      <div class="prop"><span>Direction</span><span>À la baisse</span></div>
+      <div class="prop"><span>Mécanisme</span><span>Emprunter + vendre + racheter</span></div>
+      <div class="prop"><span>Gain max</span><span>100% (prix → 0)</span></div>
+      <div class="prop"><span>Perte max</span><span>Illimitée (prix peut ∞)</span></div>
+      <div class="prop"><span>Niveau requis</span><span>Expert</span></div>
+      <div class="prop"><span>Coût</span><span>Intérêts d'emprunt + dividendes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 6: GESTION DU RISQUE -->
+<section id="risque">
+  <div class="section-label">Module 06</div>
+  <h2 class="section-title fade-in">GESTION DU <span style="color:var(--gold)">RISQUE</span></h2>
+  <p class="section-desc">La gestion du risque est LA compétence numéro 1 du trader. Un bon trader n'est pas celui qui gagne souvent, mais celui qui perd peu quand il a tort.</p>
+
+  <div class="grid-3 fade-in">
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <span class="card-icon">🎯</span>
+      <h3>Règle des 1-2%</h3>
+      <p>Ne risquez jamais plus de <span class="highlight">1-2% de votre capital</span> par trade. Sur un compte de 10 000€, le risque max par trade est de 100-200€. Même 10 pertes consécutives ne vous ruinent pas.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <span class="card-icon">📐</span>
+      <h3>Risk/Reward Ratio</h3>
+      <p>Ne prenez pas de trade avec un R/R inférieur à <span class="highlight">1:2</span>. Si vous risquez 100€, vous devez viser au minimum 200€. Avec un R/R de 1:3 et 40% de réussite, vous êtes largement profitable.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <span class="card-icon">🔢</span>
+      <h3>Taille de Position</h3>
+      <p>Position size = (Capital × % risque) / (Distance en pips × valeur du pip). <span class="highlight">Calculez TOUJOURS avant d'entrer.</span> Ne laissez jamais l'émotion décider de la taille.</p>
+    </div>
+  </div>
+
+  <div class="formula fade-in" style="margin:32px 0">
+    <div class="formula-label">Formule Position Sizing</div>
+    Position (lots) = (Capital × Risque%) / (Stop Loss en pips × Valeur pip par lot)<br>
+    <br>
+    Exemple: Capital 10 000€ | Risque 1% = 100€ | Stop = 20 pips | Valeur pip = 10$<br>
+    Position = 100 / (20 × 10) = 100 / 200 = 0.5 lot
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">RISK</span><span class="concept-title">Drawdown, Psychologie & les erreurs des débutants</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">drawdown</span> est la perte maximale depuis un pic de capital. Un drawdown de 50% nécessite +100% pour retrouver le niveau initial. C'est pour cela qu'il faut limiter les pertes absolument.</p>
+      <div class="formula">
+        <div class="formula-label">Récupération d'un drawdown</div>
+        -10% → besoin de +11.1% pour récupérer<br>
+        -25% → besoin de +33.3% pour récupérer<br>
+        -50% → besoin de +100% pour récupérer<br>
+        -75% → besoin de +300% pour récupérer ← RUINEUX
+      </div>
+      <p style="margin-top:16px">Les <span class="highlight">biais psychologiques</span> les plus dangereux :</p>
+      <ul>
+        <li><span class="red">FOMO</span> (Fear of Missing Out) — entrer sur un mouvement déjà bien avancé par peur de rater</li>
+        <li><span class="red">Revenge Trading</span> — essayer de récupérer une perte immédiatement par des trades compulsifs</li>
+        <li><span class="red">Overtrading</span> — trader trop fréquemment, souvent par ennui ou excès de confiance</li>
+        <li><span class="red">Biais de confirmation</span> — ne voir que les signaux qui confirment son opinion</li>
+        <li><span class="red">Déplacement du Stop Loss</span> — reculer son stop quand le prix s'en approche</li>
+        <li><span class="red">Clôturer trop tôt</span> — prendre profit prématurément par peur, couper les gains</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">RISK</span><span class="concept-title">Diversification & Construction de Portefeuille</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>La <span class="highlight">diversification</span> réduit le risque sans sacrifier le rendement (Nobel Markowitz, 1952). Mais une sur-diversification dilue la performance.</p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--blue)"></div>
+          <h4 style="color:var(--blue)">Portefeuille Débutant</h4>
+          <div class="prop"><span>ETF World (MSCI World)</span><span>60%</span></div>
+          <div class="prop"><span>ETF Obligations</span><span>20%</span></div>
+          <div class="prop"><span>Or / Commodités</span><span>10%</span></div>
+          <div class="prop"><span>Liquidités</span><span>10%</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--gold)"></div>
+          <h4 style="color:var(--gold)">Portefeuille Intermédiaire</h4>
+          <div class="prop"><span>Actions (dont ETF)</span><span>50%</span></div>
+          <div class="prop"><span>Obligations</span><span>20%</span></div>
+          <div class="prop"><span>Immobilier (SCPI/REIT)</span><span>15%</span></div>
+          <div class="prop"><span>Crypto</span><span>5%</span></div>
+          <div class="prop"><span>Or / MP</span><span>10%</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--purple)"></div>
+          <h4 style="color:var(--purple)">All-Weather (Dalio)</h4>
+          <div class="prop"><span>Actions</span><span>30%</span></div>
+          <div class="prop"><span>Obligations long terme</span><span>40%</span></div>
+          <div class="prop"><span>Obligations moyen terme</span><span>15%</span></div>
+          <div class="prop"><span>Or</span><span>7.5%</span></div>
+          <div class="prop"><span>Matières premières</span><span>7.5%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 7: FISCALITÉ & COMPTES -->
+<!-- MODULE: APPELS DE MARGE -->
+<section id="appel-marge" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 06-B</div>
+  <h2 class="section-title fade-in">APPELS DE <span style="color:var(--gold)">MARGE</span></h2>
+  <p class="section-desc fade-in">L'appel de marge est l'un des mécanismes les plus redoutés des traders. Mal compris, il peut provoquer la perte totale d'un compte en quelques minutes.</p>
+
+  <!-- INTRO VISUELLE -->
+  <div class="card fade-in" style="border-color:rgba(255,77,109,.3);background:linear-gradient(135deg,rgba(255,77,109,.05) 0%,var(--surface) 60%);margin-bottom:32px">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+      <span style="font-size:48px">📞</span>
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--red)">MARGIN CALL</div>
+        <div style="color:var(--muted);font-size:14px">Le coup de téléphone que tout trader redoute</div>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:15px;line-height:1.8">Un <span style="color:var(--red);font-weight:700">appel de marge</span> (Margin Call) survient quand les pertes sur vos positions ouvertes ont consommé une part trop importante de votre marge disponible. Le broker vous demande alors d'alimenter votre compte — ou il ferme vos positions de force, souvent au pire moment.</p>
+  </div>
+
+  <!-- CONCEPTS DE BASE -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">MC.01</span><span class="concept-title">Marge initiale, marge de maintenance — les définitions</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Pour trader avec effet de levier (CFD, Forex, Futures), vous devez déposer une <span class="highlight">marge</span> — une garantie. Il en existe deux types fondamentaux :</p>
+      <div class="compare-grid" style="margin-top:16px">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--blue)"></div>
+          <h4 style="color:var(--blue)">MARGE INITIALE</h4>
+          <div class="prop"><span>Définition</span><span>Capital requis pour ouvrir la position</span></div>
+          <div class="prop"><span>Calcul</span><span>Valeur position / Levier</span></div>
+          <div class="prop"><span>Exemple levier 10:1</span><span>Position 10 000€ → marge 1 000€</span></div>
+          <div class="prop"><span>Exemple levier 30:1</span><span>Position 30 000€ → marge 1 000€</span></div>
+          <div class="prop"><span>Rôle</span><span>Débloque la position leveragée</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">MARGE DE MAINTENANCE</h4>
+          <div class="prop"><span>Définition</span><span>Seuil minimum pour garder la position ouverte</span></div>
+          <div class="prop"><span>Niveau typique</span><span>50% à 75% de la marge initiale</span></div>
+          <div class="prop"><span>Si atteint</span><span>→ Margin Call déclenché</span></div>
+          <div class="prop"><span>Si ignoré</span><span>→ Stop Out : liquidation forcée</span></div>
+          <div class="prop"><span>Rôle</span><span>Protège le broker contre les pertes</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--orange)"></div>
+          <h4 style="color:var(--orange)">NIVEAU STOP OUT</h4>
+          <div class="prop"><span>Définition</span><span>Niveau de fermeture automatique forcée</span></div>
+          <div class="prop"><span>Niveau typique</span><span>20% à 50% de la marge initiale</span></div>
+          <div class="prop"><span>Déclenchement</span><span>Automatique, sans prévenir</span></div>
+          <div class="prop"><span>Ordre de fermeture</span><span>La position la plus perdante en premier</span></div>
+          <div class="prop"><span>Risque</span><span>Slippage possible en volatilité extrême</span></div>
+        </div>
+      </div>
+      <div class="formula" style="margin-top:20px">
+        <div class="formula-label">Formules clés — Margin & Levier</div>
+        Marge requise (%) = 1 / Levier × 100<br>
+        Ex: levier 30:1 → marge = 1/30 = 3.33% de la valeur notionnelle<br><br>
+        Niveau de marge (%) = (Équité du compte / Marge utilisée) × 100<br>
+        Margin Call déclenché quand niveau de marge &lt; seuil broker (ex: 100%)<br>
+        Stop Out déclenché quand niveau de marge &lt; seuil stop (ex: 50%)
+      </div>
+    </div>
+  </div>
+
+  <!-- MÉCANISME STEP BY STEP -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">MC.02</span><span class="concept-title">Mécanisme complet — Étape par étape avec exemple chiffré</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Suivons un trade EUR/USD de A à Z jusqu'à l'appel de marge :</p>
+
+      <!-- TIMELINE MARGE -->
+      <div style="margin:24px 0">
+        <div style="display:flex;flex-direction:column;gap:0">
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(77,166,255,.06);border:1px solid rgba(77,166,255,.2);border-radius:12px 12px 0 0;border-bottom:none">
+            <div style="background:var(--blue);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">1</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--blue)">Ouverture de position</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">Capital compte: <span class="highlight">5 000€</span> | Levier: <span class="highlight">30:1</span> | Achat 1 lot EUR/USD à 1.0850<br>
+              Valeur notionnelle: 100 000€ | Marge initiale requise: 100 000 / 30 = <span class="highlight">3 333€</span><br>
+              Marge libre restante: 5 000 - 3 333 = <span class="green">1 667€</span> disponibles | Niveau marge: <span class="green">150%</span> ✅</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(245,197,24,.06);border:1px solid rgba(245,197,24,.2);border-left:1px solid rgba(245,197,24,.2);border-right:1px solid rgba(245,197,24,.2);border-bottom:none">
+            <div style="background:var(--gold);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">2</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--gold)">Le marché se retourne — perte latente croissante</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">EUR/USD chute à 1.0820 → perte = 30 pips × 10$/pip = <span style="color:var(--red);font-weight:700">-300€</span><br>
+              Équité compte: 5 000 - 300 = 4 700€ | Niveau marge: 4 700 / 3 333 × 100 = <span style="color:var(--gold);font-weight:700">141%</span><br>
+              Marge libre: 1 367€ — Situation tendue mais pas encore en danger</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(255,140,66,.06);border:1px solid rgba(255,140,66,.3);border-left:1px solid rgba(255,140,66,.3);border-right:1px solid rgba(255,140,66,.3);border-bottom:none">
+            <div style="background:var(--orange);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">3</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--orange)">⚠️ Zone de danger — Approaching Margin Call</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">EUR/USD descend à 1.0750 → perte = 100 pips = <span style="color:var(--red);font-weight:700">-1 000€</span><br>
+              Équité: 4 000€ | Niveau marge: 4 000 / 3 333 × 100 = <span style="color:var(--orange);font-weight:700">120%</span><br>
+              Le broker envoie un AVERTISSEMENT — alimentez votre compte ou réduisez la position</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.4);border-radius:0">
+            <div style="background:var(--red);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">4</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--red)">🚨 MARGIN CALL — Seuil 100% atteint</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">EUR/USD à 1.0717 → perte = 133 pips = <span style="color:var(--red);font-weight:700">-1 330€</span><br>
+              Équité: 3 670€ | Niveau marge: 3 670 / 3 333 × 100 = <span style="color:var(--red);font-weight:700">110%</span> → <span class="red">MARGIN CALL !</span><br>
+              Le broker exige un dépôt immédiat. Vous avez généralement quelques heures pour réagir.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:rgba(255,77,109,.15);border:1px solid rgba(255,77,109,.5);border-radius:0 0 12px 12px;border-top:none">
+            <div style="background:#8b0000;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">5</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:6px;color:var(--red)">💀 STOP OUT — Liquidation automatique forcée</div>
+              <div style="color:var(--muted);font-size:14px;line-height:1.7">Si vous n'avez pas agi, le broker ferme la position automatiquement quand le niveau passe sous 50%.<br>
+              Perte définitive: <span style="color:var(--red);font-weight:700">-3 333€</span> (quasi-totalité de la marge) | Solde restant: ~1 667€<br>
+              <span class="red">En moins de 30 minutes pendant une forte volatilité (NFP, discours Fed), tout peut s'effondrer.</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="ex-title">📐 Calcul du prix de liquidation</div>
+        <p>Pour connaître à quel prix EXACT vous recevrez un margin call, utilisez cette formule :<br><br>
+        <span class="highlight">Prix liquidation (Long) = Prix d'entrée − ((Équité − Marge maintenance) / (Lots × Valeur pip))</span><br><br>
+        Notre exemple: 1.0850 − ((5000 − 3333 × 0.5) / (1 × 100 000)) = 1.0850 − 0.0183 = <span class="red">1.0667</span><br>
+        → Si EUR/USD tombe à 1.0667 sans stop loss, liquidation totale.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPES D'APPELS DE MARGE -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">MC.03</span><span class="concept-title">Les 4 situations qui déclenchent un appel de marge</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3" style="margin-bottom:0">
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <span class="card-icon">📉</span>
+          <h3 style="color:var(--red);font-size:16px">1. Position perdante</h3>
+          <p style="font-size:13px">La cause la plus courante. Le marché va contre vous et les pertes latentes érodent votre équité jusqu'à passer sous le seuil de maintenance. Brutal en période de forte volatilité.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,140,66,.3)">
+          <span class="card-icon">🌙</span>
+          <h3 style="color:var(--orange);font-size:16px">2. Gap overnight</h3>
+          <p style="font-size:13px">Le marché ouvre bien plus bas/haut que la clôture (gap). Votre stop loss n'a pas pu s'exécuter. La perte instantanée peut dépasser votre marge disponible en quelques secondes.</p>
+        </div>
+        <div class="card" style="border-color:rgba(168,85,247,.3)">
+          <span class="card-icon">📊</span>
+          <h3 style="color:var(--purple);font-size:16px">3. Broker augmente les exigences</h3>
+          <p style="font-size:13px">En période de forte volatilité (crise, événement macro), les brokers peuvent augmenter leurs exigences de marge subitement, déclenchant des margin calls même sur des positions gagnantes.</p>
+        </div>
+        <div class="card" style="border-color:rgba(77,166,255,.3)">
+          <span class="card-icon">💱</span>
+          <h3 style="color:var(--blue);font-size:16px">4. Effet de change sur marge</h3>
+          <p style="font-size:13px">Si votre compte est en EUR et que vous tradez des actifs en USD, une appréciation du dollar augmente mécaniquement la valeur en € de votre marge requise. Risque souvent ignoré.</p>
+        </div>
+        <div class="card" style="border-color:rgba(245,197,24,.3)">
+          <span class="card-icon">🔄</span>
+          <h3 style="color:var(--gold);font-size:16px">5. Surexposition (overleverage)</h3>
+          <p style="font-size:13px">Ouvrir trop de positions simultanément. La marge totale utilisée représente 90-100% du capital → le moindre mouvement défavorable déclenche le margin call immédiatement.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <span class="card-icon">🌊</span>
+          <h3 style="color:var(--red);font-size:16px">6. Flash crash / Événement extrême</h3>
+          <p style="font-size:13px">Événements comme le <span class="highlight">CHF Flash Crash</span> de 2015 (CHF +30% en 15 minutes) ou le <span class="highlight">pétrole négatif</span> de 2020. Certains comptes ont été liquidés ET sont passés en négatif.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFFÉRENCE CFD / FUTURES / CRYPTO -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">MC.04</span><span class="concept-title">Marge selon les instruments — CFD, Futures, Crypto, Actions</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="asset-table">
+        <thead>
+          <tr><th>Instrument</th><th>Levier max (EU)</th><th>Marge initiale type</th><th>Appel de marge</th><th>Solde négatif possible ?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CFD Forex (majeurs)</td><td>30:1</td><td>3.33%</td><td>Oui — automatique</td><td><span class="badge badge-green">Non (protection ESMA)</span></td></tr>
+          <tr><td>CFD Indices</td><td>20:1</td><td>5%</td><td>Oui — automatique</td><td><span class="badge badge-green">Non (protection ESMA)</span></td></tr>
+          <tr><td>CFD Actions</td><td>5:1</td><td>20%</td><td>Oui</td><td><span class="badge badge-green">Non (protection ESMA)</span></td></tr>
+          <tr><td>Futures (CME, Eurex)</td><td>Variable</td><td>3-15% selon contrat</td><td>Oui — variation margin quotidienne</td><td><span class="badge badge-red">OUI — pertes illimitées</span></td></tr>
+          <tr><td>Crypto Perpetual (Binance)</td><td>125:1 (!)</td><td>0.8%</td><td>Oui — liquidation automatique</td><td><span class="badge badge-orange">Dépend exchange</span></td></tr>
+          <tr><td>Actions au comptant</td><td>1:1 (PEA/CTO)</td><td>100%</td><td>Non</td><td><span class="badge badge-green">Impossible</span></td></tr>
+          <tr><td>SRD (France)</td><td>~5:1</td><td>20%</td><td>Oui — fin de mois</td><td><span class="badge badge-orange">Limité</span></td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box" style="margin-top:20px">
+        <div class="w-title">⚠️ Solde négatif — Le cauchemar des traders sur Futures</div>
+        <p>Sur les <span class="red">Futures</span> et certains exchanges crypto non-régulés, votre perte peut DÉPASSER votre dépôt initial. En 2020, des traders de Futures pétrole (WTI) ont eu des soldes <span class="red">négatifs de plusieurs milliers de dollars</span> quand le WTI est passé à -37$/baril. Les brokers CFD régulés en Europe ont l'obligation de protection contre le solde négatif depuis 2018 (ESMA).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARK-TO-MARKET / VARIATION MARGIN SUR FUTURES -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">MC.05</span><span class="concept-title">Mark-to-Market & Variation Margin sur les Futures</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Sur les Futures, le mécanisme de marge est différent des CFD. Chaque soir à la clôture, la chambre de compensation (clearing house) recalcule tous les P&L — c'est le <span class="highlight">Mark-to-Market</span>.</p>
+      <div class="formula">
+        <div class="formula-label">Variation Margin — Règlement quotidien sur Futures</div>
+        Chaque soir: votre compte est DÉBITÉ des pertes ou CRÉDITÉ des gains de la journée<br><br>
+        Exemple: Vous êtes Long 1 contrat CAC 40 Future (valeur 1 point = 10€)<br>
+        Jour 1: CAC ouvre 7800, ferme 7750 → -50 points → débit de 50 × 10€ = -500€ sur votre compte<br>
+        Jour 2: CAC ouvre 7750, ferme 7720 → -30 points → débit de 300€<br>
+        Si solde &lt; marge de maintenance → appel de marge le soir même, à régler avant l'ouverture
+      </div>
+      <div class="example-box">
+        <div class="ex-title">💡 Différence clé CFD vs Futures sur la marge</div>
+        <p><span class="highlight">CFD</span> : les pertes latentes s'accumulent en temps réel sur votre équité. Stop Out déclenché dès que le niveau de marge est atteint, à n'importe quel moment de la journée.<br><br>
+        <span class="highlight">Futures</span> : règlement quotidien. Vous pouvez avoir une position perdante en cours de journée sans appel de marge immédiat — mais à la clôture le broker prélève directement. Si vous n'avez pas les fonds, l'appel de marge est émis le soir et doit être réglé avant l'ouverture du lendemain.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMENT ÉVITER / GÉRER -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">MC.06</span><span class="concept-title">7 règles pour ne JAMAIS recevoir d'appel de marge</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3" style="margin-bottom:24px">
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">01</div>
+          <h3 style="color:var(--green);font-size:15px">Respectez la règle des 1-2%</h3>
+          <p style="font-size:13px">Ne risquez jamais plus de 1-2% de votre capital par trade. Avec cette règle, même 10 pertes consécutives ne peuvent pas vous provoquer un margin call.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">02</div>
+          <h3 style="color:var(--green);font-size:15px">Toujours utiliser un Stop Loss</h3>
+          <p style="font-size:13px">Un stop loss placé avant l'entrée en position garantit que votre perte est définie et limitée. C'est la première ligne de défense contre l'appel de marge.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">03</div>
+          <h3 style="color:var(--green);font-size:15px">Gardez une marge libre de 50%+</h3>
+          <p style="font-size:13px">N'utilisez jamais plus de 50% de votre capital en marge. Les 50% restants servent de coussin pour absorber les mouvements adverses sans atteindre le seuil de margin call.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">04</div>
+          <h3 style="color:var(--green);font-size:15px">Évitez les événements à risque</h3>
+          <p style="font-size:13px">NFP, décisions de banques centrales, résultats d'entreprises... Fermez ou réduisez vos positions AVANT ces événements, ou élargissez vos stops pour absorber la volatilité.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">05</div>
+          <h3 style="color:var(--green);font-size:15px">Fermez les positions overnight</h3>
+          <p style="font-size:13px">En day trading, fermez toujours vos positions avant la clôture du marché. Les gaps d'ouverture sont imprévisibles et peuvent déclencher un margin call instantané.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);letter-spacing:2px">06</div>
+          <h3 style="color:var(--green);font-size:15px">Calculez AVANT d'entrer</h3>
+          <p style="font-size:13px">Avant chaque trade, calculez votre niveau de margin call exact. Connaître le prix auquel vous serez liquidé vous aide à choisir la bonne taille de position et le bon stop.</p>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <div class="w-title">⛔ L'ERREUR FATALE — Moyenner à la baisse sur une position perdante</div>
+        <p>Un réflexe dangereux de débutant : quand une position perd, rajouter des lots pour "faire baisser le prix moyen". <span class="red">C'est exactement ce qui précipite le margin call.</span> Vous augmentez votre exposition sur une position déjà perdante, consommant encore plus de marge. Si le marché continue dans la même direction, la liquidation survient d'autant plus vite. La discipline consiste à <span class="highlight">couper la perte, jamais à la moyenner.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMULATEUR -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">MC.07</span><span class="concept-title">🧮 Simulateur d'appel de marge — Calculez votre niveau de risque</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;padding-top:20px">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Capital du compte (€)</div>
+          <input type="number" id="sim-capital" value="10000" min="100" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:IBM Plex Mono,monospace;font-size:14px;outline:none" oninput="calcMargin()" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Levier utilisé</div>
+          <select id="sim-levier" onchange="calcMargin()" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:IBM Plex Mono,monospace;font-size:14px;outline:none;cursor:pointer">
+            <option value="2">2:1 (Crypto ESMA)</option>
+            <option value="5">5:1 (Actions CFD)</option>
+            <option value="10">10:1 (Indices)</option>
+            <option value="20">20:1 (Indices majeurs)</option>
+            <option value="30" selected>30:1 (Forex majeurs)</option>
+            <option value="50">50:1 (Hors Europe)</option>
+            <option value="100">100:1 (Hors Europe)</option>
+            <option value="125">125:1 (Crypto perp.)</option>
+          </select>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">% du capital en marge utilisée</div>
+          <input type="number" id="sim-usage" value="50" min="1" max="100" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:IBM Plex Mono,monospace;font-size:14px;outline:none" oninput="calcMargin()" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Seuil Margin Call du broker (%)</div>
+          <input type="number" id="sim-mc-level" value="100" min="50" max="200" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:IBM Plex Mono,monospace;font-size:14px;outline:none" oninput="calcMargin()" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+      </div>
+
+      <div id="sim-result" style="margin-top:24px;padding:24px;background:var(--surface2);border-radius:12px;border:1px solid var(--border)">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">RÉSULTATS DU SIMULATEUR</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px" id="sim-metrics"></div>
+        <div id="sim-verdict" style="margin-top:16px;padding:14px;border-radius:8px;font-size:14px;line-height:1.6"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAS RÉELS HISTORIQUES -->
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">MC.08</span><span class="concept-title">Cas réels historiques — Quand les margin calls ont ruiné des géants</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">LTCM — 1998</h4>
+          <div class="prop"><span>Levier utilisé</span><span>25:1 à 250:1</span></div>
+          <div class="prop"><span>Pertes en 4 mois</span><span>-4,6 Milliards $</span></div>
+          <div class="prop"><span>Cause</span><span>Défaut Russie + fuite vers la qualité</span></div>
+          <div class="prop"><span>Résultat</span><span>Renflouement par la Fed + 14 banques</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px">Long-Term Capital Management était géré par 2 prix Nobel d'économie. Leur modèle mathématique n'avait pas prévu les corrélations en période de crise : tous leurs actifs ont chuté simultanément.</p>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--orange)"></div>
+          <h4 style="color:var(--orange)">CHF FLASH CRASH — Jan 2015</h4>
+          <div class="prop"><span>Événement</span><span>BNS abandonne le plancher EUR/CHF</span></div>
+          <div class="prop"><span>Mouvement</span><span>CHF +30% en 15 minutes</span></div>
+          <div class="prop"><span>Victimes</span><span>Milliers de traders retail + brokers</span></div>
+          <div class="prop"><span>Broker FXCM</span><span>Pertes clients : -225M$ → renfloué</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px">Tous les stops loss ont été "gaps" — le prix a sauté par-dessus sans exécution. Des traders ont perdu non seulement leur dépôt mais se sont retrouvés débiteurs auprès de leur broker.</p>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--purple)"></div>
+          <h4 style="color:var(--purple)">PÉTROLE WTI NÉGATIF — Avr 2020</h4>
+          <div class="prop"><span>Événement</span><span>Prix WTI Mai 2020 : -37,63$/baril</span></div>
+          <div class="prop"><span>Cause</span><span>Stockages pleins + COVID-19</span></div>
+          <div class="prop"><span>Victimes</span><span>Traders de futures sur pétrole</span></div>
+          <div class="prop"><span>Broker Bank of China</span><span>-1 Milliard $ de pertes clients</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px">Des particuliers chinois avaient acheté un produit lié au WTI. Personne n'avait prévu que le prix puisse passer négatif. Soldes débiteurs massifs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE: BOUGIES JAPONAISES -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="bougies" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 09</div>
+  <h2 class="section-title fade-in">BOUGIES <span style="color:var(--gold)">JAPONAISES</span></h2>
+  <p class="section-desc fade-in">Les candlesticks sont le langage universel des traders. Inventées au Japon au XVIIIe siècle par Munehisa Homma pour spéculer sur le riz, elles révèlent en un coup d'œil la psychologie du marché.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">BJ.01</span><span class="concept-title">Anatomie d'une bougie — OHLC</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Chaque bougie représente une période (1min, 1h, 1 jour…) et contient 4 informations :</p>
+      <div class="formula">
+        <div class="formula-label">Structure OHLC</div>
+        O = Open (Prix d'ouverture) → bas du corps si bougie haussière<br>
+        H = High (Plus haut atteint) → sommet de la mèche supérieure<br>
+        L = Low  (Plus bas atteint)  → bas de la mèche inférieure<br>
+        C = Close (Prix de clôture)  → haut du corps si bougie haussière<br><br>
+        Corps large = forte conviction | Mèches longues = hésitation / rejet
+      </div>
+      <!-- Candlestick visual SVG -->
+      <div style="display:flex;gap:32px;align-items:flex-end;margin:28px 0;flex-wrap:wrap">
+        <!-- Bullish candle -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="40" stroke="#00d4aa" stroke-width="2"/>
+            <rect x="15" y="40" width="30" height="80" fill="#00d4aa" rx="2"/>
+            <line x1="30" y1="120" x2="30" y2="150" stroke="#00d4aa" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--green);font-size:12px;font-weight:700;margin-top:8px">HAUSSIÈRE</div>
+          <div style="color:var(--muted);font-size:11px">Close > Open</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Corps vert/blanc</div>
+        </div>
+        <!-- Bearish candle -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="40" stroke="#ff4d6d" stroke-width="2"/>
+            <rect x="15" y="40" width="30" height="80" fill="#ff4d6d" rx="2"/>
+            <line x1="30" y1="120" x2="30" y2="150" stroke="#ff4d6d" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--red);font-size:12px;font-weight:700;margin-top:8px">BAISSIÈRE</div>
+          <div style="color:var(--muted);font-size:11px">Close &lt; Open</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Corps rouge/noir</div>
+        </div>
+        <!-- Doji -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="78" stroke="#f5c518" stroke-width="2"/>
+            <rect x="10" y="78" width="40" height="4" fill="#f5c518" rx="1"/>
+            <line x1="30" y1="82" x2="30" y2="150" stroke="#f5c518" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--gold);font-size:12px;font-weight:700;margin-top:8px">DOJI</div>
+          <div style="color:var(--muted);font-size:11px">Open ≈ Close</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Indécision</div>
+        </div>
+        <!-- Hammer -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="20" stroke="#00d4aa" stroke-width="2"/>
+            <rect x="15" y="20" width="30" height="30" fill="#00d4aa" rx="2"/>
+            <line x1="30" y1="50" x2="30" y2="150" stroke="#00d4aa" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--green);font-size:12px;font-weight:700;margin-top:8px">MARTEAU</div>
+          <div style="color:var(--muted);font-size:11px">Longue mèche bas</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Retournement haussier</div>
+        </div>
+        <!-- Shooting star -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <line x1="30" y1="10" x2="30" y2="110" stroke="#ff4d6d" stroke-width="2"/>
+            <rect x="15" y="110" width="30" height="30" fill="#ff4d6d" rx="2"/>
+            <line x1="30" y1="140" x2="30" y2="150" stroke="#ff4d6d" stroke-width="2"/>
+          </svg>
+          <div style="color:var(--red);font-size:12px;font-weight:700;margin-top:8px">ÉTOILE FILANTE</div>
+          <div style="color:var(--muted);font-size:11px">Longue mèche haut</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Retournement baissier</div>
+        </div>
+        <!-- Marubozu -->
+        <div style="text-align:center">
+          <svg width="60" height="160" viewBox="0 0 60 160">
+            <rect x="15" y="10" width="30" height="140" fill="#00d4aa" rx="2"/>
+          </svg>
+          <div style="color:var(--green);font-size:12px;font-weight:700;margin-top:8px">MARUBOZU</div>
+          <div style="color:var(--muted);font-size:11px">Aucune mèche</div>
+          <div style="color:var(--muted);font-size:10px;margin-top:4px">Force absolue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">BJ.02</span><span class="concept-title">Les 12 figures de retournement essentielles</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="asset-table">
+        <thead><tr><th>Figure</th><th>Signal</th><th>Description</th><th>Fiabilité</th><th>Confirmation requise</th></tr></thead>
+        <tbody>
+          <tr><td>🔨 Marteau (Hammer)</td><td><span class="badge badge-green">Haussier</span></td><td>Petite corps en haut + longue mèche basse. Apparaît après une baisse → les acheteurs ont rejeté les bas prix</td><td><span class="badge badge-gold">Bonne</span></td><td>Bougie suivante haussière</td></tr>
+          <tr><td>⭐ Étoile filante (Shooting Star)</td><td><span class="badge badge-red">Baissier</span></td><td>Petite corps en bas + longue mèche haute. Après une hausse → les vendeurs ont rejeté les hauts prix</td><td><span class="badge badge-gold">Bonne</span></td><td>Bougie suivante baissière</td></tr>
+          <tr><td>🔃 Engulfant haussier</td><td><span class="badge badge-green">Haussier</span></td><td>Grande bougie verte avale entièrement la précédente rouge. Fort signal de retournement</td><td><span class="badge badge-green">Forte</span></td><td>Volume élevé</td></tr>
+          <tr><td>🔃 Engulfant baissier</td><td><span class="badge badge-red">Baissier</span></td><td>Grande bougie rouge avale entièrement la précédente verte. Fort signal de retournement</td><td><span class="badge badge-green">Forte</span></td><td>Volume élevé</td></tr>
+          <tr><td>✙ Doji</td><td><span class="badge badge-blue">Neutre</span></td><td>Open = Close. Indécision totale entre acheteurs et vendeurs. Contexte crucial pour l'interprétation</td><td><span class="badge badge-gold">Modérée</span></td><td>Bougie suivante + contexte</td></tr>
+          <tr><td>⚡ Doji libellule</td><td><span class="badge badge-green">Haussier</span></td><td>Open/Close en haut + longue mèche basse. Rejet fort des prix bas</td><td><span class="badge badge-green">Forte</span></td><td>Support + volume</td></tr>
+          <tr><td>☄️ Doji pierre tombale</td><td><span class="badge badge-red">Baissier</span></td><td>Open/Close en bas + longue mèche haute. Rejet fort des prix hauts</td><td><span class="badge badge-green">Forte</span></td><td>Résistance + volume</td></tr>
+          <tr><td>🌟 Morning Star</td><td><span class="badge badge-green">Haussier</span></td><td>3 bougies: grande rouge → petit doji → grande verte. Retournement haussier puissant</td><td><span class="badge badge-green">Très forte</span></td><td>Volume sur 3e bougie</td></tr>
+          <tr><td>🌙 Evening Star</td><td><span class="badge badge-red">Baissier</span></td><td>3 bougies: grande verte → petit doji → grande rouge. Retournement baissier puissant</td><td><span class="badge badge-green">Très forte</span></td><td>Volume sur 3e bougie</td></tr>
+          <tr><td>👶 Harami haussier</td><td><span class="badge badge-green">Haussier</span></td><td>Petite bougie verte contenue dans le corps d'une grande bougie rouge précédente</td><td><span class="badge badge-gold">Modérée</span></td><td>Confirmation obligatoire</td></tr>
+          <tr><td>3 soldats blancs</td><td><span class="badge badge-green">Haussier</span></td><td>3 grandes bougies vertes consécutives, chacune ouvrant dans le corps de la précédente</td><td><span class="badge badge-green">Forte</span></td><td>Volume croissant</td></tr>
+          <tr><td>3 corbeaux noirs</td><td><span class="badge badge-red">Baissier</span></td><td>3 grandes bougies rouges consécutives. Signal de distribution intense</td><td><span class="badge badge-green">Forte</span></td><td>Volume croissant</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box" style="margin-top:20px">
+        <div class="w-title">⚠️ Règle d'or des bougies</div>
+        <p>Une bougie seule ne suffit <span class="red">jamais</span> à prendre un trade. Elle doit être confirmée par : le contexte (support/résistance), le volume, et au minimum la bougie suivante. Les figures en bas de range ou sur support fort ont une bien meilleure fiabilité qu'en plein milieu d'une tendance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE: VENTE À DÉCOUVERT / SRD / ETF LEVIER / DCA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="instruments-avances" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 10</div>
+  <h2 class="section-title fade-in">INSTRUMENTS <span style="color:var(--gold)">AVANCÉS</span></h2>
+  <p class="section-desc fade-in">Vente à découvert, SRD français, ETF à levier, DCA, SCPI/REITs, copy trading — tout ce que le cours standard oublie.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">IA.01</span><span class="concept-title">Vente à découvert — Mécanisme complet du short selling</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>La <span class="highlight">vente à découvert</span> permet de profiter d'une baisse. Vous vendez des titres que vous ne possédez pas encore (vous les empruntez), puis vous les rachetez moins cher pour rembourser.</p>
+      <div style="display:flex;flex-direction:column;gap:0;margin:20px 0">
+        <div style="padding:16px 20px;background:rgba(77,166,255,.06);border:1px solid rgba(77,166,255,.2);border-radius:10px 10px 0 0;border-bottom:none">
+          <span style="color:var(--blue);font-weight:700">Étape 1 :</span><span style="color:var(--muted);font-size:14px"> Vous empruntez 100 actions Tesla à 250$ auprès du broker (coût d'emprunt : ~2-5%/an)</span>
+        </div>
+        <div style="padding:16px 20px;background:rgba(245,197,24,.06);border:1px solid rgba(245,197,24,.2);border-left:1px solid rgba(245,197,24,.2);border-right:1px solid rgba(245,197,24,.2);border-bottom:none">
+          <span style="color:var(--gold);font-weight:700">Étape 2 :</span><span style="color:var(--muted);font-size:14px"> Vous vendez immédiatement ces 100 actions à 250$ = vous recevez 25 000$ sur votre compte</span>
+        </div>
+        <div style="padding:16px 20px;background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.2);border-left:1px solid rgba(0,212,170,.2);border-right:1px solid rgba(0,212,170,.2);border-bottom:none">
+          <span style="color:var(--green);font-weight:700">Étape 3 :</span><span style="color:var(--muted);font-size:14px"> Tesla chute à 180$ → vous rachetez 100 actions à 180$ = vous dépensez 18 000$</span>
+        </div>
+        <div style="padding:16px 20px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);border-radius:0 0 10px 10px">
+          <span style="color:var(--green);font-weight:700">Résultat :</span><span style="color:var(--muted);font-size:14px"> Profit = 25 000 - 18 000 - coûts d'emprunt = <span class="green">~6 900$</span> sur une baisse de 28%</span>
+        </div>
+      </div>
+      <div class="formula">
+        <div class="formula-label">Asymétrie fondamentale du short</div>
+        Gain maximum : 100% (si le prix tombe à 0$)<br>
+        Perte maximale : ILLIMITÉE (le prix peut monter à l'infini)<br>
+        Coûts : frais d'emprunt (stock borrow fee) + dividendes à payer si détention longue<br>
+        Short Squeeze : si trop de shorts + prix monte → rachats forcés → prix explose
+      </div>
+      <div class="warning-box">
+        <div class="w-title">⚠️ Short selling via CFD vs actions réelles</div>
+        <p>Sur un <span class="highlight">compte CFD</span>, shorter est simple : vous cliquez "Vendre". Le broker simule le mécanisme. Sur un <span class="highlight">vrai compte actions</span>, le broker doit réellement emprunter les titres — pas toujours possible (low borrow availability), et le coût peut être très élevé pour des actions très shortées.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">IA.02</span><span class="concept-title">Le SRD — Service de Règlement Différé (France)</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">SRD</span> est un mécanisme uniquement français permettant d'acheter ou vendre des actions à crédit, avec règlement différé en fin de mois. C'est l'équivalent d'un levier sur actions françaises.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--blue)">Fonctionnement</h3>
+          <p style="font-size:13px">Vous achetez des actions sans les payer immédiatement. Le règlement se fait le dernier jour de bourse du mois (Liquidation). Vous pouvez "reporter" au mois suivant moyennant des frais de report.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--gold)">Levier & Couverture</h3>
+          <p style="font-size:13px">Couverture minimum : 20% en espèces (levier 5:1), 25% en obligations, 40% en actions. Exemple : 2 000€ de couverture → jusqu'à 10 000€ d'achats SRD.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--red)">Risques spécifiques</h3>
+          <p style="font-size:13px">Frais de report mensuels (~0.5-1.5%/mois). Possibilité de vente à découvert (VAD). En cas de pertes importantes, appel de marge possible avant la liquidation mensuelle.</p>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="ex-title">📅 Calendrier SRD — La liquidation mensuelle</div>
+        <p>La <span class="highlight">Liquidation Générale</span> intervient le dernier jour de bourse du mois. Si vous gardez votre position, elle est "reportée" au mois suivant avec des frais. La <span class="highlight">5 liquidations avant la fin du mois</span>, les positions commencent à être fermées si couverture insuffisante. Contrairement aux CFD, le SRD ne déclenche pas de Stop Out automatique intraday.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">IA.03</span><span class="concept-title">ETF à levier & ETF inverses — Performance decay expliqué</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Les <span class="highlight">ETF à levier</span> (2x, 3x) et <span class="highlight">ETF inverses</span> (-1x, -2x) amplifient les mouvements quotidiens d'un indice. Attention : leur comportement à long terme est radicalement différent de ce que les débutants imaginent.</p>
+      <div class="formula">
+        <div class="formula-label">Le Volatility Decay — Pourquoi les ETF levier perdent sur le long terme</div>
+        Jour 1 : Indice +10% → ETF 2x : +20% | Capital 100€ → 120€<br>
+        Jour 2 : Indice -10% → ETF 2x : -20% | Capital 120€ → 96€<br>
+        Résultat indice: 100 × 1.10 × 0.90 = 99€ (-1%)<br>
+        Résultat ETF 2x: 100 × 1.20 × 0.80 = 96€ (-4%) ← PIRE que l'indice × 2 !<br><br>
+        Plus la volatilité est forte, plus le decay est important.
+        Sur 1 an de marché agité, un ETF 3x peut perdre 50% quand l'indice est flat.
+      </div>
+      <table class="asset-table" style="margin-top:16px">
+        <thead><tr><th>Type ETF</th><th>Exemple</th><th>Usage approprié</th><th>Durée max recommandée</th><th>Risque decay</th></tr></thead>
+        <tbody>
+          <tr><td>ETF Classique (1x)</td><td>Amundi MSCI World</td><td>Investissement long terme</td><td>Illimité</td><td><span class="badge badge-green">Aucun</span></td></tr>
+          <tr><td>ETF Levier 2x</td><td>Xtrackers S&P 500 2x</td><td>Trading tactique court terme</td><td>Quelques semaines max</td><td><span class="badge badge-gold">Modéré</span></td></tr>
+          <tr><td>ETF Levier 3x</td><td>ProShares TQQQ (Nasdaq 3x)</td><td>Spéculation court terme</td><td>Quelques jours</td><td><span class="badge badge-red">Fort</span></td></tr>
+          <tr><td>ETF Inverse (-1x)</td><td>BX4 (CAC 40 Bear)</td><td>Couverture de portefeuille</td><td>Quelques semaines</td><td><span class="badge badge-gold">Modéré</span></td></tr>
+          <tr><td>ETF Inverse (-2x)</td><td>ProShares QQQ Bear 2x</td><td>Spéculation baissière</td><td>Quelques jours</td><td><span class="badge badge-red">Très fort</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">IA.04</span><span class="concept-title">DCA — Dollar Cost Averaging, la stratégie des gagnants</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">DCA</span> (investissement programmé) consiste à investir un montant fixe à intervalles réguliers, quelles que soient les conditions de marché. C'est statistiquement la meilleure stratégie pour 90% des investisseurs particuliers.</p>
+      <div class="formula">
+        <div class="formula-label">DCA vs Lump Sum — Exemple sur 12 mois, 1 200€ à investir</div>
+        LUMP SUM : investir 1 200€ le 1er janvier → dépend entièrement du timing<br>
+        DCA       : investir 100€/mois → achète plus de parts quand le prix est bas, moins quand il est haut<br><br>
+        Jan: 100€ / 50€ = 2 parts | Avr: 100€ / 40€ = 2.5 parts (baisse = opportunité !)<br>
+        Jul: 100€ / 60€ = 1.67 parts | Oct: 100€ / 55€ = 1.82 parts<br>
+        Prix moyen DCA: inférieur au prix moyen de l'année → avantage mathématique prouvé
+      </div>
+      <div class="grid-3">
+        <div class="card" style="border-color:rgba(0,212,170,.3)">
+          <h3 style="color:var(--green);font-size:15px">✅ Avantages DCA</h3>
+          <p style="font-size:13px">Élimine le risque de mauvais timing. Discipline automatique. Réduit l'impact émotionnel. Bénéfice mathématique en marché volatile. Accessible à tous (dès 50€/mois).</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--gold);font-size:15px">⚙️ Comment mettre en place</h3>
+          <p style="font-size:13px">Virement automatique mensuel sur PEA ou Assurance-Vie. Achat programmé d'ETF MSCI World ou S&P 500. Ignorer les fluctuations court terme. Durée minimale : 5-10 ans.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--blue);font-size:15px">📊 Performance historique</h3>
+          <p style="font-size:13px">1 000€/mois sur le S&P 500 depuis 2000 (incluant crash 2001, 2008, 2020) : capital investi 288 000€ → valeur 2024 : ~1 100 000€. Le DCA transforme les crises en opportunités.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">IA.05</span><span class="concept-title">SCPI & REITs — L'immobilier en Bourse</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Les <span class="highlight">SCPI</span> (France) et <span class="highlight">REITs</span> (USA/monde) permettent d'investir dans l'immobilier sans acheter un bien physique. Distribution de loyers sous forme de dividendes trimestriels.</p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--blue)"></div>
+          <h4 style="color:var(--blue)">SCPI (France)</h4>
+          <div class="prop"><span>Rendement moyen</span><span>4-6%/an (2024)</span></div>
+          <div class="prop"><span>Ticket d'entrée</span><span>200€ à 5 000€/part</span></div>
+          <div class="prop"><span>Liquidité</span><span>Faible (marché secondaire)</span></div>
+          <div class="prop"><span>Frais</span><span>8-12% à l'entrée + 1%/an gestion</span></div>
+          <div class="prop"><span>Fiscalité</span><span>Revenus fonciers (CSG+IR)</span></div>
+          <div class="prop"><span>Exemples</span><span>Immorente, Primovie, Épargne Foncière</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--green)"></div>
+          <h4 style="color:var(--green)">REITs (USA/Europe)</h4>
+          <div class="prop"><span>Rendement moyen</span><span>3-8%/an</span></div>
+          <div class="prop"><span>Ticket d'entrée</span><span>1 action (~10-500$)</span></div>
+          <div class="prop"><span>Liquidité</span><span>Très forte (cotés en bourse)</span></div>
+          <div class="prop"><span>Frais</span><span>Frais broker seulement</span></div>
+          <div class="prop"><span>Distribution légale</span><span>90% des bénéfices redistribués</span></div>
+          <div class="prop"><span>Exemples</span><span>Realty Income (O), Vonovia, Unibail</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--gold)"></div>
+          <h4 style="color:var(--gold)">ETF REIT</h4>
+          <div class="prop"><span>Diversification</span><span>Centaines de REITs en 1 achat</span></div>
+          <div class="prop"><span>Ticket d'entrée</span><span>Dès 20€</span></div>
+          <div class="prop"><span>Liquidité</span><span>Très forte</span></div>
+          <div class="prop"><span>Exemples</span><span>Amundi FTSE EPRA, iShares Global REIT</span></div>
+          <div class="prop"><span>Recommandé pour</span><span>Débutants voulant exposer à l'immo</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">IA.06</span><span class="concept-title">Copy Trading — Fonctionnement, plateformes, pièges</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">copy trading</span> permet de répliquer automatiquement les trades d'un autre trader. Populaire mais très souvent mal utilisé.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--blue)">Comment ça fonctionne</h3>
+          <p style="font-size:13px">Vous allouez un capital à un "signal provider". Chaque trade qu'il passe est automatiquement répliqué sur votre compte proportionnellement. Si lui investit 10% de son capital sur AAPL, vous aussi.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--gold)">Plateformes principales</h3>
+          <p style="font-size:13px"><span class="highlight">eToro</span> — le plus populaire, régulé. <span class="highlight">ZuluTrade</span> — compatible multi-brokers. <span class="highlight">NAGA</span> — européen. <span class="highlight">MetaTrader Signals</span> — pour MT4/MT5.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--red)">Les pièges à éviter</h3>
+          <p style="font-size:13px">Les bons résultats passés ne garantissent rien. Les "traders" peuvent prendre des risques excessifs. Frais cachés. Biais de survivorship : on vous montre les gagnants, pas les perdants.</p>
+        </div>
+      </div>
+      <div class="warning-box">
+        <div class="w-title">⚠️ Le problème du copy trading</div>
+        <p>Un trader avec 12 mois de bons résultats peut tout perdre le 13e mois. Son drawdown détruira votre capital. De plus, les meilleurs traders n'ont aucune incitation à partager leur edge — ceux qui le font gagnent souvent plus sur les frais de copy que sur leur propre trading. Utilisez-le comme outil de <span class="highlight">diversification marginale</span>, jamais comme stratégie principale.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">IA.07</span><span class="concept-title">Dividendes en détail — Ex-date, capture, stratégies</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Les <span class="highlight">dividendes</span> semblent être de l'argent gratuit — ils ne le sont pas. Voici comment ça fonctionne vraiment.</p>
+      <div class="formula">
+        <div class="formula-label">4 dates importantes des dividendes</div>
+        DATE D'ANNONCE    → l'entreprise annonce le montant et les dates<br>
+        DATE EX-DIVIDENDE → pour avoir droit au dividende, vous devez posséder l'action AVANT cette date<br>
+        DATE D'ENREGISTREMENT → J+2 après ex-date, le registre est figé<br>
+        DATE DE PAIEMENT  → le dividende est versé sur votre compte (J+quelques semaines)
+      </div>
+      <div class="example-box">
+        <div class="ex-title">💡 Le "piège" de la capture de dividende</div>
+        <p>Le jour de l'ex-dividende, le cours de l'action baisse mécaniquement d'un montant équivalent au dividende versé. Si TotalEnergies verse 0.79€ de dividende, son cours baisse d'environ 0.79€ à l'ouverture. Acheter la veille pour encaisser le dividende ne génère donc pas de gain net — avant frais et fiscalité.</p>
+      </div>
+      <table class="asset-table">
+        <thead><tr><th>Type de dividende</th><th>Description</th><th>Exemple</th></tr></thead>
+        <tbody>
+          <tr><td>Dividende ordinaire</td><td>Distribution régulière (annuelle/trimestrielle) des bénéfices</td><td>TotalEnergies : 3.22€/an (~5.5%)</td></tr>
+          <tr><td>Dividende exceptionnel</td><td>Distribution ponctuelle liée à un événement (cession d'actif…)</td><td>LVMH post-COVID en 2021</td></tr>
+          <tr><td>Dividende en actions</td><td>Nouvelles actions offertes au lieu de cash → dilution</td><td>Certaines foncières cotées</td></tr>
+          <tr><td>Rachat d'actions (buyback)</td><td>Équivalent au dividende mais fiscalement plus efficace aux USA</td><td>Apple : 85 Mds$/an de buybacks</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE: PSYCHOLOGIE DU TRADING -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="psychologie" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 11</div>
+  <h2 class="section-title fade-in">PSYCHOLOGIE <span style="color:var(--gold)">DU TRADER</span></h2>
+  <p class="section-desc fade-in">80% des traders perdent non pas par manque de stratégie, mais par manque de maîtrise émotionnelle. La psychologie est la compétence la plus sous-estimée et la plus déterminante.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">PS.01</span><span class="concept-title">Les 12 biais cognitifs qui ruinent les traders</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3" style="margin-bottom:0">
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">😱 Aversion à la perte</h3>
+          <p style="font-size:13px">Kahneman & Tversky (1979) : perdre 100€ est psychologiquement 2× plus douloureux que gagner 100€ est plaisant. Résultat : on coupe trop vite les gains et on laisse courir les pertes.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">🎯 Biais de confirmation</h3>
+          <p style="font-size:13px">On cherche instinctivement les informations qui confirment notre thèse. Si on est long sur Tesla, on ne voit que les news positives. Remède : chercher activement les arguments contraires.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">⚓ Biais d'ancrage</h3>
+          <p style="font-size:13px">On s'accroche à un prix de référence arbitraire. "J'ai acheté à 100€, je vends quand ça revient à 100€" — le marché ignore complètement votre prix d'achat.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">🎲 Excès de confiance</h3>
+          <p style="font-size:13px">Après une série de gains, on se croit invincible. On augmente les tailles de position, on réduit les stops. C'est souvent là que survient la perte catastrophique.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">👥 Biais de troupeau (Herding)</h3>
+          <p style="font-size:13px">Suivre la masse par peur d'être seul. "Tout le monde achète du Bitcoin à 60 000$, je ne veux pas rater ça." C'est souvent le meilleur signal contrarian pour faire l'inverse.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">🎰 Biais du joueur</h3>
+          <p style="font-size:13px">Croire qu'après 5 trades perdants, le prochain sera forcément gagnant. Ou après 5 gagnants, le suivant sera perdant. Chaque trade est statistiquement indépendant.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">📰 Biais de récence</h3>
+          <p style="font-size:13px">Extrapoler le passé récent : "le marché monte depuis 3 mois, il va continuer." Les tendances finissent toujours. Le biais de récence fait acheter les sommets et vendre les creux.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">🏆 Hubris post-gain</h3>
+          <p style="font-size:13px">Attribuer les gains à son talent et les pertes à la malchance. Empêche l'analyse objective de sa performance réelle. Le marché est indifférent à votre ego.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">💡 Illusion de contrôle</h3>
+          <p style="font-size:13px">Croire qu'on peut "sentir" le marché ou qu'une analyse suffisamment complexe garantit le succès. Les marchés comportent une part irréductible d'aléatoire.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">💰 Effet de disposition</h3>
+          <p style="font-size:13px">Vendre trop vite les positions gagnantes (pour "sécuriser le gain") et garder trop longtemps les perdantes (espoir de retour). L'exact inverse de ce qu'il faut faire.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">🔮 Biais rétrospectif</h3>
+          <p style="font-size:13px">"J'aurais dû le voir venir." Après un mouvement de marché, on croit qu'il était prévisible. Fausse l'évaluation de sa propre performance passée.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.2)">
+          <h3 style="font-size:14px;color:var(--red)">🔁 FOMO & Revenge</h3>
+          <p style="font-size:13px">FOMO = entrer sur un mouvement déjà bien avancé. Revenge trading = vouloir récupérer une perte immédiatement. Les deux conduisent au surtrading et aux pertes amplifiées.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">PS.02</span><span class="concept-title">La Prospect Theory de Kahneman — Pourquoi nous sommes câblés pour perdre</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Daniel Kahneman (Prix Nobel 2002) a démontré que nos décisions financières sont fondamentalement irrationnelles. La <span class="highlight">Prospect Theory</span> explique pourquoi les traders perdent systématiquement contre leur propre intérêt.</p>
+      <div class="formula">
+        <div class="formula-label">Les 3 piliers de la Prospect Theory appliqués au trading</div>
+        1. REFERENCE POINT : nos décisions sont relatives à un point de référence (prix d'achat), pas absolues<br>
+        2. DIMINISHING SENSITIVITY : gagner 200€ vs 100€ = moins de plaisir que 100€ vs 0€ → on coupe trop tôt<br>
+        3. LOSS AVERSION : pertes pèsent ~2.25× plus que gains équivalents → on garde les perdants trop longtemps
+      </div>
+      <div class="example-box">
+        <div class="ex-title">🧠 Expérience mentale de Kahneman</div>
+        <p>Quel choix faites-vous ?<br>
+        <span class="highlight">Situation A :</span> Gain certain de 900€ OU 90% de chances de gagner 1 000€ → La majorité choisit le gain certain (aversion au risque dans les gains)<br>
+        <span class="highlight">Situation B :</span> Perte certaine de 900€ OU 90% de chances de perdre 1 000€ → La majorité prend le risque (recherche du risque dans les pertes)<br>
+        Résultat trading : on prend ses bénéfices trop tôt ET on laisse ses pertes courir → recette parfaite pour la ruine.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">PS.03</span><span class="concept-title">Le Journal de Trading — L'outil #1 de progression</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Un <span class="highlight">journal de trading</span> tenu rigoureusement est ce qui sépare les traders qui progressent de ceux qui tournent en rond pendant des années. Il révèle vos patterns réels, pas ceux que vous imaginez.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--blue)">📝 Ce qu'il faut noter</h3>
+          <p style="font-size:13px">Date/heure | Instrument | Direction | Prix entrée | Stop loss | Take profit | Taille position | Raison d'entrée (setup) | Screenshots graphique | État émotionnel (1-10)</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--gold)">📊 Ce qu'il faut analyser</h3>
+          <p style="font-size:13px">Win rate par setup | R:R moyen réalisé | Performance par session/heure | Performance par marché | Trades en état de stress vs calme | Erreurs récurrentes</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--green)">🛠️ Outils recommandés</h3>
+          <p style="font-size:13px">TraderVue (automatisé, analyse statistique) | Edgewonk | Simple feuille Excel | Notion ou Obsidian | Screenshots TradingView avec annotations</p>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="ex-title">📋 Modèle d'entrée de journal</div>
+        <p>
+        <span class="highlight">Trade #47</span> | 15/04/2025 09:35 | EUR/USD | LONG<br>
+        Entrée: 1.0842 | Stop: 1.0812 (-30 pips) | Target: 1.0902 (+60 pips) | R:R = 1:2<br>
+        Taille: 0.3 lot | Capital risqué: 90€ (0.9% du compte)<br>
+        Setup: Cassure résistance 1.0835 avec volume + RSI 58 non-surachat + session Londres<br>
+        Résultat: +47 pips | +141€ | Clôturé manuellement avant target (peur)<br>
+        <span class="red">Erreur: sorti trop tôt par impatience. Le prix a atteint le target 2h après.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">PS.04</span><span class="concept-title">Gérer les séries perdantes — Protocole de récupération</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Même les meilleurs traders traversent des <span class="highlight">séries perdantes</span> (losing streaks). La différence entre un trader durable et un autre, c'est la réponse à ces moments.</p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">Mauvaise réponse</h4>
+          <div class="prop"><span>Réaction</span><span>Augmenter les tailles pour récupérer</span></div>
+          <div class="prop"><span>Fréquence</span><span>Trader encore plus souvent</span></div>
+          <div class="prop"><span>Règles</span><span>Abandonner son plan de trading</span></div>
+          <div class="prop"><span>État</span><span>Revenge trading émotionnel</span></div>
+          <div class="prop"><span>Résultat</span><span>Pertes amplifiées, destruction du compte</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--green)"></div>
+          <h4 style="color:var(--green)">Protocole professionnel</h4>
+          <div class="prop"><span>Après 3 pertes consécutives</span><span>Pause obligatoire 24h</span></div>
+          <div class="prop"><span>Après 5 pertes</span><span>Réduire taille de 50%, analyser</span></div>
+          <div class="prop"><span>Drawdown -10%</span><span>Arrêt trading 1 semaine, review</span></div>
+          <div class="prop"><span>Drawdown -20%</span><span>Retour au compte démo 2 semaines</span></div>
+          <div class="prop"><span>Règle d'or</span><span>Les marchés seront là demain aussi</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE: BROKERS & OUTILS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="brokers" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 12</div>
+  <h2 class="section-title fade-in">BROKERS & <span style="color:var(--gold)">PLATEFORMES</span></h2>
+  <p class="section-desc fade-in">Le choix du broker impacte directement votre rentabilité. Frais, régulation, exécution, outils — voici comment comparer objectivement.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">BR.01</span><span class="concept-title">Comparatif complet des brokers — France & Europe</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="asset-table">
+        <thead><tr><th>Broker</th><th>Type</th><th>Régulation</th><th>Frais actions FR</th><th>ETF</th><th>Crypto</th><th>CFD/Levier</th><th>Idéal pour</th></tr></thead>
+        <tbody>
+          <tr><td>Degiro</td><td>Discount</td><td>AFM (NL) + AMF</td><td>~1€+0.05%</td><td>✅ Gratuit(s)</td><td>❌</td><td>❌</td><td><span class="badge badge-green">Investisseurs</span></td></tr>
+          <tr><td>Boursorama Bourse</td><td>Banque</td><td>AMF</td><td>0.99€ à 1.99%</td><td>✅</td><td>❌</td><td>❌</td><td><span class="badge badge-blue">PEA + banque</span></td></tr>
+          <tr><td>Fortuneo</td><td>Banque</td><td>AMF</td><td>0€ (conditions)</td><td>✅</td><td>❌</td><td>❌</td><td><span class="badge badge-blue">PEA gratuit</span></td></tr>
+          <tr><td>Interactive Brokers</td><td>Pro</td><td>SEC + AMF</td><td>0.05% min 1$</td><td>✅</td><td>✅ (limité)</td><td>✅ Pro</td><td><span class="badge badge-purple">Traders actifs</span></td></tr>
+          <tr><td>Saxo Bank</td><td>Pro</td><td>DFSA + AMF</td><td>0.1% min 10€</td><td>✅</td><td>❌</td><td>✅</td><td><span class="badge badge-purple">Traders pro</span></td></tr>
+          <tr><td>eToro</td><td>Social</td><td>CySEC + AMF</td><td>0% (spread)</td><td>✅</td><td>✅</td><td>✅ CFD</td><td><span class="badge badge-gold">Copy trading</span></td></tr>
+          <tr><td>XTB</td><td>CFD</td><td>KNF + AMF</td><td>0% &lt;100K€/mois</td><td>✅</td><td>✅ Crypto</td><td>✅</td><td><span class="badge badge-orange">Traders actifs</span></td></tr>
+          <tr><td>IG Markets</td><td>CFD</td><td>FCA + AMF</td><td>Spread</td><td>✅</td><td>✅</td><td>✅</td><td><span class="badge badge-orange">CFD/Forex</span></td></tr>
+          <tr><td>Binance / Kraken</td><td>Crypto</td><td>Variable</td><td>❌</td><td>❌</td><td>✅ Complet</td><td>✅ Futures</td><td><span class="badge badge-red">Crypto only</span></td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box" style="margin-top:20px">
+        <div class="w-title">⚠️ Vérifiez TOUJOURS la régulation avant de déposer</div>
+        <p>En France, vérifiez que le broker est enregistré auprès de l'<span class="highlight">AMF</span> (amf-france.org → rubrique "Rechercher une société"). Un broker non régulé peut disparaître avec vos fonds du jour au lendemain. Méfiez-vous des brokers qui ne sont pas sur la liste blanche de l'AMF. La protection des dépôts en France est assurée par le <span class="highlight">Fonds de Garantie des Dépôts</span> à hauteur de 70 000€ pour les actifs non-crypto.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">BR.02</span><span class="concept-title">Frais cachés — Ce que les brokers ne mettent pas en avant</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="asset-table">
+        <thead><tr><th>Type de frais</th><th>Description</th><th>Impact annuel estimé</th></tr></thead>
+        <tbody>
+          <tr><td>Spread bid/ask</td><td>Différence entre prix achat et vente → coût implicite à chaque trade</td><td>Très variable selon instrument</td></tr>
+          <tr><td>Overnight swap (CFD)</td><td>Coût de financement pour garder une position leveragée overnight (~2-8%/an)</td><td><span class="badge badge-red">Élevé sur positions longues</span></td></tr>
+          <tr><td>Inactivité</td><td>Certains brokers facturent si aucun trade pendant X mois</td><td>5-15€/mois</td></tr>
+          <tr><td>Change de devise</td><td>Conversion EUR↔USD sur achat d'actions US (0.1-1.5% par transaction)</td><td><span class="badge badge-gold">Modéré</span></td></tr>
+          <tr><td>Retrait</td><td>Frais de virement bancaire pour retirer vos fonds</td><td>0-25€ par retrait</td></tr>
+          <tr><td>Garde / Custodial</td><td>Frais annuels pour détenir des titres (surtout banques traditionnelles)</td><td>0.1-0.5%/an</td></tr>
+          <tr><td>Données temps réel</td><td>Flux de cotation en direct (certains brokers facturent)</td><td>5-30€/mois</td></tr>
+          <tr><td>Frais de conversion ETF</td><td>TER (Total Expense Ratio) de l'ETF prélevé automatiquement</td><td>0.07% à 1.5%/an</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE: OUTILS DU TRADER -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="outils" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 13</div>
+  <h2 class="section-title fade-in">OUTILS DU <span style="color:var(--gold)">TRADER</span></h2>
+  <p class="section-desc fade-in">TradingView, calendrier économique, screeners, backtesting — maîtrisez les outils qui font la différence.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">OT.01</span><span class="concept-title">TradingView — La référence mondiale des graphiques</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p><span class="highlight">TradingView</span> (tradingview.com) est la plateforme de chartisme la plus utilisée au monde. Gratuite avec limitations, elle est indispensable.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--blue)">Fonctionnalités clés</h3>
+          <p style="font-size:13px">Graphiques multi-timeframe | 100+ indicateurs | Pine Script (langage de script) | Alertes de prix | Backtesting intégré | Social (idées de traders) | Paper trading</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--gold)">Raccourcis essentiels</h3>
+          <p style="font-size:13px">Alt+T → dessin tendance | Alt+H → horizontale | Alt+F → Fibonacci | Alt+C → copie | 1/5/D/W → changer timeframe | Ctrl+Z → annuler | / → recherche symbole</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--green)">Plans gratuit vs payant</h3>
+          <p style="font-size:13px">Gratuit : 3 indicateurs/graphique, 1 alerte, données 15min délayées. Basic+ : 5 indicateurs. Pro+ : données temps réel, alertes illimitées. Premium : multi-charts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">OT.02</span><span class="concept-title">Calendrier Économique — Lire et utiliser l'agenda des marchés</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">calendrier économique</span> liste tous les événements macro susceptibles de créer de la volatilité. Indispensable avant chaque session de trading.</p>
+      <div class="formula">
+        <div class="formula-label">Comment lire un event économique</div>
+        DEVISE IMPACTÉE → quelle monnaie/marché va être touché<br>
+        IMPORTANCE (🔴🟡🟢) → niveau de volatilité attendu<br>
+        PRÉCÉDENT → résultat du mois dernier (base de comparaison)<br>
+        PRÉVISION → consensus des économistes (prix déjà dans le marché)<br>
+        RÉEL → la vraie donnée publiée → c'est l'ÉCART vs prévision qui fait bouger<br><br>
+        Règle : Réel &gt; Prévision = positif pour la devise/marché concerné
+      </div>
+      <table class="asset-table">
+        <thead><tr><th>Plateforme</th><th>URL</th><th>Forces</th></tr></thead>
+        <tbody>
+          <tr><td>Forex Factory</td><td>forexfactory.com/calendar</td><td>Référence Forex, filtres avancés, couleur-coded, historique</td></tr>
+          <tr><td>Investing.com</td><td>investing.com/economic-calendar</td><td>Complet, multi-actifs, notifications mobiles</td></tr>
+          <tr><td>TradingEconomics</td><td>tradingeconomics.com</td><td>Données macro mondiales, graphiques historiques</td></tr>
+          <tr><td>EarningsWhispers</td><td>earningswhispers.com</td><td>Calendrier résultats d'entreprises US</td></tr>
+          <tr><td>AMF / BCE</td><td>amf-france.org | ecb.europa.eu</td><td>Régulateurs officiels, discours, décisions</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">OT.03</span><span class="concept-title">Backtesting & Paper Trading — Tester sans risque</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">backtesting</span> consiste à tester une stratégie sur données historiques. Le <span class="highlight">paper trading</span> teste en temps réel sans argent réel. Les deux sont <span class="green">indispensables avant de risquer du capital.</span></p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--blue)"></div>
+          <h4 style="color:var(--blue)">Backtesting</h4>
+          <div class="prop"><span>Avantage</span><span>Résultats sur 5-10 ans en minutes</span></div>
+          <div class="prop"><span>Limite</span><span>Overfitting, lookahead bias</span></div>
+          <div class="prop"><span>Outil gratuit</span><span>TradingView (Pine Script)</span></div>
+          <div class="prop"><span>Outil pro</span><span>MetaTrader Strategy Tester</span></div>
+          <div class="prop"><span>Métriques clés</span><span>Win rate, max drawdown, Sharpe ratio</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--green)"></div>
+          <h4 style="color:var(--green)">Paper Trading</h4>
+          <div class="prop"><span>Avantage</span><span>Données temps réel, émotions simulées</span></div>
+          <div class="prop"><span>Durée minimum</span><span>3 mois avant argent réel</span></div>
+          <div class="prop"><span>Outil gratuit</span><span>TradingView Paper | TD Ameritrade</span></div>
+          <div class="prop"><span>Piège</span><span>Sans argent réel = sans vraies émotions</span></div>
+          <div class="prop"><span>Règle</span><span>Même discipline qu'avec argent réel</span></div>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="ex-title">📊 Métriques d'évaluation d'une stratégie</div>
+        <p>
+        <span class="highlight">Win Rate</span> : % de trades gagnants (55%+ est excellent pour day trading)<br>
+        <span class="highlight">Profit Factor</span> : Gains bruts / Pertes brutes &gt;1.5 = stratégie rentable<br>
+        <span class="highlight">Sharpe Ratio</span> : Rendement ajusté au risque &gt;1 = bon, &gt;2 = excellent<br>
+        <span class="highlight">Max Drawdown</span> : Perte maximale depuis un pic — doit rester sous 20% idéalement<br>
+        <span class="highlight">Expectancy</span> : (Win% × Gain moyen) − (Loss% × Perte moyenne) = gain espéré par trade
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">OT.04</span><span class="concept-title">Screeners & Sources d'information — Trouver les opportunités</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--blue)">📊 Screeners actions</h3>
+          <p style="font-size:13px"><span class="highlight">Finviz.com</span> — screener US ultra-complet. <span class="highlight">Zonebourse.com</span> — Europe + France. <span class="highlight">TradingView screener</span> — intégré. <span class="highlight">Wisesheets</span> — données dans Excel/Google Sheets.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--gold)">📰 Sources fiables</h3>
+          <p style="font-size:13px"><span class="highlight">Bloomberg / Reuters</span> — actualité institutionnelle. <span class="highlight">Les Échos</span> — France. <span class="highlight">Seeking Alpha</span> — analyses US. <span class="highlight">Zero Hedge</span> — macro (attention: orienté). <span class="highlight">SEC EDGAR</span> — documents officiels US.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;color:var(--red)">⚠️ Sources à éviter</h3>
+          <p style="font-size:13px">Influenceurs crypto sans track record. Forums Reddit/Twitter pour des signaux. "Groupes privés de trading" payants. Newsletters de "traders millionnaires". Tout ce qui promet des rendements garantis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MODULE: RÉGLEMENTATION, AMF, FISCALITÉ CRYPTO -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="reglementation" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 14</div>
+  <h2 class="section-title fade-in">RÉGLEMENTATION, <span style="color:var(--gold)">AMF & SÉCURITÉ</span></h2>
+  <p class="section-desc fade-in">Comprendre la réglementation, repérer les arnaques et déclarer correctement vos gains — des compétences souvent négligées, toujours indispensables.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">RG.01</span><span class="concept-title">AMF, ESMA, SEC — Qui régule quoi ?</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3">
+        <div class="card" style="border-color:rgba(0,85,164,.4)">
+          <span class="card-icon">🇫🇷</span>
+          <h3 style="color:#4da6ff;font-size:15px">AMF (France)</h3>
+          <p style="font-size:13px">Autorité des Marchés Financiers. Régule les marchés financiers français, les sociétés de gestion, les brokers actifs en France. Publie les listes noires de brokers. Site : amf-france.org</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,120,215,.4)">
+          <span class="card-icon">🇪🇺</span>
+          <h3 style="color:#4da6ff;font-size:15px">ESMA (Europe)</h3>
+          <p style="font-size:13px">European Securities and Markets Authority. Fixe les règles européennes : leviers max CFD, protection solde négatif, standardisation des produits financiers. Supervise les régulateurs nationaux.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,90,150,.4)">
+          <span class="card-icon">🇺🇸</span>
+          <h3 style="color:#4da6ff;font-size:15px">SEC & FINRA (USA)</h3>
+          <p style="font-size:13px">Securities and Exchange Commission + Financial Industry Regulatory Authority. Régulent les marchés US. Les brokers US doivent être enregistrés auprès du FINRA. Données sur finra.org/brokercheck</p>
+        </div>
+      </div>
+      <div class="formula" style="margin-top:20px">
+        <div class="formula-label">Comment vérifier un broker en France — 3 étapes</div>
+        1. Recherche sur amf-france.org → "Rechercher une société" → vérifier la liste blanche<br>
+        2. Vérifier la régulation sur le site du régulateur du pays d'origine (FCA pour UK, CySEC pour Chypre…)<br>
+        3. Chercher "[Nom du broker] avis arnaque" + "liste noire AMF" sur Google<br><br>
+        ✅ Brokers sur liste blanche AMF = safer | ❌ Hors liste = risque très élevé
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">RG.02</span><span class="concept-title">Arnaques financières — Les reconnaître et les éviter</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3">
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">🎭 Faux brokers</h3>
+          <p style="font-size:13px">Site professionnel mais pas régulé. Proposent des rendements garantis. Vous laissent gagner au début puis bloquent les retraits. Exigent des "frais de libération" pour débloquer les fonds. Disparus après.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">📱 Signaux & groupes Telegram</h3>
+          <p style="font-size:13px">"Trader expérimenté" vend des signaux à 97€/mois. Résultats non audités. Souvent des pump & dump organisés sur des actifs illiquides. Les premiers acheteurs (insiders) profitent des suiveurs.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">🏆 Schéma de Ponzi</h3>
+          <p style="font-size:13px">Promet des rendements fixes élevés (5-10%/mois). Paye les anciens investisseurs avec l'argent des nouveaux. S'effondre quand les retraits dépassent les dépôts. Exemple : Bernard Madoff (-65 Mds$).</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">🚀 Pump & Dump crypto</h3>
+          <p style="font-size:13px">Coordonné sur Discord/Telegram. Un groupe accumule un altcoin, puis envoie un signal d'achat massif. Le prix monte, les organisateurs vendent sur les nouveaux acheteurs. En quelques minutes, -50-90%.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">💼 Prop Firm frauduleuses</h3>
+          <p style="font-size:13px">Vous faites payer une "évaluation" (200-1000€) pour trader leur capital. Certaines ne versent jamais les gains, changent les règles rétroactivement, ou sont des sociétés fantômes. Vérifiez les avis.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">📸 Faux influenceurs</h3>
+          <p style="font-size:13px">Screenshots de gains falsifiés (PnL facilement modifiable). Lifestyle luxueux ≠ trading profitable. Gagnent réellement leur argent en vendant des formations à 997€. Jamais de pertes montrées.</p>
+        </div>
+      </div>
+      <div class="warning-box" style="margin-top:20px">
+        <div class="w-title">🚨 Signaux d'alarme universels</div>
+        <p>
+        ❌ Rendements garantis (aucun investissement légitime ne garantit des rendements)<br>
+        ❌ Pression temporelle "offre limitée 24h"<br>
+        ❌ Vous demande de recruter d'autres investisseurs (MLM financier)<br>
+        ❌ Pas d'adresse physique vérifiable<br>
+        ❌ Impossible de retirer vos fonds librement<br>
+        ❌ Bonus à ne pas retirer pendant X mois (piège fréquent des brokers CFD non-régulés)
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">RG.03</span><span class="concept-title">Fiscalité crypto en France — Déclaration, Cerfa 2086, régimes</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Depuis 2019, la fiscalité crypto est encadrée en France. Méconnaître ces règles expose à des redressements fiscaux importants.</p>
+      <div class="formula">
+        <div class="formula-label">Régime fiscal crypto France (2025)</div>
+        Plus-values crypto → imposition UNIQUEMENT lors de la conversion en monnaie FIAT (€, $)<br>
+        Échange crypto→crypto (BTC→ETH) = PAS imposable (depuis 2023)<br><br>
+        Taux fixe : Flat Tax 30% (12.8% IR + 17.2% prélèvements sociaux)<br>
+        Option barème IR progressif si revenus modestes (peut être plus avantageux)<br><br>
+        FORMULAIRE : Déclaration 2086 (intégré dans la déclaration 2042 C)<br>
+        Calcul : PV = (Prix cession − Prix acquisition moyen pondéré × fraction vendue)<br>
+        Seuil d'imposition : 0€ (toute plus-value est imposable, pas d'abattement)
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--green)"></div>
+          <h4 style="color:var(--green)">✅ Opérations non-imposables</h4>
+          <div class="prop"><span>Achat de crypto</span><span>Non imposable</span></div>
+          <div class="prop"><span>Transfert entre vos wallets</span><span>Non imposable</span></div>
+          <div class="prop"><span>Échange crypto→crypto</span><span>Non imposable (depuis 2023)</span></div>
+          <div class="prop"><span>Staking (reçu)</span><span>Imposable uniquement à la cession</span></div>
+          <div class="prop"><span>NFT reçu en cadeau</span><span>Non imposable à la réception</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">❌ Opérations imposables</h4>
+          <div class="prop"><span>Vente crypto contre €</span><span>Imposable sur PV</span></div>
+          <div class="prop"><span>Achat bien/service en crypto</span><span>Imposable (cession)</span></div>
+          <div class="prop"><span>Mining professionnel</span><span>BIC (régime entreprise)</span></div>
+          <div class="prop"><span>NFT vendu contre €</span><span>Imposable</span></div>
+          <div class="prop"><span>Revenus DeFi réguliers</span><span>Potentiellement BIC</span></div>
+        </div>
+      </div>
+      <div class="warning-box" style="margin-top:16px">
+        <div class="w-title">⚠️ Comptes offshore — Danger légal</div>
+        <p>Utiliser un broker étranger non déclaré (Binance offshore, brokers aux Seychelles…) n'exonère PAS de l'impôt français. Les échanges d'informations entre administrations fiscales (CRS/OCDE) sont automatiques. Les sanctions : <span class="red">jusqu'à 80% de majoration + intérêts de retard + poursuites pénales dans les cas graves.</span> Déclarez TOUS vos comptes étrangers (formulaire 3916) même sans gains.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-header-left"><span class="concept-num">RG.04</span><span class="concept-title">Les Prop Firms légitimes — Trader avec le capital d'une société</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Les <span class="highlight">Proprietary Trading Firms</span> (prop firms) vous permettent de trader avec leur capital après avoir réussi un processus d'évaluation. Modèle en plein essor.</p>
+      <div class="formula">
+        <div class="formula-label">Fonctionnement d'une prop firm</div>
+        1. Vous payez des frais d'évaluation (100-1000€ selon taille de compte)<br>
+        2. Vous tradez un compte fictif pendant 30-90 jours avec des règles strictes<br>
+        3. Si vous atteignez l'objectif de profit sans dépasser le drawdown max → vous êtes "fundé"<br>
+        4. Vous tradez leur capital réel et partagez les profits (75-90% pour vous)<br>
+        5. Pas de risque de votre capital une fois fundé (au-delà des frais d'évaluation)
+      </div>
+      <table class="asset-table">
+        <thead><tr><th>Prop Firm</th><th>Capital max</th><th>Partage profits</th><th>Réputation</th><th>Régulation</th></tr></thead>
+        <tbody>
+          <tr><td>FTMO</td><td>200 000€</td><td>80-90%</td><td><span class="badge badge-green">Excellente</span></td><td>Tchéquie, régulé</td></tr>
+          <tr><td>The Funded Trader</td><td>600 000$</td><td>80%</td><td><span class="badge badge-gold">Bonne</span></td><td>USA</td></tr>
+          <tr><td>MyForexFunds</td><td>Fermé 2023</td><td>—</td><td><span class="badge badge-red">Fermée par régulateurs</span></td><td>Problèmes légaux</td></tr>
+          <tr><td>Apex Trader Funding</td><td>300 000$</td><td>90%</td><td><span class="badge badge-gold">Bonne</span></td><td>USA (Futures)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section id="fiscalite">
+  <div class="section-label">Module 07</div>
+  <h2 class="section-title fade-in">FISCALITÉ & <span style="color:var(--gold)">COMPTES</span></h2>
+  <p class="section-desc">En France, la fiscalité est cruciale. Bien choisir son enveloppe fiscale peut doubler votre rendement net sur 20 ans.</p>
+
+  <div class="grid-3 fade-in">
+    <div class="card" style="border-color:rgba(0,212,170,.3)">
+      <span class="card-icon">🏛️</span>
+      <h3 style="color:var(--green)">PEA — Plan Épargne Actions</h3>
+      <p>Enveloppe fiscale française très avantageuse. <span class="highlight">Plafond: 150 000€.</span> Après 5 ans : <span class="green">gains exonérés d'IR</span> (seulement 17.2% prélèvements sociaux). Uniquement actions et ETF européens. Idéal pour investissement long terme.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💼</span>
+      <h3>CTO — Compte-Titres Ordinaire</h3>
+      <p>Universel : actions monde entier, ETF, obligations, dérivés. Fiscalité : <span class="red">Flat Tax 30%</span> (12.8% IR + 17.2% PS) sur plus-values et dividendes. Pas de plafond. Nécessaire pour actions US, crypto (sur certains brokers).</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <span class="card-icon">🌟</span>
+      <h3 style="color:var(--gold)">Assurance-Vie</h3>
+      <p>Enveloppe fiscale très flexible. Avantages successoraux majeurs. Après 8 ans : abattement 4 600€/an (9 200€ couple). Fonds euros (capital garanti) + unités de compte (ETF, SCPI…). <span class="green">Très populaire en France.</span></p>
+    </div>
+  </div>
+
+  <div class="formula fade-in" style="margin-top:32px">
+    <div class="formula-label">Impact fiscal sur 20 ans — Exemple avec 10 000€ investis à 8%/an</div>
+    CTO (Flat Tax 30% chaque année) : ~26 000€ final<br>
+    PEA (exonéré IR après 5 ans) : ~46 600€ final → +79% de surplus !<br>
+    Leçon : l'optimisation fiscale > le stock picking pour la plupart des investisseurs
+  </div>
+</section>
+
+<!-- MODULE 8: ROADMAP -->
+<section id="roadmap">
+  <div class="section-label">Module 08</div>
+  <h2 class="section-title fade-in">VOTRE <span style="color:var(--gold)">ROADMAP</span></h2>
+  <p class="section-desc">Comment progresser concrètement de débutant à trader/investisseur confirmé.</p>
+
+  <div class="roadmap fade-in">
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-step">Étape 1 — Mois 1-3</div>
+      <div class="roadmap-title">Les Fondamentaux & Compte Démo</div>
+      <div class="roadmap-desc">Apprenez les bases : classes d'actifs, types d'ordres, lecture de graphiques. Ouvrez un compte démo (paper trading) et tradez sans argent réel. Objectif : comprendre le mécanisme des marchés sans risque financier. Lisez "L'investisseur Intelligent" de Benjamin Graham.</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-step">Étape 2 — Mois 3-6</div>
+      <div class="roadmap-title">Stratégie & Journal de Trading</div>
+      <div class="roadmap-desc">Définissez VOTRE stratégie : investissement passif ETF OU trading actif. Choisissez 1-2 marchés max. Tenez un journal de trading : notez chaque trade, le raisonnement, l'émotionnel, le résultat. Analysez vos patterns de réussite et d'échec.</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-step">Étape 3 — Mois 6-12</div>
+      <div class="roadmap-title">Capital Réel Limité</div>
+      <div class="roadmap-desc">Commencez avec un capital que vous pouvez perdre entièrement (500-2000€ maximum). Appliquez strictement votre plan de gestion du risque. L'objectif n'est PAS de gagner de l'argent, c'est d'apprendre à trader avec l'émotion de l'argent réel.</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-step">Étape 4 — An 1-2</div>
+      <div class="roadmap-title">Optimisation & Scaling</div>
+      <div class="roadmap-desc">Si vous êtes profitable sur 6 mois consécutifs, augmentez progressivement le capital. Optimisez votre stratégie via le backtest. Explorez les outils avancés : screeners, données alternatives, order flow. Diversifiez sur plusieurs marchés.</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-step">Étape 5 — An 3+</div>
+      <div class="roadmap-title">Trader / Investisseur Confirmé</div>
+      <div class="roadmap-desc">À ce stade vous avez une edge (avantage statistique) prouvée sur le marché. Capital conséquent, discipline de fer, gestion émotionnelle maîtrisée. Envisagez le trading propriétaire (prop firms) ou la gestion pour tiers si légalement encadré.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="section-label">Quiz Interactif</div>
+  <h2 class="section-title fade-in">TESTEZ VOS <span style="color:var(--gold)">CONNAISSANCES</span></h2>
+  <p class="section-desc">15 questions pour valider votre compréhension des marchés financiers.</p>
+
+  <div class="quiz-box fade-in" id="quizBox">
+    <div class="quiz-score" id="quizScore">Question 1 / 15</div>
+    <div class="quiz-question" id="quizQuestion"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <div class="quiz-nav">
+      <button class="btn-ghost" id="quizPrev" onclick="quizPrev()" style="display:none">← Précédent</button>
+      <button class="btn" id="quizNext" onclick="quizNext()">Suivant →</button>
+    </div>
+    <div id="quizResult" style="display:none;text-align:center;padding:24px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:60px;color:var(--gold)" id="finalScore"></div>
+      <div style="font-size:18px;margin-bottom:16px" id="finalMsg"></div>
+      <button class="btn" onclick="restartQuiz()">Recommencer</button>
+    </div>
+  </div>
+</section>
+
+<!-- GLOSSAIRE -->
+<section id="glossaire">
+  <div class="section-label">Référence</div>
+  <h2 class="section-title fade-in">GLOSSAIRE <span style="color:var(--gold)">COMPLET</span></h2>
+  <p class="section-desc">Tous les termes financiers essentiels en un seul endroit. Cherchez n'importe quel mot.</p>
+
+  <div class="glossary-search fade-in">
+    <input type="text" class="search-input" id="glossarySearch" placeholder="Rechercher un terme... ex: leverage, pip, dividende" oninput="filterGlossary()" />
+  </div>
+  <div class="glossary-grid" id="glossaryGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">BOURSE ACADEMY</div>
+  <p>Ce cours est fourni à titre éducatif uniquement. Les marchés financiers comportent des risques significatifs. Les performances passées ne préjugent pas des performances futures.</p>
+  <p class="disclaimer">⚠️ AVERTISSEMENT : Investir comporte un risque de perte en capital. Les CFD, le Forex et les produits dérivés sont des instruments complexes présentant un risque élevé de perte rapide en capital en raison de l'effet de levier. Entre 74% et 89% des comptes clients de détail perdent de l'argent lors de la négociation de CFD. Ce contenu ne constitue PAS un conseil en investissement.</p>
+</footer>
+</body>

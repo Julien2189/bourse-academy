@@ -1,0 +1,124 @@
+<section id="fondamentaux">
+  <div class="section-label">Module 01</div>
+  <h2 class="section-title fade-in">LES <span style="color:var(--gold)">FONDAMENTAUX</span></h2>
+  <p class="section-desc">Avant d'investir le moindre euro, il faut comprendre les bases du marché financier, comment il fonctionne et qui en sont les acteurs.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">01.01</span><span class="concept-title">Qu'est-ce que la Bourse ?</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>La <span class="highlight">Bourse</span> est un marché organisé où s'échangent des actifs financiers (actions, obligations, dérivés…). Elle remplit deux fonctions essentielles : permettre aux entreprises de se financer en émettant des titres, et permettre aux investisseurs d'acheter/vendre ces titres librement.</p>
+      <p>Les principales Bourses mondiales :</p>
+      <ul>
+        <li>🇫🇷 <span class="highlight">Euronext Paris</span> (CAC 40) — 1ère place européenne</li>
+        <li>🇺🇸 <span class="highlight">NYSE</span> (New York Stock Exchange) — plus grande au monde</li>
+        <li>🇺🇸 <span class="highlight">NASDAQ</span> — spécialisée tech (Apple, Google, Nvidia…)</li>
+        <li>🇬🇧 <span class="highlight">London Stock Exchange</span> (FTSE 100)</li>
+        <li>🇯🇵 <span class="highlight">Tokyo Stock Exchange</span> (Nikkei 225)</li>
+        <li>🇩🇪 <span class="highlight">Xetra Frankfurt</span> (DAX 40)</li>
+      </ul>
+      <div class="example-box">
+        <div class="ex-title">💡 Analogie simple</div>
+        <p>La Bourse, c'est comme un marché aux puces géant : les vendeurs proposent leurs actifs à un certain prix, les acheteurs font des offres, et la transaction se fait quand les deux parties sont d'accord. Le <span class="highlight">cours</span> d'une action, c'est simplement le dernier prix auquel elle a été échangée.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">01.02</span><span class="concept-title">Les acteurs du marché</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Les marchés financiers impliquent de nombreux acteurs aux objectifs différents :</p>
+      <ul>
+        <li><span class="highlight">Investisseurs particuliers (retail)</span> — vous et moi, représentent ~15% des volumes</li>
+        <li><span class="highlight">Fonds institutionnels</span> — BlackRock, Vanguard, fonds de pension → >60% des volumes</li>
+        <li><span class="highlight">Market Makers</span> — assurent la liquidité en cotant en permanence un prix acheteur et vendeur</li>
+        <li><span class="highlight">Hedge Funds</span> — stratégies agressives, short selling, arbitrage</li>
+        <li><span class="highlight">Banques centrales</span> (BCE, Fed) — influencent les taux, la monnaie</li>
+        <li><span class="highlight">Algorithmes / HFT</span> — High Frequency Trading, représentent 50-70% des volumes sur les grands marchés</li>
+        <li><span class="highlight">Entreprises</span> — émettent des actions et obligations pour se financer</li>
+        <li><span class="highlight">Courtiers (brokers)</span> — intermédiaires qui exécutent vos ordres (Degiro, eToro, Boursorama…)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">01.03</span><span class="concept-title">Le carnet d'ordres (Order Book)</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">carnet d'ordres</span> est le cœur du marché. Il liste tous les ordres d'achat et de vente en attente, classés par prix.</p>
+      <div class="formula">
+        <div class="formula-label">Structure</div>
+        OFFRE (ASK) = plus bas prix auquel on peut acheter<br>
+        DEMANDE (BID) = plus haut prix auquel on peut vendre<br>
+        SPREAD = ASK - BID (coût implicite de la transaction)
+      </div>
+      <p>Plus le <span class="highlight">spread</span> est faible, plus l'actif est <span class="green">liquide</span>. Un spread large = actif peu liquide = coûts de transaction élevés.</p>
+      <div class="example-box">
+        <div class="ex-title">📊 Exemple concret — LVMH</div>
+        <p>BID: 750.20€ | ASK: 750.40€ | Spread = 0,20€ = 0,027% → très liquide<br>
+        Pour une action peu connue : BID: 12,00€ | ASK: 12,40€ | Spread = 0,40€ = 3,3% → peu liquide, dangereux pour le trader court terme.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">01.04</span><span class="concept-title">Types d'ordres de Bourse</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Il existe plusieurs façons de passer un ordre en Bourse :</p>
+      <ul>
+        <li><span class="highlight">Ordre au marché (Market Order)</span> — s'exécute immédiatement au meilleur prix disponible. Rapide mais le prix n'est pas garanti.</li>
+        <li><span class="highlight">Ordre à cours limité (Limit Order)</span> — s'exécute uniquement si le prix atteint votre limite. Meilleur contrôle mais pas de garantie d'exécution.</li>
+        <li><span class="highlight">Ordre stop (Stop Loss)</span> — déclenche une vente automatique si le prix descend sous un seuil. Protège contre les grosses pertes.</li>
+        <li><span class="highlight">Ordre Stop-Limit</span> — combinaison : déclenché par le stop, mais s'exécute en limit. Risque de non-exécution en gap.</li>
+        <li><span class="highlight">Ordre OCO (One Cancels the Other)</span> — deux ordres liés : si l'un s'exécute, l'autre est annulé automatiquement.</li>
+        <li><span class="highlight">Ordre à la clôture / ouverture</span> — s'exécute uniquement au prix d'ouverture ou de clôture de séance.</li>
+      </ul>
+      <div class="warning-box">
+        <div class="w-title">⚠️ Attention au Slippage</div>
+        <p>Le <span class="red">slippage</span> est l'écart entre le prix espéré et le prix d'exécution réel. Il survient surtout lors de forte volatilité ou de faible liquidité. Un ordre au marché en période de crash peut s'exécuter bien plus bas que prévu.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">01.05</span><span class="concept-title">Trading vs Investissement — Quelle différence ?</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Ces deux approches sont fondamentalement différentes :</p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--green)"></div>
+          <h4 style="color:var(--green)">INVESTISSEMENT</h4>
+          <div class="prop"><span>Horizon</span><span>Long terme (1-20 ans)</span></div>
+          <div class="prop"><span>Objectif</span><span>Croissance du capital</span></div>
+          <div class="prop"><span>Analyse</span><span>Fondamentale</span></div>
+          <div class="prop"><span>Fréquence</span><span>Rare (buy & hold)</span></div>
+          <div class="prop"><span>Stress</span><span>Faible</span></div>
+          <div class="prop"><span>Exemple</span><span>Acheter Apple et garder 10 ans</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">TRADING</h4>
+          <div class="prop"><span>Horizon</span><span>Court terme (sec à semaines)</span></div>
+          <div class="prop"><span>Objectif</span><span>Profit sur mouvements de prix</span></div>
+          <div class="prop"><span>Analyse</span><span>Technique + flux</span></div>
+          <div class="prop"><span>Fréquence</span><span>Élevée (parfois 100x/jour)</span></div>
+          <div class="prop"><span>Stress</span><span>Très élevé</span></div>
+          <div class="prop"><span>Exemple</span><span>Shorter l'EUR/USD pendant NFP</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

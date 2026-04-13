@@ -1,0 +1,95 @@
+<section id="risque">
+  <div class="section-label">Module 06</div>
+  <h2 class="section-title fade-in">GESTION DU <span style="color:var(--gold)">RISQUE</span></h2>
+  <p class="section-desc">La gestion du risque est LA compétence numéro 1 du trader. Un bon trader n'est pas celui qui gagne souvent, mais celui qui perd peu quand il a tort.</p>
+
+  <div class="grid-3 fade-in">
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <span class="card-icon">🎯</span>
+      <h3>Règle des 1-2%</h3>
+      <p>Ne risquez jamais plus de <span class="highlight">1-2% de votre capital</span> par trade. Sur un compte de 10 000€, le risque max par trade est de 100-200€. Même 10 pertes consécutives ne vous ruinent pas.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <span class="card-icon">📐</span>
+      <h3>Risk/Reward Ratio</h3>
+      <p>Ne prenez pas de trade avec un R/R inférieur à <span class="highlight">1:2</span>. Si vous risquez 100€, vous devez viser au minimum 200€. Avec un R/R de 1:3 et 40% de réussite, vous êtes largement profitable.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <span class="card-icon">🔢</span>
+      <h3>Taille de Position</h3>
+      <p>Position size = (Capital × % risque) / (Distance en pips × valeur du pip). <span class="highlight">Calculez TOUJOURS avant d'entrer.</span> Ne laissez jamais l'émotion décider de la taille.</p>
+    </div>
+  </div>
+
+  <div class="formula fade-in" style="margin:32px 0">
+    <div class="formula-label">Formule Position Sizing</div>
+    Position (lots) = (Capital × Risque%) / (Stop Loss en pips × Valeur pip par lot)<br>
+    <br>
+    Exemple: Capital 10 000€ | Risque 1% = 100€ | Stop = 20 pips | Valeur pip = 10$<br>
+    Position = 100 / (20 × 10) = 100 / 200 = 0.5 lot
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">RISK</span><span class="concept-title">Drawdown, Psychologie & les erreurs des débutants</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Le <span class="highlight">drawdown</span> est la perte maximale depuis un pic de capital. Un drawdown de 50% nécessite +100% pour retrouver le niveau initial. C'est pour cela qu'il faut limiter les pertes absolument.</p>
+      <div class="formula">
+        <div class="formula-label">Récupération d'un drawdown</div>
+        -10% → besoin de +11.1% pour récupérer<br>
+        -25% → besoin de +33.3% pour récupérer<br>
+        -50% → besoin de +100% pour récupérer<br>
+        -75% → besoin de +300% pour récupérer ← RUINEUX
+      </div>
+      <p style="margin-top:16px">Les <span class="highlight">biais psychologiques</span> les plus dangereux :</p>
+      <ul>
+        <li><span class="red">FOMO</span> (Fear of Missing Out) — entrer sur un mouvement déjà bien avancé par peur de rater</li>
+        <li><span class="red">Revenge Trading</span> — essayer de récupérer une perte immédiatement par des trades compulsifs</li>
+        <li><span class="red">Overtrading</span> — trader trop fréquemment, souvent par ennui ou excès de confiance</li>
+        <li><span class="red">Biais de confirmation</span> — ne voir que les signaux qui confirment son opinion</li>
+        <li><span class="red">Déplacement du Stop Loss</span> — reculer son stop quand le prix s'en approche</li>
+        <li><span class="red">Clôturer trop tôt</span> — prendre profit prématurément par peur, couper les gains</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">RISK</span><span class="concept-title">Diversification & Construction de Portefeuille</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>La <span class="highlight">diversification</span> réduit le risque sans sacrifier le rendement (Nobel Markowitz, 1952). Mais une sur-diversification dilue la performance.</p>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--blue)"></div>
+          <h4 style="color:var(--blue)">Portefeuille Débutant</h4>
+          <div class="prop"><span>ETF World (MSCI World)</span><span>60%</span></div>
+          <div class="prop"><span>ETF Obligations</span><span>20%</span></div>
+          <div class="prop"><span>Or / Commodités</span><span>10%</span></div>
+          <div class="prop"><span>Liquidités</span><span>10%</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--gold)"></div>
+          <h4 style="color:var(--gold)">Portefeuille Intermédiaire</h4>
+          <div class="prop"><span>Actions (dont ETF)</span><span>50%</span></div>
+          <div class="prop"><span>Obligations</span><span>20%</span></div>
+          <div class="prop"><span>Immobilier (SCPI/REIT)</span><span>15%</span></div>
+          <div class="prop"><span>Crypto</span><span>5%</span></div>
+          <div class="prop"><span>Or / MP</span><span>10%</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--purple)"></div>
+          <h4 style="color:var(--purple)">All-Weather (Dalio)</h4>
+          <div class="prop"><span>Actions</span><span>30%</span></div>
+          <div class="prop"><span>Obligations long terme</span><span>40%</span></div>
+          <div class="prop"><span>Obligations moyen terme</span><span>15%</span></div>
+          <div class="prop"><span>Or</span><span>7.5%</span></div>
+          <div class="prop"><span>Matières premières</span><span>7.5%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

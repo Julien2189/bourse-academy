@@ -1,0 +1,318 @@
+<section id="actifs">
+  <div class="section-label">Module 02</div>
+  <h2 class="section-title fade-in">CLASSES D'<span style="color:var(--gold)">ACTIFS</span></h2>
+  <p class="section-desc">Un actif financier est tout instrument susceptible de prendre de la valeur ou de générer des revenus. Voici les 5 grandes classes.</p>
+
+  <div class="tabs" id="assetTabs">
+    <button class="tab active" (click)="switchTab('actions', $event)">📈 Actions</button>
+    <button class="tab" (click)="switchTab('forex', $event)">💱 Forex</button>
+    <button class="tab" (click)="switchTab('crypto', $event)">₿ Crypto</button>
+    <button class="tab" (click)="switchTab('matieres', $event)">🛢️ Matières 1ères</button>
+    <button class="tab" (click)="switchTab('obligations', $event)">📄 Obligations</button>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="tab-panel active" id="actions">
+    <div class="card fade-in" style="margin-bottom:20px">
+      <span class="card-icon">📈</span>
+      <h3>Les Actions</h3>
+      <p>Une <span class="highlight">action</span> représente une fraction du capital d'une entreprise. En achetant une action, vous devenez actionnaire = copropriétaire de l'entreprise. Vous profitez de la hausse du cours (plus-value) et des dividendes.</p>
+    </div>
+    <h3 style="font-size:18px;font-weight:700;margin-bottom:20px;margin-top:32px">🇫🇷 Actions Françaises — CAC 40 & Euronext</h3>
+    <div class="chart-demo">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">CAC 40 <span id="cacLiveBadge"></span></div>
+          <div class="chart-price" id="chartPrice" style="font-size:28px">— <span style="font-size:14px;color:var(--muted);font-family:Outfit,sans-serif">chargement...</span></div>
+        </div>
+        <div id="chartChange" style="font-size:13px;font-weight:600;color:var(--muted)">Clé API requise</div>
+      </div>
+      <canvas id="priceChart"></canvas>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;font-family:IBM Plex Mono,monospace" id="chartMeta">⚙️ Configurez une clé Twelve Data (bouton en bas à droite) pour les données réelles</div>
+    </div>
+    <table class="asset-table fade-in">
+      <thead>
+        <tr><th>Entreprise</th><th>Ticker</th><th>Prix LIVE</th><th>Variation</th><th>Dividende</th><th>Risque</th><th>Profil</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>LVMH (MC)</td><td>MC.PA</td><td class="price-cell" id="price-MC.PA"><span class="loading-price">⏳</span></td><td id="change-MC.PA">—</td><td>~1.5%</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-green">Croissance</span></td></tr>
+        <tr><td>TotalEnergies (TTE)</td><td>TTE.PA</td><td class="price-cell" id="price-TTE.PA"><span class="loading-price">⏳</span></td><td id="change-TTE.PA">—</td><td>~5.5%</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot active-low"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-gold">Dividende</span></td></tr>
+        <tr><td>BNP Paribas (BNP)</td><td>BNP.PA</td><td class="price-cell" id="price-BNP.PA"><span class="loading-price">⏳</span></td><td id="change-BNP.PA">—</td><td>~6%</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div></div></td><td><span class="badge badge-gold">Dividende</span></td></tr>
+        <tr><td>Sanofi (SAN)</td><td>SAN.PA</td><td class="price-cell" id="price-SAN.PA"><span class="loading-price">⏳</span></td><td id="change-SAN.PA">—</td><td>~3.5%</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot active-low"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-blue">Défensif</span></td></tr>
+        <tr><td>Airbus (AIR)</td><td>AIR.PA</td><td class="price-cell" id="price-AIR.PA"><span class="loading-price">⏳</span></td><td id="change-AIR.PA">—</td><td>~1%</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-green">Croissance</span></td></tr>
+        <tr><td>Hermès (RMS)</td><td>RMS.PA</td><td class="price-cell" id="price-RMS.PA"><span class="loading-price">⏳</span></td><td id="change-RMS.PA">—</td><td>~0.8%</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-purple">Premium</span></td></tr>
+      </tbody>
+    </table>
+    <h3 style="font-size:18px;font-weight:700;margin-bottom:20px;margin-top:40px">🇺🇸 Actions Américaines — S&P 500 / NASDAQ</h3>
+    <table class="asset-table fade-in">
+      <thead>
+        <tr><th>Entreprise</th><th>Ticker</th><th>Prix LIVE</th><th>Variation</th><th>Risque</th><th>Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Apple</td><td>AAPL</td><td class="price-cell" id="price-AAPL"><span class="loading-price">⏳</span></td><td id="change-AAPL">—</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-blue">Méga Cap</span></td></tr>
+        <tr><td>Nvidia</td><td>NVDA</td><td class="price-cell" id="price-NVDA"><span class="loading-price">⏳</span></td><td id="change-NVDA">—</td><td><div class="risk-meter"><div class="risk-dot active-high"></div><div class="risk-dot active-high"></div><div class="risk-dot active-high"></div></div></td><td><span class="badge badge-green">Hypercroissance</span></td></tr>
+        <tr><td>Microsoft</td><td>MSFT</td><td class="price-cell" id="price-MSFT"><span class="loading-price">⏳</span></td><td id="change-MSFT">—</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-blue">Méga Cap</span></td></tr>
+        <tr><td>Tesla</td><td>TSLA</td><td class="price-cell" id="price-TSLA"><span class="loading-price">⏳</span></td><td id="change-TSLA">—</td><td><div class="risk-meter"><div class="risk-dot active-high"></div><div class="risk-dot active-high"></div><div class="risk-dot active-high"></div></div></td><td><span class="badge badge-orange">Spéculatif</span></td></tr>
+        <tr><td>Berkshire Hathaway</td><td>BRK.B</td><td class="price-cell" id="price-BRK.B"><span class="loading-price">⏳</span></td><td id="change-BRK.B">—</td><td><div class="risk-meter"><div class="risk-dot active-low"></div><div class="risk-dot active-low"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-gold">Value</span></td></tr>
+        <tr><td>Amazon</td><td>AMZN</td><td class="price-cell" id="price-AMZN"><span class="loading-price">⏳</span></td><td id="change-AMZN">—</td><td><div class="risk-meter"><div class="risk-dot active-mid"></div><div class="risk-dot active-mid"></div><div class="risk-dot"></div></div></td><td><span class="badge badge-green">Croissance</span></td></tr>
+      </tbody>
+    </table>
+    <div class="concept-block fade-in" style="margin-top:32px">
+      <div class="concept-header" (click)="toggleConcept($event)">
+        <div class="concept-header-left"><span class="concept-num">INFO</span><span class="concept-title">Comment lire une action — P/E, PEG, dividende, EPS</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <p>Pour évaluer une action, les investisseurs utilisent plusieurs ratios fondamentaux :</p>
+        <div class="formula">
+          <div class="formula-label">Ratios clés</div>
+          P/E (Price/Earnings) = Cours / Bénéfice par action → valorisation<br>
+          PEG = P/E / Taux de croissance → ajuste le P/E à la croissance<br>
+          EPS (Earnings Per Share) = Bénéfice net / Nb d'actions<br>
+          Rendement dividende = Dividende annuel / Cours × 100<br>
+          ROE (Return on Equity) = Bénéfice net / Capitaux propres
+        </div>
+        <div class="example-box">
+          <div class="ex-title">📊 Exemple — Apple</div>
+          <p>Cours: 200$ | EPS: 6.5$ | P/E = 30.7 | Dividende: 0.96$/action = 0.48% de rendement | ROE: 171% (exceptionnel car rachats massifs d'actions). Un P/E de 30 pour une entreprise qui croît de 10%/an = PEG de 3, ce qui est élevé. Apple vaut cher en termes de valorisation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOREX -->
+  <div class="tab-panel" id="forex">
+    <div class="card fade-in" style="margin-bottom:28px">
+      <span class="card-icon">💱</span>
+      <h3>Le Marché des Changes (FOREX)</h3>
+      <p>Le <span class="highlight">Forex</span> (Foreign Exchange) est le plus grand marché financier au monde avec <span class="green">7 500 milliards $</span> d'échanges quotidiens. Il est ouvert 24h/24, 5j/7 et ne dispose d'aucune bourse centralisée. On y échange des paires de devises.</p>
+    </div>
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;margin-top:0">Taux de change en temps réel</h3>
+    <table class="asset-table" style="margin-bottom:32px">
+      <thead><tr><th>Paire</th><th>Taux LIVE</th><th>Variation</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>EUR/USD</td><td class="price-cell" id="price-EUR/USD"><span class="loading-price">⏳</span></td><td id="change-EUR/USD">—</td><td><span class="badge badge-green">Majeure</span></td></tr>
+        <tr><td>GBP/USD</td><td class="price-cell" id="price-GBP/USD"><span class="loading-price">⏳</span></td><td id="change-GBP/USD">—</td><td><span class="badge badge-green">Majeure</span></td></tr>
+        <tr><td>USD/JPY</td><td class="price-cell" id="price-USD/JPY"><span class="loading-price">⏳</span></td><td id="change-USD/JPY">—</td><td><span class="badge badge-green">Majeure</span></td></tr>
+        <tr><td>USD/CHF</td><td class="price-cell" id="price-USD/CHF"><span class="loading-price">⏳</span></td><td id="change-USD/CHF">—</td><td><span class="badge badge-green">Majeure</span></td></tr>
+        <tr><td>EUR/GBP</td><td class="price-cell" id="price-EUR/GBP"><span class="loading-price">⏳</span></td><td id="change-EUR/GBP">—</td><td><span class="badge badge-gold">Mineure</span></td></tr>
+        <tr><td>AUD/USD</td><td class="price-cell" id="price-AUD/USD"><span class="loading-price">⏳</span></td><td id="change-AUD/USD">—</td><td><span class="badge badge-gold">Mineure</span></td></tr>
+      </tbody>
+    </table>
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <h3 style="color:var(--blue)">Paires Majeures</h3>
+        <p>EUR/USD, GBP/USD, USD/JPY, USD/CHF, AUD/USD, USD/CAD, NZD/USD. Très liquides, spreads serrés. <span class="green">Recommandées pour débutants.</span></p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--gold)">Paires Mineures</h3>
+        <p>EUR/GBP, EUR/JPY, GBP/JPY, AUD/JPY... Moins liquides mais encore accessibles. Spreads légèrement plus larges.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--red)">Paires Exotiques</h3>
+        <p>USD/TRY, EUR/ZAR, USD/BRL... Très volatiles, spreads énormes, peu recommandées. <span class="red">Risque très élevé.</span></p>
+      </div>
+    </div>
+    <div class="concept-block fade-in" style="margin-top:28px">
+      <div class="concept-header" (click)="toggleConcept($event)">
+        <div class="concept-header-left"><span class="concept-num">FOREX</span><span class="concept-title">Comprendre les Pips, Lots et Leviers</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <div class="formula">
+          <div class="formula-label">Unités Forex</div>
+          1 PIP = 0.0001 sur EUR/USD (4ème décimale)<br>
+          1 LOT standard = 100 000 unités de devise de base<br>
+          1 Mini-lot = 10 000 unités<br>
+          1 Micro-lot = 1 000 unités<br>
+          Valeur d'un pip (lot standard EUR/USD) ≈ 10$
+        </div>
+        <div class="example-box">
+          <div class="ex-title">💡 Exemple de trade EUR/USD</div>
+          <p>Vous achetez 1 lot standard EUR/USD à 1.0850. Le prix monte à 1.0870. Gain = 20 pips × 10$ = <span class="green">200$</span>. Avec un levier de 30:1 (max en Europe), vous immobilisez 3 333$ de marge pour contrôler 100 000$. Attention : le levier amplifie AUSSI les pertes.</p>
+        </div>
+        <div class="warning-box">
+          <div class="w-title">⚠️ Réglementation ESMA (Europe)</div>
+          <p>En Europe, le levier max sur Forex est limité à <span class="red">30:1</span> pour les particuliers (majeurs). À l'inverse, certains brokers offshore offrent 500:1 — extrêmement dangereux. 74-89% des comptes retail perdent de l'argent sur le Forex selon les statistiques des brokers régulés.</p>
+        </div>
+      </div>
+    </div>
+    <h3 style="font-size:18px;font-weight:700;margin:32px 0 20px">Sessions de trading Forex</h3>
+    <table class="asset-table fade-in">
+      <thead><tr><th>Session</th><th>Heure FR (hiver)</th><th>Heure FR (été)</th><th>Paires actives</th><th>Volatilité</th></tr></thead>
+      <tbody>
+        <tr><td>Sydney</td><td>23h - 08h</td><td>00h - 09h</td><td>AUD/USD, NZD/USD</td><td><span class="badge badge-blue">Faible</span></td></tr>
+        <tr><td>Tokyo</td><td>01h - 10h</td><td>02h - 11h</td><td>USD/JPY, AUD/JPY</td><td><span class="badge badge-gold">Modérée</span></td></tr>
+        <tr><td>Londres</td><td>09h - 18h</td><td>10h - 19h</td><td>EUR/USD, GBP/USD</td><td><span class="badge badge-green">Forte</span></td></tr>
+        <tr><td>New York</td><td>14h - 23h</td><td>15h - 00h</td><td>Toutes majeures</td><td><span class="badge badge-red">Très forte</span></td></tr>
+        <tr><td>Londres + NY (overlap)</td><td>14h - 18h</td><td>15h - 19h</td><td>EUR/USD, GBP/USD</td><td><span class="badge badge-red">Maximum</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CRYPTO -->
+  <div class="tab-panel" id="crypto">
+    <div class="card fade-in" style="margin-bottom:28px">
+      <span class="card-icon">₿</span>
+      <h3>Les Cryptomonnaies</h3>
+      <p>Les <span class="highlight">cryptomonnaies</span> sont des actifs numériques décentralisés basés sur la blockchain. Le marché est ouvert <span class="green">24h/24, 7j/7</span>. Très volatil, potentiel de gain énorme, risque de perte totale. Capitalisation totale : ~2 500 Mds$ (2025).</p>
+    </div>
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <h3>Bitcoin (BTC)</h3>
+        <div style="margin-bottom:8px"><span class="price-cell" id="price-BTC" style="font-size:20px">⏳</span> <span id="change-BTC" style="font-size:13px">—</span></div>
+        <p>Première crypto, "or numérique". Supply limitée à 21M BTC. <span class="highlight">Store of value</span>. Halving tous les 4 ans divise la récompense des mineurs par 2 → impact haussier historique.</p>
+      </div>
+      <div class="card">
+        <h3>Ethereum (ETH)</h3>
+        <div style="margin-bottom:8px"><span class="price-cell" id="price-ETH" style="font-size:20px">⏳</span> <span id="change-ETH" style="font-size:13px">—</span></div>
+        <p>Plateforme de <span class="highlight">smart contracts</span>. Permet les DeFi, NFT, dApps. Proof of Stake depuis 2022. Écosystème le plus développé en dehors de BTC.</p>
+      </div>
+      <div class="card">
+        <h3>Altcoins</h3>
+        <div style="margin-bottom:8px;font-size:12px;color:var(--muted)"><span id="price-SOL" class="price-cell">⏳</span> SOL &nbsp; <span id="price-BNB" class="price-cell">⏳</span> BNB</div>
+        <p>Solana, Cardano, Avalanche, Chainlink, Polkadot… Plus risqués mais aussi potentiellement plus rentables. <span class="red">Risque de disparition totale.</span></p>
+      </div>
+    </div>
+    <div class="concept-block fade-in" style="margin-top:28px">
+      <div class="concept-header" (click)="toggleConcept($event)">
+        <div class="concept-header-left"><span class="concept-num">CRYPTO</span><span class="concept-title">DeFi, NFT, Staking, Stablecoins — Le Lexique Crypto</span></div>
+        <span class="concept-arrow">▼</span>
+      </div>
+      <div class="concept-body">
+        <ul>
+          <li><span class="highlight">DeFi (Finance Décentralisée)</span> — protocoles financiers sans intermédiaire : prêts, échanges, yield farming sur la blockchain</li>
+          <li><span class="highlight">Stablecoin</span> — crypto indexée sur une devise (USDT, USDC, DAI). Utilisée pour se "refugier" en crypto sans volatilité</li>
+          <li><span class="highlight">Staking</span> — bloquer ses cryptos pour valider des transactions et recevoir des récompenses (~5-15%/an sur ETH)</li>
+          <li><span class="highlight">NFT (Non-Fungible Token)</span> — token unique sur blockchain représentant un actif numérique (art, jeux…)</li>
+          <li><span class="highlight">Wallet</span> — portefeuille numérique. Custodial (exchange garde les clés) ou Non-custodial (vous gardez vos clés = vrai propriétaire)</li>
+          <li><span class="highlight">Halving BTC</span> — événement tous les ~4 ans diviséant par 2 la récompense des mineurs. Historiquement bullish à 12-18 mois</li>
+          <li><span class="highlight">Fear & Greed Index</span> — indicateur de sentiment crypto 0-100. En dessous de 20 = peur extrême = souvent bon moment d'achat</li>
+        </ul>
+        <div class="warning-box">
+          <div class="w-title">⚠️ ATTENTION aux arnaques crypto</div>
+          <p>95% des altcoins perdent plus de 90% de leur valeur sur le long terme. Méfiez-vous des <span class="red">rug pulls</span>, <span class="red">pump & dump</span>, influenceurs payés pour promouvoir des tokens. Ne jamais investir plus que vous n'êtes prêt à perdre totalement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATIÈRES PREMIÈRES -->
+  <div class="tab-panel" id="matieres">
+    <div class="card fade-in" style="margin-bottom:28px">
+      <span class="card-icon">🛢️</span>
+      <h3>Matières Premières (Commodities)</h3>
+      <p>Les <span class="highlight">matières premières</span> sont des ressources naturelles ou agricoles. Elles jouent un rôle de <span class="green">couverture contre l'inflation</span> et de diversification de portefeuille. On y accède via des contrats futures, ETF, ou CFD.</p>
+    </div>
+    <table class="asset-table fade-in">
+      <thead><tr><th>Matière Première</th><th>Symbole</th><th>Prix LIVE</th><th>Variation</th><th>Catégorie</th><th>Corrélation</th></tr></thead>
+     <tbody>
+  <tr>
+    <td>Or (Gold)</td>
+    <td>XAU/USD</td>
+    <td class="price-cell" id="price-XAU/USD"><span class="loading-price">⏳</span></td>
+    <td id="change-XAU/USD">—</td>
+    <td>Métal précieux</td>
+    <td><span class="badge badge-red">-USD, -Taux</span></td>
+  </tr>
+
+  <tr>
+    <td>Argent (Silver)</td>
+    <td>XAG/USD</td>
+    <td class="price-cell" id="price-XAG/USD"><span class="loading-price">⏳</span></td>
+    <td id="change-XAG/USD">—</td>
+    <td>Métal précieux/Industriel</td>
+    <td><span class="badge badge-gold">+Or, +Industrie</span></td>
+  </tr>
+
+  <tr>
+    <td>Pétrole Brent</td>
+    <td>BRENT/USD</td>
+    <td class="price-cell" id="price-BRENT/USD"><span class="loading-price">⏳</span></td>
+    <td id="change-BRENT/USD">—</td>
+    <td>Énergie</td>
+    <td><span class="badge badge-orange">+Croissance mondiale</span></td>
+  </tr>
+
+  <tr>
+    <td>Pétrole WTI</td>
+    <td>WTI/USD</td>
+    <td class="price-cell" id="price-WTI/USD"><span class="loading-price">⏳</span></td>
+    <td id="change-WTI/USD">—</td>
+    <td>Énergie</td>
+    <td><span class="badge badge-orange">+Brent</span></td>
+  </tr>
+
+  <tr>
+    <td>Gaz Naturel</td>
+    <td>NATGAS</td>
+    <td class="price-cell" id="price-NATGAS"><span class="loading-price">⏳</span></td>
+    <td id="change-NATGAS">—</td>
+    <td>Énergie</td>
+    <td><span class="badge badge-red">Très volatile</span></td>
+  </tr>
+
+  <tr>
+    <td>Blé</td>
+    <td>WHEAT</td>
+    <td class="price-cell" id="price-WHEAT"><span class="loading-price">⏳</span></td>
+    <td id="change-WHEAT">—</td>
+    <td>Agricole</td>
+    <td><span class="badge badge-blue">Saisonnier</span></td>
+  </tr>
+
+  <tr>
+    <td>Cuivre</td>
+    <td>COPPER</td>
+    <td class="price-cell" id="price-COPPER"><span class="loading-price">⏳</span></td>
+    <td id="change-COPPER">—</td>
+    <td>Métal industriel</td>
+    <td><span class="badge badge-green">+Chine, +Croissance</span></td>
+  </tr>
+
+  <tr>
+    <td>Café, Cacao, Soja</td>
+    <td>—</td>
+    <td>—</td>
+    <td>—</td>
+    <td>Agricole/Soft</td>
+    <td><span class="badge badge-purple">Saisonniers</span></td>
+  </tr>
+</tbody>
+    </table>
+    <div class="example-box fade-in" style="margin-top:24px">
+      <div class="ex-title">💡 L'or comme valeur refuge</div>
+      <p>L'or ne génère pas de revenus mais protège contre l'inflation et les crises. Règle empirique : <span class="highlight">quand les taux réels baissent, l'or monte</span>. En 2020 (COVID, taux proches de 0), l'or a atteint un record historique à 2 070$/oz. En 2025, avec tensions géopolitiques et achats massifs des banques centrales, il dépasse 2 300$/oz.</p>
+    </div>
+  </div>
+
+  <!-- OBLIGATIONS -->
+  <div class="tab-panel" id="obligations">
+    <div class="card fade-in" style="margin-bottom:28px">
+      <span class="card-icon">📄</span>
+      <h3>Les Obligations (Bonds)</h3>
+      <p>Une <span class="highlight">obligation</span> est un titre de dette. En achetant une obligation, vous prêtez de l'argent à un émetteur (État, entreprise) qui s'engage à vous rembourser à échéance avec des intérêts périodiques (coupons). Moins risqué que les actions, mais moins rentable.</p>
+    </div>
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <h3 style="color:var(--blue)">Obligations d'État</h3>
+        <p><span class="highlight">OAT</span> françaises, <span class="highlight">Treasuries</span> US, <span class="highlight">Bunds</span> allemands. Très sûres (risque souverain). Les T-Bills US à 3 mois servent de taux "sans risque". <span class="green">Rendement ~3-5% en 2025.</span></p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--gold)">Obligations Entreprises</h3>
+        <p><span class="highlight">Investment Grade</span> (notation AAA à BBB) — solides. <span class="highlight">High Yield</span> (junk bonds, BB et moins) — plus risqués mais meilleur rendement (~6-10%).</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--red)">La Courbe des Taux</h3>
+        <p>Normalement croissante (long terme > court terme). Une <span class="red">inversion</span> (court terme > long terme) prédit historiquement une récession dans 12-18 mois.</p>
+      </div>
+    </div>
+    <div class="formula fade-in" style="margin-top:24px">
+      <div class="formula-label">Relation Taux / Prix des obligations</div>
+      Quand les taux montent → prix des obligations BAISSENT (relation inverse)<br>
+      Duration = sensibilité du prix aux variations de taux<br>
+      Une obligation 10 ans avec duration 8 : si taux +1% → prix -8%<br>
+      Yield to Maturity (YTM) = rendement si on garde jusqu'à échéance
+    </div>
+  </div>
+</section>

@@ -1,0 +1,155 @@
+<section id="reglementation" style="max-width:1200px;margin:0 auto;padding:100px 24px;">
+  <div class="section-label">Module 14</div>
+  <h2 class="section-title fade-in">RÉGLEMENTATION, <span style="color:var(--gold)">AMF & SÉCURITÉ</span></h2>
+  <p class="section-desc fade-in">Comprendre la réglementation, repérer les arnaques et déclarer correctement vos gains — des compétences souvent négligées, toujours indispensables.</p>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">RG.01</span><span class="concept-title">AMF, ESMA, SEC — Qui régule quoi ?</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3">
+        <div class="card" style="border-color:rgba(0,85,164,.4)">
+          <span class="card-icon">🇫🇷</span>
+          <h3 style="color:#4da6ff;font-size:15px">AMF (France)</h3>
+          <p style="font-size:13px">Autorité des Marchés Financiers. Régule les marchés financiers français, les sociétés de gestion, les brokers actifs en France. Publie les listes noires de brokers. Site : amf-france.org</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,120,215,.4)">
+          <span class="card-icon">🇪🇺</span>
+          <h3 style="color:#4da6ff;font-size:15px">ESMA (Europe)</h3>
+          <p style="font-size:13px">European Securities and Markets Authority. Fixe les règles européennes : leviers max CFD, protection solde négatif, standardisation des produits financiers. Supervise les régulateurs nationaux.</p>
+        </div>
+        <div class="card" style="border-color:rgba(0,90,150,.4)">
+          <span class="card-icon">🇺🇸</span>
+          <h3 style="color:#4da6ff;font-size:15px">SEC & FINRA (USA)</h3>
+          <p style="font-size:13px">Securities and Exchange Commission + Financial Industry Regulatory Authority. Régulent les marchés US. Les brokers US doivent être enregistrés auprès du FINRA. Données sur finra.org/brokercheck</p>
+        </div>
+      </div>
+      <div class="formula" style="margin-top:20px">
+        <div class="formula-label">Comment vérifier un broker en France — 3 étapes</div>
+        1. Recherche sur amf-france.org → "Rechercher une société" → vérifier la liste blanche<br>
+        2. Vérifier la régulation sur le site du régulateur du pays d'origine (FCA pour UK, CySEC pour Chypre…)<br>
+        3. Chercher "[Nom du broker] avis arnaque" + "liste noire AMF" sur Google<br><br>
+        ✅ Brokers sur liste blanche AMF = safer | ❌ Hors liste = risque très élevé
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">RG.02</span><span class="concept-title">Arnaques financières — Les reconnaître et les éviter</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-3">
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">🎭 Faux brokers</h3>
+          <p style="font-size:13px">Site professionnel mais pas régulé. Proposent des rendements garantis. Vous laissent gagner au début puis bloquent les retraits. Exigent des "frais de libération" pour débloquer les fonds. Disparus après.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">📱 Signaux & groupes Telegram</h3>
+          <p style="font-size:13px">"Trader expérimenté" vend des signaux à 97€/mois. Résultats non audités. Souvent des pump & dump organisés sur des actifs illiquides. Les premiers acheteurs (insiders) profitent des suiveurs.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">🏆 Schéma de Ponzi</h3>
+          <p style="font-size:13px">Promet des rendements fixes élevés (5-10%/mois). Paye les anciens investisseurs avec l'argent des nouveaux. S'effondre quand les retraits dépassent les dépôts. Exemple : Bernard Madoff (-65 Mds$).</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">🚀 Pump & Dump crypto</h3>
+          <p style="font-size:13px">Coordonné sur Discord/Telegram. Un groupe accumule un altcoin, puis envoie un signal d'achat massif. Le prix monte, les organisateurs vendent sur les nouveaux acheteurs. En quelques minutes, -50-90%.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">💼 Prop Firm frauduleuses</h3>
+          <p style="font-size:13px">Vous faites payer une "évaluation" (200-1000€) pour trader leur capital. Certaines ne versent jamais les gains, changent les règles rétroactivement, ou sont des sociétés fantômes. Vérifiez les avis.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,77,109,.3)">
+          <h3 style="font-size:14px;color:var(--red)">📸 Faux influenceurs</h3>
+          <p style="font-size:13px">Screenshots de gains falsifiés (PnL facilement modifiable). Lifestyle luxueux ≠ trading profitable. Gagnent réellement leur argent en vendant des formations à 997€. Jamais de pertes montrées.</p>
+        </div>
+      </div>
+      <div class="warning-box" style="margin-top:20px">
+        <div class="w-title">🚨 Signaux d'alarme universels</div>
+        <p>
+        ❌ Rendements garantis (aucun investissement légitime ne garantit des rendements)<br>
+        ❌ Pression temporelle "offre limitée 24h"<br>
+        ❌ Vous demande de recruter d'autres investisseurs (MLM financier)<br>
+        ❌ Pas d'adresse physique vérifiable<br>
+        ❌ Impossible de retirer vos fonds librement<br>
+        ❌ Bonus à ne pas retirer pendant X mois (piège fréquent des brokers CFD non-régulés)
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">RG.03</span><span class="concept-title">Fiscalité crypto en France — Déclaration, Cerfa 2086, régimes</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Depuis 2019, la fiscalité crypto est encadrée en France. Méconnaître ces règles expose à des redressements fiscaux importants.</p>
+      <div class="formula">
+        <div class="formula-label">Régime fiscal crypto France (2025)</div>
+        Plus-values crypto → imposition UNIQUEMENT lors de la conversion en monnaie FIAT (€, $)<br>
+        Échange crypto→crypto (BTC→ETH) = PAS imposable (depuis 2023)<br><br>
+        Taux fixe : Flat Tax 30% (12.8% IR + 17.2% prélèvements sociaux)<br>
+        Option barème IR progressif si revenus modestes (peut être plus avantageux)<br><br>
+        FORMULAIRE : Déclaration 2086 (intégré dans la déclaration 2042 C)<br>
+        Calcul : PV = (Prix cession − Prix acquisition moyen pondéré × fraction vendue)<br>
+        Seuil d'imposition : 0€ (toute plus-value est imposable, pas d'abattement)
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--green)"></div>
+          <h4 style="color:var(--green)">✅ Opérations non-imposables</h4>
+          <div class="prop"><span>Achat de crypto</span><span>Non imposable</span></div>
+          <div class="prop"><span>Transfert entre vos wallets</span><span>Non imposable</span></div>
+          <div class="prop"><span>Échange crypto→crypto</span><span>Non imposable (depuis 2023)</span></div>
+          <div class="prop"><span>Staking (reçu)</span><span>Imposable uniquement à la cession</span></div>
+          <div class="prop"><span>NFT reçu en cadeau</span><span>Non imposable à la réception</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="top-accent" style="background:var(--red)"></div>
+          <h4 style="color:var(--red)">❌ Opérations imposables</h4>
+          <div class="prop"><span>Vente crypto contre €</span><span>Imposable sur PV</span></div>
+          <div class="prop"><span>Achat bien/service en crypto</span><span>Imposable (cession)</span></div>
+          <div class="prop"><span>Mining professionnel</span><span>BIC (régime entreprise)</span></div>
+          <div class="prop"><span>NFT vendu contre €</span><span>Imposable</span></div>
+          <div class="prop"><span>Revenus DeFi réguliers</span><span>Potentiellement BIC</span></div>
+        </div>
+      </div>
+      <div class="warning-box" style="margin-top:16px">
+        <div class="w-title">⚠️ Comptes offshore — Danger légal</div>
+        <p>Utiliser un broker étranger non déclaré (Binance offshore, brokers aux Seychelles…) n'exonère PAS de l'impôt français. Les échanges d'informations entre administrations fiscales (CRS/OCDE) sont automatiques. Les sanctions : <span class="red">jusqu'à 80% de majoration + intérêts de retard + poursuites pénales dans les cas graves.</span> Déclarez TOUS vos comptes étrangers (formulaire 3916) même sans gains.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block fade-in">
+    <div class="concept-header" (click)="toggleConcept($event)">
+      <div class="concept-header-left"><span class="concept-num">RG.04</span><span class="concept-title">Les Prop Firms légitimes — Trader avec le capital d'une société</span></div>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <p>Les <span class="highlight">Proprietary Trading Firms</span> (prop firms) vous permettent de trader avec leur capital après avoir réussi un processus d'évaluation. Modèle en plein essor.</p>
+      <div class="formula">
+        <div class="formula-label">Fonctionnement d'une prop firm</div>
+        1. Vous payez des frais d'évaluation (100-1000€ selon taille de compte)<br>
+        2. Vous tradez un compte fictif pendant 30-90 jours avec des règles strictes<br>
+        3. Si vous atteignez l'objectif de profit sans dépasser le drawdown max → vous êtes "fundé"<br>
+        4. Vous tradez leur capital réel et partagez les profits (75-90% pour vous)<br>
+        5. Pas de risque de votre capital une fois fundé (au-delà des frais d'évaluation)
+      </div>
+      <table class="asset-table">
+        <thead><tr><th>Prop Firm</th><th>Capital max</th><th>Partage profits</th><th>Réputation</th><th>Régulation</th></tr></thead>
+        <tbody>
+          <tr><td>FTMO</td><td>200 000€</td><td>80-90%</td><td><span class="badge badge-green">Excellente</span></td><td>Tchéquie, régulé</td></tr>
+          <tr><td>The Funded Trader</td><td>600 000$</td><td>80%</td><td><span class="badge badge-gold">Bonne</span></td><td>USA</td></tr>
+          <tr><td>MyForexFunds</td><td>Fermé 2023</td><td>—</td><td><span class="badge badge-red">Fermée par régulateurs</span></td><td>Problèmes légaux</td></tr>
+          <tr><td>Apex Trader Funding</td><td>300 000$</td><td>90%</td><td><span class="badge badge-gold">Bonne</span></td><td>USA (Futures)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
