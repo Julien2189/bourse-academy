@@ -14,4 +14,28 @@ export class HeaderShell {
   @Output() apiClear = new EventEmitter<void>();
   @Output() menuToggle = new EventEmitter<void>();
   @Output() menuClose = new EventEmitter<void>();
+
+  toggleTheme(): void {
+    this.themeToggle.emit();
+  }
+
+  toggleApiDrawer(): void {
+    this.apiToggle.emit();
+  }
+
+  saveAndFetch(): void {
+    this.apiSave.emit();
+  }
+
+  clearApiKey(): void {
+    this.apiClear.emit();
+  }
+
+  toggleMenu(): void {
+    this.menuToggle.emit();
+  }
+
+  closeMenu(): void {
+    this.menuClose.emit();
+  }
 }

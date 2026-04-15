@@ -21,18 +21,6 @@ import { Quiz } from './components/quiz/quiz';
 import { Glossaire } from './components/glossaire/glossaire';
 import { Footer } from './components/footer/footer';
 
-
-type QuizItem = {
-  q: string;
-  opts: string[];
-  correct: number;
-  exp: string;
-};
-
-type GlossaryItem = {
-  t: string;
-  d: string;
-};
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -62,15 +50,9 @@ type GlossaryItem = {
   styleUrl: './app.css'
 })
 export class App implements AfterViewInit, OnDestroy {
-
   private observer?: IntersectionObserver;
   private refreshTimer?: number;
   private chartTimer?: number;
-  private simTimer?: number;
-
-  qIndex = 0;
-  score = 0;
-  answered = false;
 
   readonly TWELVE_STOCKS = [
     'AAPL', 'NVDA', 'MSFT', 'TSLA', 'BRK.B', 'AMZN',
@@ -82,24 +64,13 @@ export class App implements AfterViewInit, OnDestroy {
     'EUR/GBP', 'AUD/USD', 'XAU/USD', 'XAG/USD'
   ];
 
-  readonly quizData: QuizItem[] = [
-   
-  ];
-
-  readonly glossaire: GlossaryItem[] = [
- 
-  ];
-
   ngAfterViewInit(): void {
     this.initProgressBar();
     this.initFadeObserver();
-    this.loadQuestion();
-    this.buildGlossary();
     this.applyTheme();
     this.buildSimulatedTicker();
 
     this.chartTimer = window.setTimeout(() => this.drawChart(), 400);
-    this.simTimer = window.setTimeout(() => this.calcMargin(), 800);
 
     const savedKey = localStorage.getItem('twelveApiKey');
     const keyInput = this.byId<HTMLInputElement>('twelveApiKey');
@@ -115,7 +86,6 @@ export class App implements AfterViewInit, OnDestroy {
 
     if (this.refreshTimer) window.clearTimeout(this.refreshTimer);
     if (this.chartTimer) window.clearTimeout(this.chartTimer);
-    if (this.simTimer) window.clearTimeout(this.simTimer);
   }
 
   private byId<T extends HTMLElement>(id: string): T | null {
@@ -151,8 +121,6 @@ export class App implements AfterViewInit, OnDestroy {
     }
   }
 
-
-
   // =====================
   // PROGRESS BAR
   // =====================
@@ -173,52 +141,19 @@ export class App implements AfterViewInit, OnDestroy {
   // =====================
 
   private initFadeObserver(): void {
-    this.observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          (entry.target as HTMLElement).classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+    this.observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
     document.querySelectorAll('.fade-in').forEach(el => this.observer?.observe(el));
   }
-
-  // =====================
-  // ACCORDION
-  // =====================
-
- toggleConcept(event: Event) {
-  const header = event.currentTarget as HTMLElement;
-  const body = header.nextElementSibling as HTMLElement;
-  const arrow = header.querySelector('.concept-arrow') as HTMLElement;
-
-  body.classList.toggle('open');
-  arrow.classList.toggle('open');
-}
-  // =====================
-  // TABS
-  // =====================
-
-  switchTab(id: string, event: Event) {
-  const btn = event.currentTarget as HTMLElement;
-
-  document.querySelectorAll('#assetTabs .tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('#actifs .tab-panel').forEach(p => p.classList.remove('active'));
-
-  btn.classList.add('active');
-  document.getElementById(id)?.classList.add('active');
-}
-
-switchTabAnalyse(id: string, event: Event) {
-  const btn = event.currentTarget as HTMLElement;
-
-  document.querySelectorAll('#analyseTabs .tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('#analyse .tab-panel').forEach(p => p.classList.remove('active'));
-
-  btn.classList.add('active');
-  document.getElementById(id)?.classList.add('active');
-}
 
   // =====================
   // API PANEL
@@ -231,7 +166,9 @@ switchTabAnalyse(id: string, event: Event) {
     const saved = localStorage.getItem('twelveApiKey');
     const input = this.byId<HTMLInputElement>('twelveApiKey');
 
-    if (saved && input) input.value = saved;
+    if (saved && input) {
+      input.value = saved;
+    }
   }
 
   saveAndFetch(): void {
@@ -357,7 +294,7 @@ switchTabAnalyse(id: string, event: Event) {
 
       if (crypto.bitcoin) {
         this.setPrice('BTC', crypto.bitcoin.usd, crypto.bitcoin.usd_24h_change, '$');
-        this.setPrice('ETH', crypto.ethereum.usd, crypto.ethereum.usd_24h_change, '$');
+        this.setPrice('ETH', crypto.ethereum?.usd, crypto.ethereum?.usd_24h_change, '$');
         this.setPrice('SOL', crypto.solana?.usd, crypto.solana?.usd_24h_change, '$');
         this.setPrice('BNB', crypto.binancecoin?.usd, crypto.binancecoin?.usd_24h_change, '$');
       }
@@ -397,7 +334,7 @@ switchTabAnalyse(id: string, event: Event) {
           const price = parseFloat(item.close);
           const prev = parseFloat(item.previous_close);
           const chg = prev ? ((price - prev) / prev) * 100 : null;
-          const currency = (sym.includes('XAU') || sym.includes('XAG')) ? '$' : '';
+          const currency = sym.includes('XAU') || sym.includes('XAG') ? '$' : '';
           this.setPrice(sym, price, chg, currency);
         }
       });
@@ -498,7 +435,8 @@ switchTabAnalyse(id: string, event: Event) {
   buildSimulatedTicker(): void {
     const ticker = this.byId<HTMLElement>('liveTicker');
     if (ticker) {
-      ticker.textContent = '⚙️ Configurez une clé API (bouton ⚙️ en bas à droite) pour les prix réels   |   📊 BOURSE ACADEMY — DE ZÉRO À HERO   |   ';
+      ticker.textContent =
+        '⚙️ Configurez une clé API (bouton ⚙️ en bas à droite) pour les prix réels   |   📊 BOURSE ACADEMY — DE ZÉRO À HERO   |   ';
     }
   }
 
@@ -538,7 +476,7 @@ switchTabAnalyse(id: string, event: Event) {
     const rng = mx - mn || 1;
 
     const toY = (v: number) => height - ((v - mn) / rng) * (height - 20) - 10;
-    const toX = (i: number) => (i / (prices!.length - 1)) * width;
+    const toX = (i: number) => (i / (prices.length - 1)) * width;
 
     const isUp = prices[prices.length - 1] >= prices[0];
     const lineColor = isUp ? '#00d4aa' : '#ff4d6d';
@@ -563,241 +501,6 @@ switchTabAnalyse(id: string, event: Event) {
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = 2;
     ctx.stroke();
-  }
-
-  // =====================
-  // QUIZ
-  // =====================
-
-  loadQuestion(): void {
-    if (!this.quizData.length) return;
-
-    const q = this.quizData[this.qIndex];
-
-    const scoreEl = this.byId<HTMLElement>('quizScore');
-    const questionEl = this.byId<HTMLElement>('quizQuestion');
-    const optsEl = this.byId<HTMLElement>('quizOptions');
-    const feedbackEl = this.byId<HTMLElement>('quizFeedback');
-    const nextEl = this.byId<HTMLElement>('quizNext');
-    const prevEl = this.byId<HTMLElement>('quizPrev');
-
-    if (scoreEl) scoreEl.textContent = `Question ${this.qIndex + 1} / ${this.quizData.length}`;
-    if (questionEl) questionEl.textContent = q.q;
-
-    if (optsEl) {
-      optsEl.innerHTML = '';
-      q.opts.forEach((opt, i) => {
-        const btn = document.createElement('button');
-        btn.className = 'quiz-option';
-        btn.textContent = opt;
-        btn.addEventListener('click', () => this.selectAnswer(i));
-        optsEl.appendChild(btn);
-      });
-    }
-
-    if (feedbackEl) {
-      feedbackEl.className = 'quiz-feedback';
-      feedbackEl.textContent = '';
-    }
-
-    this.answered = false;
-
-    if (nextEl) nextEl.textContent = this.qIndex === this.quizData.length - 1 ? 'Voir résultat' : 'Suivant →';
-    if (prevEl) prevEl.style.display = this.qIndex > 0 ? 'inline-block' : 'none';
-  }
-
-  selectAnswer(i: number): void {
-    if (this.answered) return;
-
-    this.answered = true;
-    const q = this.quizData[this.qIndex];
-
-    document.querySelectorAll('.quiz-option').forEach((btn, idx) => {
-      if (idx === q.correct) btn.classList.add('correct');
-      else if (idx === i && i !== q.correct) btn.classList.add('wrong');
-    });
-
-    const fb = this.byId<HTMLElement>('quizFeedback');
-    if (!fb) return;
-
-    if (i === q.correct) {
-      this.score++;
-      fb.className = 'quiz-feedback good show';
-      fb.textContent = '✅ Correct ! ' + q.exp;
-    } else {
-      fb.className = 'quiz-feedback bad show';
-      fb.textContent = '❌ Incorrect. ' + q.exp;
-    }
-  }
-
-  quizNext(): void {
-    const fb = this.byId<HTMLElement>('quizFeedback');
-
-    if (!this.answered) {
-      if (fb) {
-        fb.className = 'quiz-feedback bad show';
-        fb.textContent = '⚠️ Sélectionnez une réponse.';
-      }
-      return;
-    }
-
-    this.qIndex++;
-
-    if (this.qIndex >= this.quizData.length) this.showResult();
-    else this.loadQuestion();
-  }
-
-  quizPrev(): void {
-    if (this.qIndex > 0) {
-      this.qIndex--;
-      this.loadQuestion();
-    }
-  }
-
-  showResult(): void {
-    const optionsEl = this.byId<HTMLElement>('quizOptions');
-    const questionEl = this.byId<HTMLElement>('quizQuestion');
-    const feedbackEl = this.byId<HTMLElement>('quizFeedback');
-    const nextEl = this.byId<HTMLElement>('quizNext');
-    const prevEl = this.byId<HTMLElement>('quizPrev');
-    const res = this.byId<HTMLElement>('quizResult');
-    const finalScore = this.byId<HTMLElement>('finalScore');
-    const finalMsg = this.byId<HTMLElement>('finalMsg');
-
-    if (optionsEl) optionsEl.innerHTML = '';
-    if (questionEl) questionEl.textContent = '';
-    if (feedbackEl) feedbackEl.className = 'quiz-feedback';
-    if (nextEl) nextEl.style.display = 'none';
-    if (prevEl) prevEl.style.display = 'none';
-    if (res) res.style.display = 'block';
-
-    const pct = Math.round((this.score / this.quizData.length) * 100);
-
-    if (finalScore) finalScore.textContent = `${this.score} / ${this.quizData.length}`;
-    if (finalMsg) {
-      finalMsg.textContent =
-        pct >= 80 ? '🏆 Excellent ! Vous maîtrisez les marchés financiers.' :
-        pct >= 60 ? '📈 Bon niveau ! Continuez à approfondir.' :
-        pct >= 40 ? '📚 Correct, mais relisez les modules essentiels.' :
-        '🔄 Retournez au début du cours, les bases sont importantes !';
-    }
-  }
-
-  restartQuiz(): void {
-    this.qIndex = 0;
-    this.score = 0;
-    this.answered = false;
-
-    const resultEl = this.byId<HTMLElement>('quizResult');
-    const nextEl = this.byId<HTMLElement>('quizNext');
-
-    if (resultEl) resultEl.style.display = 'none';
-    if (nextEl) nextEl.style.display = 'inline-block';
-
-    this.loadQuestion();
-  }
-
-  // =====================
-  // GLOSSAIRE
-  // =====================
-
-  buildGlossary(filter = ''): void {
-    const grid = this.byId<HTMLElement>('glossaryGrid');
-    if (!grid) return;
-
-    grid.innerHTML = '';
-
-    this.glossaire
-      .filter(g =>
-        !filter ||
-        g.t.toLowerCase().includes(filter.toLowerCase()) ||
-        g.d.toLowerCase().includes(filter.toLowerCase())
-      )
-      .forEach(g => {
-        const div = document.createElement('div');
-        div.className = 'glossary-item';
-        div.innerHTML = `<h4>${g.t}</h4><p>${g.d}</p>`;
-        grid.appendChild(div);
-      });
-  }
-
-  filterGlossary(event?: Event): void {
-    const value = (event?.target as HTMLInputElement | null)?.value
-      ?? this.byId<HTMLInputElement>('glossarySearch')?.value
-      ?? '';
-
-    this.buildGlossary(value);
-  }
-
-  // =====================
-  // SIMULATEUR MARGE
-  // =====================
-
-  calcMargin(): void {
-    const capital = parseFloat(this.byId<HTMLInputElement>('sim-capital')?.value || '10000');
-    const levier = parseFloat(this.byId<HTMLSelectElement>('sim-levier')?.value || '30');
-    const usagePct = parseFloat(this.byId<HTMLInputElement>('sim-usage')?.value || '50');
-    const mcLevel = parseFloat(this.byId<HTMLInputElement>('sim-mc-level')?.value || '100');
-
-    const margeUtilisee = capital * (usagePct / 100);
-    const positionNotional = margeUtilisee * levier;
-    const margeLibre = capital - margeUtilisee;
-    const niveauMarge = (capital / margeUtilisee) * 100;
-    const equiteMinMC = margeUtilisee * (mcLevel / 100);
-    const perteAvantMC = capital - equiteMinMC;
-    const perteAvantMCpct = (perteAvantMC / capital) * 100;
-    const stopOutLevel = mcLevel * 0.5;
-    const equiteMinSO = margeUtilisee * (stopOutLevel / 100);
-    const perteAvantSO = capital - equiteMinSO;
-
-    const metricsEl = this.byId<HTMLElement>('sim-metrics');
-    if (!metricsEl) return;
-
-    const metrics = [
-      { label: 'Position notionnelle', value: positionNotional.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + ' €', color: 'var(--blue)' },
-      { label: 'Marge utilisée', value: margeUtilisee.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + ' € (' + usagePct + '%)', color: 'var(--gold)' },
-      { label: 'Marge libre', value: margeLibre.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + ' €', color: margeLibre > capital * 0.3 ? 'var(--green)' : 'var(--red)' },
-      { label: 'Niveau de marge actuel', value: niveauMarge.toFixed(0) + '%', color: niveauMarge > 200 ? 'var(--green)' : niveauMarge > 120 ? 'var(--gold)' : 'var(--red)' },
-      { label: 'Perte avant Margin Call', value: '-' + perteAvantMC.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + ' € (' + perteAvantMCpct.toFixed(1) + '%)', color: perteAvantMCpct > 20 ? 'var(--green)' : perteAvantMCpct > 10 ? 'var(--gold)' : 'var(--red)' },
-      { label: 'Perte avant Stop Out', value: '-' + perteAvantSO.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + ' €', color: 'var(--red)' },
-    ];
-
-    metricsEl.innerHTML = metrics.map(m => `
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px">
-        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">${m.label}</div>
-        <div style="font-family:IBM Plex Mono,monospace;font-size:16px;font-weight:700;color:${m.color}">${m.value}</div>
-      </div>
-    `).join('');
-
-    const verdictEl = this.byId<HTMLElement>('sim-verdict');
-    if (!verdictEl) return;
-
-    let verdict = '';
-    let bg = '';
-    let border = '';
-
-    if (niveauMarge > 300) {
-      verdict = `✅ <strong>Position très sécurisée.</strong> Votre niveau de marge est excellent. Vous pouvez absorber une perte de ${perteAvantMCpct.toFixed(1)}% avant tout appel de marge.`;
-      bg = 'rgba(0,212,170,.08)';
-      border = '1px solid rgba(0,212,170,.3)';
-    } else if (niveauMarge > 150) {
-      verdict = `⚠️ <strong>Situation correcte mais surveillez.</strong> Une baisse de ${perteAvantMCpct.toFixed(1)}% de votre capital déclencherait le margin call.`;
-      bg = 'rgba(245,197,24,.08)';
-      border = '1px solid rgba(245,197,24,.3)';
-    } else if (niveauMarge > 100) {
-      verdict = `🚨 <strong>ZONE DE DANGER.</strong> Vous êtes très proche du seuil de margin call. Une perte de seulement ${perteAvantMCpct.toFixed(1)}% suffit.`;
-      bg = 'rgba(255,140,66,.08)';
-      border = '1px solid rgba(255,140,66,.3)';
-    } else {
-      verdict = `💀 <strong>MARGIN CALL IMMINENT OU DÉJÀ DÉCLENCHÉ.</strong> Le broker peut liquider vos positions à tout moment.`;
-      bg = 'rgba(255,77,109,.1)';
-      border = '1px solid rgba(255,77,109,.4)';
-    }
-
-    verdictEl.innerHTML = `<div style="font-size:14px;line-height:1.7;color:var(--text)">${verdict}</div>`;
-    verdictEl.style.background = bg;
-    verdictEl.style.border = border;
-    verdictEl.style.borderRadius = '8px';
   }
 
   // =====================
